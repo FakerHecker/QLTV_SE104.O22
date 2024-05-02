@@ -1,18 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\QLTV_SE104O22\\",
+  "WorkspaceRootPath": "D:\\QLTV_SE104.O22\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|d:\\qltv_se104o22\\gui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\view\\dangnhap.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\view\\dangnhap.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104O22\\gui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|d:\\qltv_se104.o22\\gui\\view\\dialogcustom.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\view\\dialogcustom.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104O22\\gui\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\tranb\\AppData\\Local\\Temp\\.vsdbgsrc\\3714f74b82eacc6cf8dcf1e32980b0908d4f8b447d25d4eb08ff1424a7b57c02\\ResourcePart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\view\\dangnhap.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\view\\dangnhap.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\app.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\app.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|D:\\QLTV_SE104.O22\\gui\\resource\\icon_book.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{7C2D9607-E664-4714-A213-E1DBA09F0911}|GUI\\GUI.csproj|solutionrelative:gui\\resource\\icon_book.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +45,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,24 +60,72 @@
               "Name": "ST:1:0:{904ea1b4-c6a7-4eca-94a1-76eab06c5187}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "D:\\QLTV_SE104O22\\GUI\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "GUI\\MainWindow.xaml.cs",
-              "ToolTip": "D:\\QLTV_SE104O22\\GUI\\MainWindow.xaml.cs",
-              "RelativeToolTip": "GUI\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAcwB0AAAAAAAAA",
+              "Title": "DialogCustom.xaml",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\View\\DialogCustom.xaml",
+              "RelativeDocumentMoniker": "GUI\\View\\DialogCustom.xaml",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\View\\DialogCustom.xaml",
+              "RelativeToolTip": "GUI\\View\\DialogCustom.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-02T04:13:18.409Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ResourcePart.cs",
+              "DocumentMoniker": "C:\\Users\\tranb\\AppData\\Local\\Temp\\.vsdbgsrc\\3714f74b82eacc6cf8dcf1e32980b0908d4f8b447d25d4eb08ff1424a7b57c02\\ResourcePart.cs",
+              "ToolTip": "C:\\Users\\tranb\\AppData\\Local\\Temp\\.vsdbgsrc\\3714f74b82eacc6cf8dcf1e32980b0908d4f8b447d25d4eb08ff1424a7b57c02\\ResourcePart.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAEwCsAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-26T09:22:38.089Z"
+              "WhenOpened": "2024-05-02T03:06:51.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "icon_book.png",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\Resource\\icon_book.png",
+              "RelativeDocumentMoniker": "GUI\\Resource\\icon_book.png",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\Resource\\icon_book.png",
+              "RelativeToolTip": "GUI\\Resource\\icon_book.png",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2024-05-02T03:03:40.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DangNhap.xaml",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\View\\DangNhap.xaml",
+              "RelativeDocumentMoniker": "GUI\\View\\DangNhap.xaml",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\View\\DangNhap.xaml",
+              "RelativeToolTip": "GUI\\View\\DangNhap.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-02T02:46:10.944Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\View\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "GUI\\View\\MainWindow.xaml",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\View\\MainWindow.xaml",
+              "RelativeToolTip": "GUI\\View\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-04-26T08:09:17.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "App.xaml",
-              "DocumentMoniker": "D:\\QLTV_SE104O22\\GUI\\App.xaml",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\App.xaml",
               "RelativeDocumentMoniker": "GUI\\App.xaml",
-              "ToolTip": "D:\\QLTV_SE104O22\\GUI\\App.xaml",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\App.xaml",
               "RelativeToolTip": "GUI\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-04-26T08:11:24.22Z",
@@ -62,15 +133,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\QLTV_SE104O22\\GUI\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "GUI\\MainWindow.xaml",
-              "ToolTip": "D:\\QLTV_SE104O22\\GUI\\MainWindow.xaml",
-              "RelativeToolTip": "GUI\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-04-26T08:09:17.116Z",
-              "EditorCaption": ""
+              "DocumentIndex": 6,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\App.xaml.cs",
+              "RelativeDocumentMoniker": "GUI\\App.xaml.cs",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\App.xaml.cs",
+              "RelativeToolTip": "GUI\\App.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T03:04:32.828Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DangNhap.xaml.cs",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\View\\DangNhap.xaml.cs",
+              "RelativeDocumentMoniker": "GUI\\View\\DangNhap.xaml.cs",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\View\\DangNhap.xaml.cs",
+              "RelativeToolTip": "GUI\\View\\DangNhap.xaml.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAASwBwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T03:08:32.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\QLTV_SE104.O22\\GUI\\View\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "GUI\\View\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\QLTV_SE104.O22\\GUI\\View\\MainWindow.xaml.cs",
+              "RelativeToolTip": "GUI\\View\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAcwB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-26T09:22:38.089Z"
             }
           ]
         },
