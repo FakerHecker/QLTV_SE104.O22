@@ -1,0 +1,66 @@
+﻿<Window x:Class="QuanLyThuVien.W_QuanLyDocGia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        mc:Ignorable="d"
+        Title="W_QuanLyDocGia" Height="600" Width="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="txtMaDocGia"  Grid.Row="2" Grid.Column="1"/>
+        <TextBox x:Name="txtHoTen" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="txtDiaChi"  Grid.Row="3" Grid.Column="3"/>
+        <TextBox x:Name="txtEmail"  Grid.Row="4" Grid.Column="3"/>
+        <TextBox x:Name="txtNgayHetHan"  Grid.Row="3" Grid.Column="5"/>
+        <TextBox x:Name="txtTongNo" Grid.Row="4" Grid.Column="5"/>
+        <Label Content="Mã độc giả" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Họ tên" Grid.Row="3" Grid.Column="0"/>
+        <Label Content="Loại độc giả" Grid.Row="4" Grid.Column="0"/>
+        <Label Content="Ngày lập thẻ" Grid.Row="2" Grid.Column="4"/>
+        <Label Content="Ngày hết hạn" Grid.Row="3" Grid.Column="4"/>
+        <Label Content="Tổng nợ" Grid.Row="4" Grid.Column="4"/>
+        <Label Content="Thông tin độc giả" Grid.Row="0" Grid.Column="0" FontSize="20" Grid.ColumnSpan="2"/>
+        <Label Content="Danh sách độc giả" Grid.Row="5" Grid.Column="0" FontSize="15" />
+        <DataGrid x:Name="dataGridView"  Grid.Row="5" Grid.Column="0" SelectedCellsChanged="dataGridView_SelectedCellsChanged" Grid.ColumnSpan="6" Grid.RowSpan="7" Margin="0,49,0,0"/>
+        <Label  Content="Danh sách thông tin độc giả" HorizontalAlignment="Left" Margin="0,292,0,0" VerticalAlignment="Top"/>
+        <Label Content="Ngày sinh" Grid.Row="2" Grid.Column="2"/>
+        <Label Content="Địa chỉ" Grid.Row="3" Grid.Column="2"/>
+        <Label Content="Email" Grid.Row="4" Grid.Column="2"/>
+        <Button x:Name="btnThem" Content="Thêm mới" HorizontalAlignment="Left" Margin="168,224,0,0" VerticalAlignment="Top" Height="25" Width="132" Click="btnThem_Click"/>
+        <Button x:Name="btnXoa" Content="Xóa" HorizontalAlignment="Left" Margin="499,224,0,0" VerticalAlignment="Top" Height="26" Width="132" Click="btnXoa_Click"/>
+        <Button x:Name="btnSua" Content="Sửa" HorizontalAlignment="Left" Margin="696,224,0,0" VerticalAlignment="Top" Height="25" Width="132" Click="btnSua_Click"/>
+        <ComboBox x:Name="cbLoaiDG"  Grid.Row="4" Grid.Column="1">
+            <ComboBoxItem IsSelected="True">LDG001</ComboBoxItem>
+            <ComboBoxItem>LDG002</ComboBoxItem>
+            <ComboBoxItem>Hồ Chí Minh</ComboBoxItem>
+        </ComboBox>
+        <DatePicker x:Name="dtNgaySinh"  Grid.Row="2" Grid.Column="3"/>
+        <DatePicker x:Name="dtNgayLapThe"  Grid.Row="2" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged"/>
+        <Button x:Name="btnLuu" Content="Lưu" HorizontalAlignment="Left" Margin="336,224,0,0" VerticalAlignment="Top" Height="25" Width="132" Click="btnLuu_Click"/>
+        <GroupBox x:Name="gb" Content="Thông tin chi tiết độc giả" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="QuanLyThuVien.W_QuanLyLoaiDocGia"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        mc:Ignorable="d"
+        Title="W_QuanLyLoaiDocGia" Height="450" Width="800">
+    <Grid>
+        <Label Content="Loại độc giả" FontSize ="20" HorizontalAlignment="Center" Margin="0,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="Thông tin loại độc giả" FontSize="15" HorizontalAlignment="Left" Margin="146,128,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgvLoaiDocGia" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="321,168,0,0" SelectionChanged="dgvLoaiDocGia_SelectionChanged"/>
+        <TextBox x:Name="txbMaLoaiDocGia" HorizontalAlignment="Left" Margin="161,196,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txbTenLoaiDocGia" HorizontalAlignment="Left" Margin="161,263,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Mã loại độc giả" HorizontalAlignment="Left" Margin="49,192,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tên loại độc giả" HorizontalAlignment="Left" Margin="49,259,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnThemMoi" Content="Thêm mới" HorizontalAlignment="Left" Margin="70,323,0,0" VerticalAlignment="Top" Click="btnThemMoi_Click" />
+        <Button x:Name="btnLuu" Content="Lưu" HorizontalAlignment="Left" Margin="204,323,0,0" VerticalAlignment="Top" Click="btnLuu_Click"/>
+        <Button x:Name="btnCapNhat" Content="Cập nhật" HorizontalAlignment="Left" Margin="73,373,0,0" VerticalAlignment="Top" Click="btnCapNhat_Click"/>
+        <Button x:Name="btnXoa" Content="Xóa" HorizontalAlignment="Left" Margin="203,373,0,0" VerticalAlignment="Top" Click="btnXoa_Click"/>
+
+    </Grid>
+</Window>

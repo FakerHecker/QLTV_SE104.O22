@@ -1,0 +1,48 @@
+﻿<Window x:Class="QuanLyThuVien.W_QuanLyPhieuThuTienPhat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        mc:Ignorable="d"
+        Title="W_QuanLyPhieuThuTienPhat" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Phiếu thu tiền phạt" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Label Content="Mã phiếu thu" FontSize="15"  Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Mã độc giả" FontSize="15"  Grid.Row="3" Grid.Column="0"/>
+        <Label Content="Họ tên" FontSize="15"  Grid.Row="4" Grid.Column="0"/>
+        <Label Content="Tổng nợ" FontSize="15"  Grid.Row="2" Grid.Column="2"/>
+        <Label Content="Số tiền thu" FontSize="15"  Grid.Row="3" Grid.Column="2"/>
+        <Label Content="Còn lại" FontSize="15"  Grid.Row="4" Grid.Column="2"/>
+        <Label Content="Ngày thu" FontSize="15"  Grid.Row="2" Grid.Column="4"/>
+        <TextBox x:Name="txbMaPhieuThu" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="txbMaDocGia" Grid.Row="3" Grid.Column="1" />
+        <TextBox x:Name="txbTenDocGia" Grid.Row="4" Grid.Column="1" />
+        <TextBox x:Name="txbTongNo" Grid.Row="2" Grid.Column="3" />
+        <TextBox x:Name="txbSoTienThu" Grid.Row="3" Grid.Column="3" />
+        <TextBox x:Name="txbConLai" Grid.Row="4" Grid.Column="3" />
+        <DatePicker Grid.Row="2" Grid.Column="5"/>
+        <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,39,10,10" Grid.RowSpan="5"/>
+    </Grid>
+</Window>
