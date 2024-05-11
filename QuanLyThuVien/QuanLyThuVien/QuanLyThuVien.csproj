@@ -61,6 +61,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLTV_DBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="W_BaoCaoThongKe.xaml.cs">
+      <DependentUpon>W_BaoCaoThongKe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="W_DauSach.xaml.cs">
+      <DependentUpon>W_DauSach.xaml</DependentUpon>
+    </Compile>
     <Compile Include="W_QuanLyChiTietPhieuNhapSach.xaml.cs">
       <DependentUpon>W_QuanLyChiTietPhieuNhapSach.xaml</DependentUpon>
     </Compile>
@@ -70,14 +76,29 @@
     <Compile Include="W_QuanLyLoaiDocGia.xaml.cs">
       <DependentUpon>W_QuanLyLoaiDocGia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="W_QuanLyPhieuMuonTraSach.xaml.cs">
+      <DependentUpon>W_QuanLyPhieuMuonTraSach.xaml</DependentUpon>
+    </Compile>
     <Compile Include="W_QuanLyPhieuNhapSach.xaml.cs">
       <DependentUpon>W_QuanLyPhieuNhapSach.xaml</DependentUpon>
     </Compile>
     <Compile Include="W_QuanLyPhieuThuTienPhat.xaml.cs">
       <DependentUpon>W_QuanLyPhieuThuTienPhat.xaml</DependentUpon>
     </Compile>
+    <Compile Include="W_QuanLyPhieuTraSach.xaml.cs">
+      <DependentUpon>W_QuanLyPhieuTraSach.xaml</DependentUpon>
+    </Compile>
     <Compile Include="W_QuanLySach.xaml.cs">
       <DependentUpon>W_QuanLySach.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="W_QuanLyTacGia.xaml.cs">
+      <DependentUpon>W_QuanLyTacGia.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="W_QuanLyTheLoaiSach.xaml.cs">
+      <DependentUpon>W_QuanLyTheLoaiSach.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="W_TraCuuSach.xaml.cs">
+      <DependentUpon>W_TraCuuSach.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +112,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="W_BaoCaoThongKe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="W_DauSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="W_QuanLyChiTietPhieuNhapSach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="W_QuanLyPhieuMuonTraSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="W_QuanLyPhieuNhapSach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,7 +144,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="W_QuanLyPhieuTraSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="W_QuanLySach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="W_QuanLyTacGia.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="W_QuanLyTheLoaiSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="W_TraCuuSach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\App.xaml
-7816552928
+14-1967390514
 
-131524617805
+201094038399
 14-207034072
-MainWindow.xaml;W_QuanLyChiTietPhieuNhapSach.xaml;W_QuanLyDocGia.xaml;W_QuanLyLoaiDocGia.xaml;W_QuanLyPhieuNhapSach.xaml;W_QuanLyPhieuThuTienPhat.xaml;W_QuanLySach.xaml;
+MainWindow.xaml;W_BaoCaoThongKe.xaml;W_DauSach.xaml;W_QuanLyChiTietPhieuNhapSach.xaml;W_QuanLyDocGia.xaml;W_QuanLyLoaiDocGia.xaml;W_QuanLyPhieuMuonTraSach.xaml;W_QuanLyPhieuNhapSach.xaml;W_QuanLyPhieuThuTienPhat.xaml;W_QuanLyPhieuTraSach.xaml;W_QuanLySach.xaml;W_QuanLyTacGia.xaml;W_QuanLyTheLoaiSach.xaml;W_TraCuuSach.xaml;
 
 True
 

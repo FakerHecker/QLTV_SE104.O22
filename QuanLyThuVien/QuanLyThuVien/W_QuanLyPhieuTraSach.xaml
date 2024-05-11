@@ -1,0 +1,50 @@
+﻿<Window x:Class="QuanLyThuVien.W_QuanLyPhieuTraSach"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        mc:Ignorable="d"
+        Title="W_QuanLyPhieuTraSach" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Phiếu trả sách" FontSize="20" Grid.ColumnSpan="2"/>
+        <Label Content="Mã phiếu mượn" Grid.Row="2"/>
+        <Label Content="Mã độc giả" Grid.Row="3"/>
+
+
+        <TextBox  Grid.Row="2" Grid.Column="1"/>
+        <DatePicker  Grid.Row="3" Grid.Column="1"/>
+
+        <Label Content="Ngày trả" Grid.Row="2" Grid.Column="2"/>
+        <Label Content="Ngày phải trả" Grid.Row="3" Grid.Column="2"/>
+
+
+        <DatePicker  Grid.Row="2" Grid.Column="3"/>
+        <DatePicker  Grid.Row="3" Grid.Column="3"/>
+
+
+
+        <Label Content="Tiền phạt" Grid.Row="2" Grid.Column="4"/>
+        <Label Content="Số tiền trả" Grid.Row="3" Grid.Column="4"/>
+        <Label Content="Còn lại" Grid.Row="4" Grid.Column="4"/>
+
+    </Grid>
+</Window>

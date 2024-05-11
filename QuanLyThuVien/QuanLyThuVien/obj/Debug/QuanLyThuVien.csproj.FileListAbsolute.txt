@@ -25,3 +25,17 @@ C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyChiTie
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyChiTietPhieuNhapSach.baml
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuThuTienPhat.g.cs
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuThuTienPhat.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_DauSach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_DauSach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyTacGia.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyTacGia.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyTheLoaiSach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyTheLoaiSach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_TraCuuSach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_TraCuuSach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuMuonTraSach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuMuonTraSach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuTraSach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuTraSach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_BaoCaoThongKe.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_BaoCaoThongKe.baml

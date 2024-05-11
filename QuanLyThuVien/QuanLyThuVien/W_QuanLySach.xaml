@@ -7,13 +7,51 @@
         mc:Ignorable="d"
         Title="W_QuanLySach" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btQuanLyDocGia" Content="Quản lý độc giả" HorizontalAlignment="Left" Margin="0,55,0,0" VerticalAlignment="Top" Height="25" Width="132" />
-        <Button x:Name="btQuanLySach" Content="Quản lý sách" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Height="22" Width="132"/>
-        <Button Content="Quản lý mượn trả" HorizontalAlignment="Left" Margin="0,102,0,0" VerticalAlignment="Top" Height="25" Width="132"/>
-        <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="0,127,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button Content="Lập báo cáo" HorizontalAlignment="Left" Margin="0,147,0,0" VerticalAlignment="Top" Width="132"/>
-        <Button Content="Thay đổi quy định" HorizontalAlignment="Left" Margin="0,167,0,0" VerticalAlignment="Top" Width="132"/>
-        <Label Content="Quản lý thư viện" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Thông tin sách" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Label Content="Mã sách" FontSize="15"  Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Tên sách" FontSize="15"  Grid.Row="3" Grid.Column="0"/>
+        <Label Content="Mã đầu sách" FontSize="15"  Grid.Row="4" Grid.Column="0"/>
+        <Label Content="Tên tác giả" FontSize="15"  Grid.Row="2" Grid.Column="2"/>
+        <Label Content="Nhà xuất bản" FontSize="15"  Grid.Row="3" Grid.Column="2"/>
+        <Label Content="Giá tiền" FontSize="15"  Grid.Row="4" Grid.Column="2"/>
+        <Label Content="Năm xuất bản" FontSize="15"  Grid.Row="2" Grid.Column="4"/>
+        <Label Content="Số lượng tồn" FontSize="15"  Grid.Row="3" Grid.Column="4"/>
+        <Label Content="Danh sách sách" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+        <TextBox x:Name="txbMaSach" Grid.Row="2" Grid.Column="1" />
+        <TextBox x:Name="txbTenSach" Grid.Row="3" Grid.Column="1" />
+        <ComboBox x:Name="cbMaDauSach" Grid.Row="4" Grid.Column="1" />
+        <ListBox x:Name="lbTenTacGia" Grid.Row="2" Grid.Column="3" />
+        <TextBox x:Name="txbNhaXuatBan" Grid.Row="3" Grid.Column="3" />
+        <TextBox x:Name="txbGiaTien" Grid.Row="4" Grid.Column="3" />
+        <DatePicker x:Name="dpNamXuatBan" Grid.Row="2" Grid.Column="5"/>
+        <TextBox x:Name="txbSoLuongTon" Grid.Row="3" Grid.Column="5" />
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4"/>
+        <GroupBox x:Name="gbPhieuThu" Content="Thông tin sách" FontSize="15" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" Margin="0,0,0,-5"/>
+        <Button Content="Thêm mới" Grid.Row="6" Grid.Column="1"/>
+        <Button Content="Lưu" Grid.Row="6" Grid.Column="2"/>
+        <Button Content="Cập nhật" Grid.Row="6" Grid.Column="3"/>
+        <Button Content="Xóa" Grid.Row="6" Grid.Column="4"/>
     </Grid>
 </Window>
