@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\QLTV_SE104.O22\GUI\obj\Debug\
+D:\GIT\QLTV_SE104.O22\GUI\obj\Debug\
 GUI
 none
 false
 DEBUG;TRACE
-D:\QLTV_SE104.O22\GUI\App.xaml
-2-1056671506
+D:\GIT\QLTV_SE104.O22\GUI\App.xaml
+31485380448
 
-6-1058485828
+71887196174
 13-1310406943
-View\MainWindow.xaml;View\DangNhap.xaml;
+View\DialogCustom.xaml;View\MainWindow.xaml;View\DangNhap.xaml;
 
 False
 

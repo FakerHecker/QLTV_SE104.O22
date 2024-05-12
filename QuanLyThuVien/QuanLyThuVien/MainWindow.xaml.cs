@@ -31,20 +31,26 @@ namespace QuanLyThuVien
             btnDocGia.Visibility = Visibility.Visible;
             btnLoaiDocGia.Visibility = Visibility.Visible;
             btnPhieuThuTienPhat.Visibility = Visibility.Visible;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+            CC.Content = new DocGia();
         }
 
 
         private void btQuanLySach_Click(object sender, RoutedEventArgs e)
         {
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
             btnSach.Visibility = Visibility.Visible;
-            btnTacGia.Visibility= Visibility.Visible;
-            btnTheLoai.Visibility= Visibility.Visible;
-        }
-
-        private void btnQuanLyChiTietPhieuNhap_Click(object sender, RoutedEventArgs e)
-        {
-            W_QuanLyChiTietPhieuNhapSach ql = new W_QuanLyChiTietPhieuNhapSach ();
-            ql.Show();
+            btnTacGia.Visibility = Visibility.Visible;
+            btnTheLoai.Visibility = Visibility.Visible;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+            CC.Content = new UC_Sach();
         }
 
         private void btnDocGia_Click(object sender, RoutedEventArgs e)
@@ -75,6 +81,68 @@ namespace QuanLyThuVien
         private void btnTacGia_Click(object sender, RoutedEventArgs e)
         {
             CC.Content = new UC_TacGia();
+        }
+
+        private void btnQuanLyMuonTra_Click(object sender, RoutedEventArgs e)
+        {
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Visible;
+            btnPhieuTraSach.Visibility = Visibility.Visible;
+            CC.Content = new UC_ChoMuonSach();
+        }
+
+        private void btnPhieuMuonSach_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_ChoMuonSach();
+        }
+
+        private void btnPhieuTraSach_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_NhanTraSach();
+        }
+
+        private void btnTimKiem_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_TraCuuSach();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+        }
+
+        private void btnLapBaoCao_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_BaoCaoThongKe();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+        }
+
+        private void btnThayDoiQuyDinh_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_ThayDoiQuyDinh();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
         }
     }
 }
