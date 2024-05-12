@@ -31,13 +31,14 @@ namespace QuanLyThuVien
             btnDocGia.Visibility = Visibility.Visible;
             btnLoaiDocGia.Visibility = Visibility.Visible;
             btnPhieuThuTienPhat.Visibility = Visibility.Visible;
-            CC.Content = new UserControl1();
         }
 
 
         private void btQuanLySach_Click(object sender, RoutedEventArgs e)
         {
-            btnQuanLyChiTietPhieuNhap.Visibility = Visibility.Visible;
+            btnSach.Visibility = Visibility.Visible;
+            btnTacGia.Visibility= Visibility.Visible;
+            btnTheLoai.Visibility= Visibility.Visible;
         }
 
         private void btnQuanLyChiTietPhieuNhap_Click(object sender, RoutedEventArgs e)
@@ -48,21 +49,32 @@ namespace QuanLyThuVien
 
         private void btnDocGia_Click(object sender, RoutedEventArgs e)
         {
-            W_QuanLyDocGia ql = new W_QuanLyDocGia ();
-            ql.Show();
-            
+            CC.Content = new DocGia();
         }
 
         private void btnLoaiDocGia_Click(object sender, RoutedEventArgs e)
         {
-            W_QuanLyLoaiDocGia ql = new W_QuanLyLoaiDocGia ();
-            ql.Show();
+            CC.Content = new UC_LoaiDocGia();
         }
 
         private void btnPhieuThuTienPhat_Click(object sender, RoutedEventArgs e)
         {
-            W_QuanLyPhieuThuTienPhat ql = new W_QuanLyPhieuThuTienPhat ();
-            ql.Show();
+            CC.Content = new UC_PhieuThuTienPhat();
+        }
+
+        private void btnSach_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_Sach();
+        }
+
+        private void btnTheLoai_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_TheLoai();
+        }
+
+        private void btnTacGia_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_TacGia();
         }
     }
 }

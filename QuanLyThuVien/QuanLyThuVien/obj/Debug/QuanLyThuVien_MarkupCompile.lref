@@ -1,7 +1,8 @@
 ﻿
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\App.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\DocGia.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\MainWindow.xaml;;
-FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UserControl1.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UC_LoaiDocGia.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_BaoCaoThongKe.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_DauSach.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_QuanLyChiTietPhieuNhapSach.xaml;;
@@ -15,4 +16,8 @@ FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_QuanLySach.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_QuanLyTacGia.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_QuanLyTheLoaiSach.xaml;;
 FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\W_TraCuuSach.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UC_PhieuThuTienPhat.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UC_Sach.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UC_TheLoai.xaml;;
+FC:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\UC_TacGia.xaml;;
 

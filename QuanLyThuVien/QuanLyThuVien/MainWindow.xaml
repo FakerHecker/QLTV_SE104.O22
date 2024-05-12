@@ -14,7 +14,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/> 
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -36,9 +36,15 @@
         <Button Content="Thay đổi quy định" Grid.Row="7" Margin="0,0,70,199" Grid.RowSpan="2"/>
         <Label Content="Quản lý thư viện" Foreground="Black" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button x:Name="btnQuanLyChiTietPhieuNhap" Content="Chi tiết phiếu nhập" Visibility="Hidden" Click="btnQuanLyChiTietPhieuNhap_Click" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name="btnDocGia" Content="Độc giả" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnDocGia_Click"></Button>
-        <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnLoaiDocGia_Click"></Button>
-        <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnPhieuThuTienPhat_Click"></Button>
+        
+        <Button x:Name="btnDocGia" Content="Độc giả" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnDocGia_Click"/>
+        <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnLoaiDocGia_Click"/>
+        <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnPhieuThuTienPhat_Click"/>
+
+        <Button x:Name="btnSach" Content="Sách" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnSach_Click"/>
+        <Button x:Name="btnTheLoai" Content="Loại sách" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnTheLoai_Click"/>
+        <Button x:Name="btnTacGia" Content="Tác giả" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnTacGia_Click"/>
+        
         <ContentControl x:Name="CC"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="7"/>
     </Grid>
 </Window>

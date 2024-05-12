@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="QuanLyThuVien.UC_PhieuThuTienPhat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyThuVien"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+
+
+
+        <Label Content="Thông tin phiếu thu tiền phạt" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="1" />
+        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" />
+        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" />
+        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" />
+
+
+        <GroupBox x:Name="gb" Header="Thông tin chi tiết phiếu thu" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" FontSize="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Mã phiếu thu" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã độc giả" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Họ tên" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Tổng nợ" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Số tiền thu" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Còn lại" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Ngày thu" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
+
+
+                <TextBox x:Name="txtMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
+                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
+                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
+                <TextBox x:Name="txtNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5"/>
+                <TextBox x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5"/>
+
+                <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1">
+                    <ComboBoxItem IsSelected="True">LDG001</ComboBoxItem>
+                    <ComboBoxItem>LDG002</ComboBoxItem>
+                </ComboBox>
+                <DatePicker x:Name="dtNgaySinh"  Grid.Row="0" Grid.Column="3"/>
+                <DatePicker x:Name="dtNgayLapThe"  Grid.Row="0" Grid.Column="5" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Danh sách phiếu thu" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
+            <Grid>
+                <DataGrid x:Name="dataGridView"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

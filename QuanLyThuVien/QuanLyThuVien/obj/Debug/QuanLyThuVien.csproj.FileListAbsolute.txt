@@ -49,5 +49,15 @@ C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\Microsoft.Xaml
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyTh.B5137F7B.Up2Date
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\App.baml
-C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UserControl1.g.cs
-C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UserControl1.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\DocGia.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\DocGia.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_LoaiDocGia.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_LoaiDocGia.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_PhieuThuTienPhat.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_PhieuThuTienPhat.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_Sach.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_Sach.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_TheLoai.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_TheLoai.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_TacGia.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_TacGia.baml
