@@ -31,6 +31,7 @@ namespace QuanLyThuVien
             btnDocGia.Visibility = Visibility.Visible;
             btnLoaiDocGia.Visibility = Visibility.Visible;
             btnPhieuThuTienPhat.Visibility = Visibility.Visible;
+            CC.Content = new UserControl1();
         }
 
 
@@ -49,6 +50,7 @@ namespace QuanLyThuVien
         {
             W_QuanLyDocGia ql = new W_QuanLyDocGia ();
             ql.Show();
+            
         }
 
         private void btnLoaiDocGia_Click(object sender, RoutedEventArgs e)

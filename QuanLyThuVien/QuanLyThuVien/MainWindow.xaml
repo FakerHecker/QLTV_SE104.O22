@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:QuanLyThuVien"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -27,16 +28,17 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btQuanLyDocGia" Content="Quản lý độc giả" Grid.Row="1" Click="btQuanLyDocGia_Click" Margin="0,0,0,29" Grid.RowSpan="2"/>
-        <Button x:Name="btQuanLySach" Content="Quản lý sách" Grid.Row="2" Click="btQuanLySach_Click" Margin="0,0,0,29" Grid.RowSpan="2"/>
-        <Button Content="Quản lý mượn trả" Grid.Row="3" Margin="0,0,0,29" Grid.RowSpan="2"/>
-        <Button Content="Tìm kiếm" Grid.Row="4" Margin="0,0,0,29" Grid.RowSpan="2"/>
-        <Button Content="Lập báo cáo" Grid.Row="5" Margin="0,0,0,29" Grid.RowSpan="2"/>
-        <Button Content="Thay đổi quy định" Grid.Row="6" Margin="0,0,0,28" Grid.RowSpan="2"/>
-        <Label Content="Quản lý thư viện" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button x:Name="btnQuanLyChiTietPhieuNhap" Content="Chi tiết phiếu nhập" Visibility="Hidden" Click="btnQuanLyChiTietPhieuNhap_Click" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1"/>
-        <Button x:Name="btnDocGia" Content="Độc giả" Grid.Column="2" Grid.Row="2" Margin="0,0,0,29" Grid.RowSpan="3" Visibility="Hidden" Click="btnDocGia_Click"></Button>
-        <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="3" Grid.Row="2" Margin="0,0,0,29" Grid.RowSpan="3" Visibility="Hidden" Click="btnLoaiDocGia_Click"></Button>
-        <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="4" Grid.Row="2" Margin="0,0,0,29" Grid.RowSpan="3" Visibility="Hidden" Click="btnPhieuThuTienPhat_Click"></Button>
+        <Button x:Name="btQuanLyDocGia" Content="Quản lý độc giả" Grid.Row="2" Click="btQuanLyDocGia_Click" Margin="0,0,70,26" Grid.RowSpan="2"/>
+        <Button x:Name="btQuanLySach" Content="Quản lý sách" Grid.Row="3" Click="btQuanLySach_Click" Margin="0,0,70,26" Grid.RowSpan="2" />
+        <Button Content="Quản lý mượn trả" Grid.Row="4" Margin="0,0,70,26" Grid.RowSpan="2"/>
+        <Button Content="Tìm kiếm" Grid.Row="5" Margin="0,0,70,26" Grid.RowSpan="2"/>
+        <Button Content="Lập báo cáo" Grid.Row="6" Margin="0,0,70,25" Grid.RowSpan="2"/>
+        <Button Content="Thay đổi quy định" Grid.Row="7" Margin="0,0,70,199" Grid.RowSpan="2"/>
+        <Label Content="Quản lý thư viện" Foreground="Black" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button x:Name="btnQuanLyChiTietPhieuNhap" Content="Chi tiết phiếu nhập" Visibility="Hidden" Click="btnQuanLyChiTietPhieuNhap_Click" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="btnDocGia" Content="Độc giả" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnDocGia_Click"></Button>
+        <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnLoaiDocGia_Click"></Button>
+        <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnPhieuThuTienPhat_Click"></Button>
+        <ContentControl x:Name="CC"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="7"/>
     </Grid>
 </Window>

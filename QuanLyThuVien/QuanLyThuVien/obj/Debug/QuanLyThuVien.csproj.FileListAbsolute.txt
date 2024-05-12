@@ -39,3 +39,15 @@ C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuT
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_QuanLyPhieuTraSach.baml
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_BaoCaoThongKe.g.cs
 C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\W_BaoCaoThongKe.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\MaterialDesignColors.dll
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\MaterialDesignColors.pdb
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyTh.B5137F7B.Up2Date
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\App.baml
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UserControl1.g.cs
+C:\Users\letam\source\repos\QuanLyThuVien\QuanLyThuVien\obj\Debug\UserControl1.baml
