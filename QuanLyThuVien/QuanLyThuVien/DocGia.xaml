@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:QuanLyThuVien"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -31,7 +32,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-
+        
 
 
         <Label Content="Thông tin độc giả" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -80,7 +81,7 @@
                     <ComboBoxItem>LDG002</ComboBoxItem>
                 </ComboBox>
                 <DatePicker x:Name="dtNgaySinh"  Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dtNgayLapThe"  Grid.Row="0" Grid.Column="5" />
+                <DatePicker x:Name="dtNgayLapThe" Grid.Row="0" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách độc giả" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">

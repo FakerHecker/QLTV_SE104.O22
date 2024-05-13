@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -29,6 +31,7 @@ namespace QuanLyThuVien
             InitializeComponent();
             string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
+           
             HienThiDanhSachDocGia();
         }
 
@@ -42,10 +45,35 @@ namespace QuanLyThuVien
             dataGridView.ItemsSource = dt.DefaultView;
             sqlConnection.Close();
         }
+        private string IncreasePrimaryKey()
+        {
+            string temp;
+            string query = "SELECT COUNT(MaDocGia) FROM DOCGIA";
+            sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            if (sqlCommand.ExecuteScalar() == null)
+            {
+                temp = sqlCommand.ExecuteScalar().ToString();
+                temp = "DG001";
+
+            }
+            else
+            {
+                temp = (Int32.Parse(sqlCommand.ExecuteScalar().ToString()) + 1 ).ToString();
+                if (temp.Length == 1)
+                    temp = "DG00" + temp;
+                else if (temp.Length == 2)
+                    temp = "DG0" + temp;
+                else
+                    temp = "DG" + temp;
+            }
+            sqlConnection.Close();
+            return temp;
+        }
 
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
-            txtMaDocGia.Text = "";
+            txtMaDocGia.Text = IncreasePrimaryKey();
             txtHoTen.Text = "";
             cbLoaiDG.SelectedIndex = 0;
             dtNgaySinh.SelectedDate = new DateTime(2000, 1, 1);
@@ -55,6 +83,7 @@ namespace QuanLyThuVien
             DateTime date = DateTime.Now.AddDays(180);
             txtNgayHetHan.Text = date.ToString();
             txtTongNo.Text = "0";
+            IncreasePrimaryKey();
         }
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
@@ -140,8 +169,9 @@ namespace QuanLyThuVien
                 sqlConnection.Close();
                 DateTime selectedDate = dtNgayLapThe.SelectedDate.Value;
                 DateTime newDate = selectedDate.AddMonths(thoiHanThe);
-                txtNgayHetHan.Text = newDate.ToString("dd/MM/yyyy");
+                txtNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
             }
+            
         }
 
         private void btnCapNhat_Click(object sender, RoutedEventArgs e)
@@ -210,5 +240,7 @@ namespace QuanLyThuVien
                 txtTongNo.Text = row_selected.Row["TongNo"].ToString();
             }
         }
+
+
     }
 }

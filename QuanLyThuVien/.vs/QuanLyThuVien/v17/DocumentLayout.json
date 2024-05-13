@@ -3,71 +3,15 @@
   "WorkspaceRootPath": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_chomuonsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_chomuonsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_loaidocgia.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_loaidocgia.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_thaydoiquydinh.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_thaydoiquydinh.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_tracuusach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_tracuusach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_nhantrasach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_nhantrasach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\uc_phieuthutienphat.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_phieuthutienphat.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\uc_loaidocgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_loaidocgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_loaidocgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\uc_phieunhapsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_phieunhapsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\uc_tacgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_tacgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\uc_sach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_sach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\w_quanlyphieumuontrasach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\w_quanlyphieumuontrasach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\w_quanlyphieunhapsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\w_quanlyphieunhapsach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\w_quanlysach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\w_quanlysach.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\uc_theloai.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\uc_theloai.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\docgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\docgia.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\quanlythuvien\\docgia.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|d:\\git\\qltv_se104.o22\\quanlythuvien\\quanlythuvien\\docgia.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FAE95E1A-2C5D-4D09-BC1B-0BC3F424E6D9}|QuanLyThuVien\\QuanLyThuVien.csproj|solutionrelative:quanlythuvien\\docgia.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -78,212 +22,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UC_ThayDoiQuyDinh.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_ThayDoiQuyDinh.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_ThayDoiQuyDinh.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_ThayDoiQuyDinh.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_ThayDoiQuyDinh.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T12:40:55.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UC_TraCuuSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TraCuuSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_TraCuuSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TraCuuSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_TraCuuSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T12:17:27.173Z",
+              "DocumentIndex": 2,
+              "Title": "DocGia.xaml.cs",
+              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml.cs",
+              "RelativeDocumentMoniker": "QuanLyThuVien\\DocGia.xaml.cs",
+              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml.cs",
+              "RelativeToolTip": "QuanLyThuVien\\DocGia.xaml.cs",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAiwGwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-13T03:36:13.108Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UC_ChoMuonSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_ChoMuonSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_ChoMuonSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_ChoMuonSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_ChoMuonSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T11:46:19.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\MainWindow.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\MainWindow.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T02:52:52.139Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\MainWindow.xaml.cs",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\MainWindow.xaml.cs",
-              "RelativeToolTip": "QuanLyThuVien\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAHkAAAAAAAAAAAA+wIoAAAA5AAAA",
+              "Title": "UC_LoaiDocGia.xaml.cs",
+              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_LoaiDocGia.xaml.cs",
+              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_LoaiDocGia.xaml.cs",
+              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_LoaiDocGia.xaml.cs",
+              "RelativeToolTip": "QuanLyThuVien\\UC_LoaiDocGia.xaml.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAiwJIAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-12T02:52:54.252Z",
+              "WhenOpened": "2024-05-13T03:36:01.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UC_NhanTraSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_NhanTraSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_NhanTraSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_NhanTraSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_NhanTraSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T11:59:56.655Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "UC_LoaiDocGia.xaml",
               "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_LoaiDocGia.xaml",
               "RelativeDocumentMoniker": "QuanLyThuVien\\UC_LoaiDocGia.xaml",
               "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_LoaiDocGia.xaml",
               "RelativeToolTip": "QuanLyThuVien\\UC_LoaiDocGia.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:05:07.086Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UC_PhieuThuTienPhat.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_PhieuThuTienPhat.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_PhieuThuTienPhat.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_PhieuThuTienPhat.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_PhieuThuTienPhat.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:19:49.57Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UC_PhieuNhapSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_PhieuNhapSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_PhieuNhapSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_PhieuNhapSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_PhieuNhapSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T11:03:24.823Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UC_Sach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_Sach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_Sach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_Sach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_Sach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:41:06.398Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "W_QuanLyPhieuMuonTraSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLyPhieuMuonTraSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\W_QuanLyPhieuMuonTraSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLyPhieuMuonTraSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\W_QuanLyPhieuMuonTraSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:54:40.393Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UC_TacGia.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TacGia.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_TacGia.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TacGia.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_TacGia.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:47:15.975Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "W_QuanLyPhieuNhapSach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLyPhieuNhapSach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\W_QuanLyPhieuNhapSach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLyPhieuNhapSach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\W_QuanLyPhieuNhapSach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:54:38.969Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "W_QuanLySach.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLySach.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\W_QuanLySach.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\W_QuanLySach.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\W_QuanLySach.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:39:54.995Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UC_TheLoai.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TheLoai.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\UC_TheLoai.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\UC_TheLoai.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\UC_TheLoai.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:45:25.177Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "DocGia.xaml",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\DocGia.xaml",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml",
-              "RelativeToolTip": "QuanLyThuVien\\DocGia.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-12T06:18:40.028Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "DocGia.xaml.cs",
-              "DocumentMoniker": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml.cs",
-              "RelativeDocumentMoniker": "QuanLyThuVien\\DocGia.xaml.cs",
-              "ToolTip": "D:\\GIT\\QLTV_SE104.O22\\QuanLyThuVien\\QuanLyThuVien\\DocGia.xaml.cs",
-              "RelativeToolTip": "QuanLyThuVien\\DocGia.xaml.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAcwJcAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-12T06:16:51.951Z",
+              "WhenOpened": "2024-05-13T03:35:15.696Z",
               "EditorCaption": ""
             }
           ]

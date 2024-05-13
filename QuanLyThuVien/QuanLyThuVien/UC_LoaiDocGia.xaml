@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Label Content="Loại độc giả" FontSize ="30" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <GroupBox Grid.Column="0" Grid.Row="1" Header="Thông tin độc giả" FontSize="15" Margin="0,0,5,0">
+        <GroupBox Grid.Column="0" Grid.Row="1" Header="Thông tin loại độc giả" FontSize="15" Margin="0,0,5,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -27,29 +27,29 @@
                     <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,5">
                     <Label Content="Mã loại độc giả" FontSize="15" Height="30"/>
                     <Label Content="Tên loại độc giả" FontSize="15" Height="30"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <TextBox x:Name="txbMaLoaiDocGia" FontSize="15" Height="25"/>
-                    <TextBox x:Name="txbTenLoaiDocGia" FontSize="15" Height="25"/>
+                    <TextBlock x:Name="tblMaLoaiDocGia" FontSize="15" Height="25" VerticalAlignment="Bottom"/>
+                    <TextBox x:Name="txbTenLoaiDocGia" FontSize="15" Height="30"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
-                    <Button Content="Thêm mới" Margin="0,0,10,10"/>
-                    <Button Content="Cập nhật" Margin="0,0,10,10"/>
+                    <Button x:Name="btnThemMoi" Content="Thêm mới" Margin="0,0,10,10" Click="btnThemMoi_Click"/>
+                    <Button x:Name="btnCapNhat" Content="Cập nhật" Margin="0,0,10,10" Click="btnCapNhat_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Button Content="Lưu" Margin="10,0,5,10"/>
-                    <Button Content="Xóa" Margin="10,0,5,10"/>
+                    <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click"/>
+                    <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10" Click="btnXoa_Click"/>
                 </StackPanel>
                 
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách loại độc giả" FontSize="15" Margin="5,0,0,0">
-            <DataGrid x:Name="dgvLoaiDocGia"/>
+        <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách loại độc giả" FontSize="15" Margin="5,0,5,0">
+            <DataGrid x:Name="dgvLoaiDocGia" SelectionChanged="dgvLoaiDocGia_SelectionChanged"/>
         </GroupBox>
     </Grid>
 </UserControl>
