@@ -26,13 +26,42 @@ namespace QuanLyThuVien
     public partial class DocGia : UserControl
     {
         SqlConnection sqlConnection;
+        string maDocGia = "DG000";
         public DocGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
+            InitMaDocGia();
            
             HienThiDanhSachDocGia();
+        }
+
+        private void InitMaDocGia()
+        {
+            sqlConnection.Open();
+            string query = "SELECT TOP 1 MaDocGia FROM DOCGIA ORDER BY MaDocGia DESC";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            if (sqlCommand.ExecuteScalar() != null)
+                maDocGia = sqlCommand.ExecuteScalar().ToString();
+            //MessageBox.Show(maPhieuThu);
+            sqlConnection.Close();
+        }
+
+        private void InitLoaiDocGia()
+        {
+            string query = "SELECT MaLoaiDocGia FROM LOAIDOCGIA"; // Thay thế YourTableName bằng tên bảng của bạn
+
+            sqlConnection.Open();
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string companyName = reader["MaLoaiDocGia"].ToString();
+                cbLoaiDG.Items.Add(companyName);
+            }
+            sqlConnection.Close();
         }
 
         private void HienThiDanhSachDocGia()
@@ -47,43 +76,32 @@ namespace QuanLyThuVien
         }
         private string IncreasePrimaryKey()
         {
-            string temp;
-            string query = "SELECT COUNT(MaDocGia) FROM DOCGIA";
-            sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            if (sqlCommand.ExecuteScalar() == null)
-            {
-                temp = sqlCommand.ExecuteScalar().ToString();
-                temp = "DG001";
+            // Tăng giá trị của biến số phiếu
+            int currentNumber = int.Parse(maDocGia.Substring(2)); // Lấy phần số từ chuỗi hiện tại
+            currentNumber++; // Tăng số phiếu
+            //MessageBox.Show(currentNumber.ToString());
+            maDocGia = $"DG{currentNumber:D3}"; // Format lại chuỗi số phiếu
 
-            }
-            else
-            {
-                temp = (Int32.Parse(sqlCommand.ExecuteScalar().ToString()) + 1 ).ToString();
-                if (temp.Length == 1)
-                    temp = "DG00" + temp;
-                else if (temp.Length == 2)
-                    temp = "DG0" + temp;
-                else
-                    temp = "DG" + temp;
-            }
-            sqlConnection.Close();
-            return temp;
+            // Hiển thị số phiếu lên giao diện (ví dụ: textBlockSoPhieu.Text = currentPhieuThu;)
+            return maDocGia;
         }
 
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
             txtMaDocGia.Text = IncreasePrimaryKey();
             txtHoTen.Text = "";
+
+            InitLoaiDocGia();
             cbLoaiDG.SelectedIndex = 0;
+
             dtNgaySinh.SelectedDate = new DateTime(2000, 1, 1);
             txtDiaChi.Text = "";
             txtEmail.Text = "";
             dtNgayLapThe.SelectedDate = DateTime.Now;
             DateTime date = DateTime.Now.AddDays(180);
-            txtNgayHetHan.Text = date.ToString();
+            tblNgayHetHan.Text = date.ToString("MM/dd/yyyy");
             txtTongNo.Text = "0";
-            IncreasePrimaryKey();
+            
         }
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
@@ -169,7 +187,7 @@ namespace QuanLyThuVien
                 sqlConnection.Close();
                 DateTime selectedDate = dtNgayLapThe.SelectedDate.Value;
                 DateTime newDate = selectedDate.AddMonths(thoiHanThe);
-                txtNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
+                tblNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
             }
             
         }
@@ -205,7 +223,7 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
                     sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.Text);
                     sqlCommand.Parameters.AddWithValue("@NgayHetHan", dtNgayLapThe.Text);
-                    sqlCommand.Parameters.AddWithValue("@TongNo", 0);
+                    sqlCommand.Parameters.AddWithValue("@TongNo", txtTongNo.Text);
                     sqlCommand.ExecuteScalar();
                 }
 
@@ -236,7 +254,7 @@ namespace QuanLyThuVien
                 txtDiaChi.Text = row_selected.Row["DiaChi"].ToString();
                 txtEmail.Text = row_selected.Row["Email"].ToString();
                 dtNgayLapThe.SelectedDate = Convert.ToDateTime(row_selected.Row["NgayLapThe"].ToString());
-                txtNgayHetHan.Text = row_selected.Row["NgayHetHan"].ToString();
+                tblNgayHetHan.Text = row_selected.Row["NgayHetHan"].ToString();
                 txtTongNo.Text = row_selected.Row["TongNo"].ToString();
             }
         }

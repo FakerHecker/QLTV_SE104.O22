@@ -36,8 +36,9 @@
 
         <Label Content="Cho mượn sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Button x:Name="btnLuu" Content="Tìm sách"  Grid.Row="5" Grid.Column="2" />
-        <Button x:Name="btnCapNhat" Content="In phiếu mượn"  Grid.Row="5" Grid.Column="3" />
+        <Button x:Name="btnChoMuon" Content="Cho mượn"  Grid.Row="5" Grid.Column="1" Click="btnChoMuon_Click" />
+        
+        <Button x:Name="btnTimSach" Content="Tìm sách"  Grid.Row="5" Grid.Column="4" Click="btnTimSach_Click" />
 
         <GroupBox x:Name="gb" Header="Thông tin phiếu mượn sách" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="4" FontSize="15" Margin="0,0,5,0">
             <Grid>
@@ -51,21 +52,18 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Mã độc giả" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Tên độc giả" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã phiếu &#xA;mượn trả" Height="50" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã độc giả" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
                 
                 <Label Content="Ngày mượn" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Ngày phải trả" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Mã cuốn sách" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
 
+                <TextBlock x:Name="tblMaPhieuMuonTra" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <ComboBox x:Name="cbMaDocGia" Height="30" Grid.Row="1" Grid.Column="1"/>
+                
+                <DatePicker x:Name="dpNgayMuon" Height="30" Grid.Row="0" Grid.Column="3"/>
+                <TextBlock x:Name="tblMaCuonSach" Height="30" Grid.Row="1" Grid.Column="3"/>
 
-
-                <TextBox x:Name="txtMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
-                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
-                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
-                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
-
-                <DatePicker x:Name="dtNgaySinh"  Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dtNgayLapThe"  Grid.Row="0" Grid.Column="5" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Tìm sách"  Grid.Column="4" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" FontSize="15">
@@ -80,11 +78,14 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="Tên sách" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
                 <Label Content="Số sách tìm thấy" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
+
+                <TextBox x:Name="txbTenSach" Height="30" Grid.Row="0" Grid.Column="1" />
+                <TextBlock x:Name="tblSoSachTimThay"  Height="30" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Danh sách sách" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
+        <GroupBox Header="Danh sách cuốn sách" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView"/>
+                <DataGrid x:Name="dgvSach" SelectionChanged="dgvSach_SelectionChanged"/>
             </Grid>
         </GroupBox>
     </Grid>

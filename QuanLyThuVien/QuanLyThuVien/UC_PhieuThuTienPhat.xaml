@@ -34,12 +34,12 @@
 
 
 
-        <Label Content="Thông tin phiếu thu tiền phạt" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Phiếu thu tiền phạt" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="1" />
-        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" />
-        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" />
-        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" />
+        <Button x:Name="btnThemMoi" Content="Thêm mới" Grid.Row="5" Grid.Column="1" Click="btnThemMoi_Click" />
+        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" Click="btnLuu_Click" />
+        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" Click="btnCapNhat_Click" />
+        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" Click="btnXoa_Click" />
 
 
         <GroupBox x:Name="gb" Header="Thông tin chi tiết phiếu thu" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" FontSize="15">
@@ -66,24 +66,23 @@
                 <Label Content="Ngày thu" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
 
 
-                <TextBox x:Name="txtMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
-                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
-                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
-                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
-                <TextBox x:Name="txtNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5"/>
-                <TextBox x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5"/>
-
-                <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">LDG001</ComboBoxItem>
-                    <ComboBoxItem>LDG002</ComboBoxItem>
+                <TextBlock x:Name="tblMaPhieuThu" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <ComboBox x:Name="cbMaDocGia" Height="30" Grid.Row="1" Grid.Column="1" SelectionChanged="cbMaDocGia_SelectionChanged">
+                    <ComboBoxItem Content="DG001"/>
+                    <ComboBoxItem Content="DG002"/>
                 </ComboBox>
-                <DatePicker x:Name="dtNgaySinh"  Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dtNgayLapThe"  Grid.Row="0" Grid.Column="5" />
+                <TextBlock x:Name="tblHoTen" Height="30" Grid.Row="2" Grid.Column="1"/>
+
+                <TextBlock x:Name="tblTongNo" Height="30" Grid.Row="0" Grid.Column="3"/>
+                <TextBox x:Name="txbSoTienThu" Height="30" Grid.Row="1" Grid.Column="3" TextChanged="txbSoTienThu_TextChanged"/>
+                <TextBlock x:Name="tblConLai" Height="30" Grid.Row="2" Grid.Column="3"/>
+
+                <DatePicker x:Name="dpNgayThu"  Grid.Row="0" Grid.Column="5" />
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách phiếu thu" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView"/>
+                <DataGrid x:Name="dgvPhieuThuTienPhat" SelectionChanged="dgvPhieuThuTienPhat_SelectionChanged"/>
             </Grid>
         </GroupBox>
     </Grid>

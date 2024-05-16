@@ -5,13 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyThuVien"
              mc:Ignorable="d" 
-                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             TextElement.FontWeight="Regular"
-TextElement.FontSize="13"
-TextOptions.TextFormattingMode="Ideal"
-TextOptions.TextRenderingMode="Auto"
-Background="{DynamicResource MaterialDesignPaper}"
-FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -43,8 +36,8 @@ FontFamily="{DynamicResource MaterialDesignFont}"
 
         <Label Content="Thông tin sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="1" />
-        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" />
+        <Button x:Name="btnThemMoi" Content="Thêm mới" Grid.Row="5" Grid.Column="1" Click="btnThemMoi_Click" />
+        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" Click="btnLuu_Click" />
         <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" />
         <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" />
 
@@ -67,31 +60,28 @@ FontFamily="{DynamicResource MaterialDesignFont}"
                 <Label Content="Mã sách" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
                 <Label Content="Tên sách" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
                 <Label Content="Mã đầu sách" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Tên tác giả" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Nhà xuất bản" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Giá tiền" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
+                
+                <Label Content="Tên đầu sách" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Mã xxx" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Tên xxx" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
+                
                 <Label Content="Năm xuất bản" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
-                <Label Content="Số lượng tồn" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
+                <Label Content="Nhà xuất bản" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
 
+                <TextBlock x:Name="tblMaSach" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <TextBox x:Name="txbTenSach" Height="30" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox x:Name="cbMaDauSach" Height="30" Grid.Row="2" Grid.Column="1"/>
 
-                <TextBox x:Name="txtMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
-                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
-                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
-                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
-                <TextBox x:Name="txtNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5"/>
-                <TextBox x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5"/>
+                <TextBlock x:Name="tblTenDauSach" Height="30" Grid.Row="0" Grid.Column="3"/>
 
-                <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1">
-                    <ComboBoxItem IsSelected="True">LDG001</ComboBoxItem>
-                    <ComboBoxItem>LDG002</ComboBoxItem>
-                </ComboBox>
-                <DatePicker x:Name="dtNgaySinh"  Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dtNgayLapThe"  Grid.Row="0" Grid.Column="5" />
+                <TextBox x:Name="txbNamXuatBan" Height="30" Grid.Row="0" Grid.Column="5"/>
+                <TextBox x:Name="txbNhaXuatBan" Height="30" Grid.Row="1" Grid.Column="5"/>
+
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách sách" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView"/>
+                <DataGrid x:Name="dataGridView" SelectionChanged="dataGridView_SelectionChanged"/>
             </Grid>
         </GroupBox>
     </Grid>

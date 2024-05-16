@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,14 @@ namespace QuanLyThuVien
     /// </summary>
     public partial class UC_BaoCaoThongKe : UserControl
     {
+        SqlConnection sqlConnection;
         public UC_BaoCaoThongKe()
         {
             InitializeComponent();
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
+            sqlConnection = new SqlConnection(connectionString);
         }
+
+        
     }
 }

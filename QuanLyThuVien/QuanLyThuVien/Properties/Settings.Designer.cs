@@ -26,7 +26,8 @@ namespace QuanLyThuVien.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-NHIP9RC;Initial Catalog=QLTV;Integrated Security=True;Trust Server Certificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-AV6EQV4\\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Passwor" +
+            "d=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True")]
         public string QLTV_DBConnectionString {
             get {
                 return ((string)(this["QLTV_DBConnectionString"]));

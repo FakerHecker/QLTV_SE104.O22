@@ -24,12 +24,25 @@ namespace QuanLyThuVien
     public partial class UC_LoaiDocGia : UserControl
     {
         SqlConnection sqlConnection;
+        private string maLoaiDocGia = "LDG000";
         public UC_LoaiDocGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
+            InitMaLoaiDocGia();
             HienThiDanhSachLoaiDocGia();
+        }
+
+        private void InitMaLoaiDocGia()
+        {
+            sqlConnection.Open();
+            string query = "SELECT TOP 1 MaLoaiDocGia FROM LoaiDOCGIA ORDER BY MaLoaiDocGia DESC";
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            if (sqlCommand.ExecuteScalar() != null)
+                maLoaiDocGia = sqlCommand.ExecuteScalar().ToString();
+            //MessageBox.Show(maPhieuThu);
+            sqlConnection.Close();
         }
 
         private void HienThiDanhSachLoaiDocGia()
@@ -56,28 +69,14 @@ namespace QuanLyThuVien
 
         private string IncreasePrimaryKey()
         {
-            string temp;
-            string query = "SELECT COUNT(MaLoaiDocGia) FROM LOAIDOCGIA";
-            sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            if (sqlCommand.ExecuteScalar() == null)
-            {
-                temp = sqlCommand.ExecuteScalar().ToString();
-                temp = "LDG001";
+            // Tăng giá trị của biến số phiếu
+            int currentNumber = int.Parse(maLoaiDocGia.Substring(3)); // Lấy phần số từ chuỗi hiện tại
+            currentNumber++; // Tăng số phiếu
+            //MessageBox.Show(currentNumber.ToString());
+            maLoaiDocGia = $"LDG{currentNumber:D3}"; // Format lại chuỗi số phiếu
 
-            }
-            else
-            {
-                temp = (Int32.Parse(sqlCommand.ExecuteScalar().ToString()) + 1).ToString();
-                if (temp.Length == 1)
-                    temp = "LDG00" + temp;
-                else if (temp.Length == 2)
-                    temp = "LDG0" + temp;
-                else
-                    temp = "LDG" + temp;
-            }
-            sqlConnection.Close();
-            return temp;
+            // Hiển thị số phiếu lên giao diện (ví dụ: textBlockSoPhieu.Text = currentPhieuThu;)
+            return maLoaiDocGia;
         }
 
         private void btnThemMoi_Click(object sender, RoutedEventArgs e)
@@ -144,6 +143,7 @@ namespace QuanLyThuVien
                 sqlConnection.Open();
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
                 sqlCommand.ExecuteScalar();
+
             }
             catch (Exception ex)
             {
