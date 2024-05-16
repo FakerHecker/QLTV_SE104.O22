@@ -6,48 +6,155 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:QuanLyThuVien"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/> 
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+        Title="MainWindow" Height="800" Width="850"
+                     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+                     TextElement.FontWeight="Regular"
+                     TextElement.FontSize="13"
+                     TextOptions.TextFormattingMode="Ideal"
+TextOptions.TextRenderingMode="Auto"
+Background="{DynamicResource MaterialDesignPaper}"
+FontFamily="{DynamicResource MaterialDesignFont}"
+        >
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid Background="#FFDEDEDE">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button x:Name="btQuanLyDocGia" Content="Quản lý độc giả" Grid.Row="2" Click="btQuanLyDocGia_Click"/>
-        <Button x:Name="btQuanLySach" Content="Quản lý sách" Grid.Row="3" Click="btQuanLySach_Click"/>
-        <Button x:Name="btnQuanLyMuonTra" Content="Quản lý mượn trả" Grid.Row="4" Click="btnQuanLyMuonTra_Click"/>
-        <Button x:Name="btnTimKiem" Content="Tìm kiếm" Grid.Row="5"  Click="btnTimKiem_Click"/>
-        <Button x:Name="btnLapBaoCao" Content="Lập báo cáo" Grid.Row="6"  Click="btnLapBaoCao_Click"/>
-        <Button x:Name="btnThayDoiQuyDinh" Content="Thay đổi quy định" Grid.Row="7" Click="btnThayDoiQuyDinh_Click" />
-        <Label Content="Quản lý thư viện" Foreground="Black" FontSize="25" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid x:Name="GridMain" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="540" Width="1010"/>
+        <Grid Height="60" VerticalAlignment="Top" Background="#FF5C99D6" Grid.Row="0">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
+            </Grid.Effect>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
+                    <StackPanel Width="150">
+                        <Button Content="Settings"/>
+                        <Button Content="Account"/>
+                        <Button Content="Help"/>
+                        <Separator/>
+                        <Button Content="Logout"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Black" FontSize="30">QUẢN LÝ THƯ VIỆN</TextBlock>
+        </Grid>
+        <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E" Grid.Column="0" Margin="0,0,0,270">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
+            </Grid.Effect>
+            <StackPanel Grid.RowSpan="2">
+                <Grid Height="auto" Background="White" RenderTransformOrigin="0.5,0.5" Grid.Column="0">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                    </Button>
 
-        <Button x:Name="btnDocGia" Content="Độc giả" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnDocGia_Click"/>
-        <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnLoaiDocGia_Click"/>
-        <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnPhieuThuTienPhat_Click"/>
+                    <Image Height="80" VerticalAlignment="Bottom"/>
+                </Grid>
+                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" Grid.Column="0">
+                    <ListViewItem x:Name="ItemPerson" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="People" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text= "Quản lý độc giả" VerticalAlignment="Center" Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemBook" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
 
-        <Button x:Name="btnSach" Content="Sách" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnSach_Click"/>
-        <Button x:Name="btnTheLoai" Content="Loại sách" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnTheLoai_Click"/>
-        <Button x:Name="btnTacGia" Content="Tác giả" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnTacGia_Click"/>
+                        <StackPanel Orientation="Horizontal" Height="50" Width="250">
+                            <materialDesign:PackIcon Kind="BookAlphabet" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Quản lý sách" VerticalAlignment="Center" Margin="10 10" />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemBorrow" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="NoteAddOutline" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Quản lý mượn trả" VerticalAlignment="Center"  Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
 
-        <Button x:Name="btnPhieuMuonSach" Content="Cho mượn sách" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Click="btnPhieuMuonSach_Click"/>
-        <Button x:Name="btnPhieuTraSach" Content="Nhận trả sách" Grid.Column="2" Grid.Row="1" Visibility="Hidden" Click="btnPhieuTraSach_Click"/>
-        
-        <ContentControl x:Name="CC"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="6" Grid.RowSpan="8"/>
+                    <ListViewItem x:Name="ItemSearch" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Search" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text ="Tìm kiếm" VerticalAlignment="Center"  Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemReport" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ReportAreaspline" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Báo cáo, thống kê" VerticalAlignment="Center"  Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="ItemFix" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Pencil" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Thay đổi quy định" VerticalAlignment="Center"  Margin="10 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+
+        </Grid>
+        <Grid Grid.Column="0" Height="800" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="81*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="SP1" Visibility="Hidden" Orientation="Horizontal" Margin="160,-320,297,30" Grid.Column="1">
+                <Button x:Name="btnDocGia" Content="Độc giả" Margin ="0,0,0,0" Click="btnDocGia_Click" Grid.Column ="0" Grid.Row="0"/>
+                <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="1" Click="btnLoaiDocGia_Click" Grid.RowSpan="2" />
+                <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="1" Click="btnPhieuThuTienPhat_Click" Grid.RowSpan="2"/>
+            </StackPanel>
+            <StackPanel x:Name="SP2" Visibility="Hidden" Orientation="Horizontal" Margin="160,60,297,30" Grid.Column="1">
+                <Button x:Name="btnSach" Content="Sách" Click="btnSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnTheLoai" Content="Loại sách" Click="btnTheLoai_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnTacGia" Content="Tác giả" Grid.ColumnSpan="2" Visibility="Hidden" Click="btnTacGia_Click" Margin="0,0,0,3" Grid.RowSpan="2"/>
+            </StackPanel>
+            <StackPanel x:Name="SP3" Visibility="Hidden" Orientation="Horizontal" Margin="160,60,297,30" Grid.Column="1">
+                <Button x:Name="btnPhieuMuonSach" Content="Cho mượn sách" Click="btnPhieuMuonSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnPhieuTraSach" Content="Nhận trả sách" Click="btnPhieuTraSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            </StackPanel>
+            <ContentControl x:Name="CC" Margin="160,118,25,26" Grid.Column="1" Grid.RowSpan="2" Background="#FF8E629B"/>
+
+        </Grid>
     </Grid>
 </Window>

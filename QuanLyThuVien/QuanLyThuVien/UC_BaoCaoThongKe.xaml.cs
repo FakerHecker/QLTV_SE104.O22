@@ -27,7 +27,8 @@ namespace QuanLyThuVien
         public UC_BaoCaoThongKe()
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
+
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
             sqlConnection = new SqlConnection(connectionString);
         }
 
