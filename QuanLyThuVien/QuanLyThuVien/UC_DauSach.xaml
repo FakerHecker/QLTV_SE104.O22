@@ -24,37 +24,48 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" >
                     <Label Content="Mã đầu sách" FontSize="15" Height="30"/>
                     <Label Content="Tên đầu sách" FontSize="15" Height="30"/>
-                    <Label Content="Tên thể loại" FontSize="15" Height="30"/>
+                    <Label Content="Mã thể loại" FontSize="15" Height="30"/>
                     <Label Content="Tác giả" FontSize="15" Height="30"/>
+                    <Label Content="" FontSize="15" Height="30"/>
+                    <Label Content="Tác của sách" FontSize="15" Height="30"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <TextBox x:Name="txbMaLoaiDocGia" FontSize="15" Height="25"/>
-                    <TextBox x:Name="txbTenLoaiDocGia" FontSize="15" Height="25"/>
-                    <TextBox  FontSize="15" Height="25"/>
-                    <TextBox  FontSize="15" Height="25"/>
-                    <TextBox  FontSize="15" Height="25"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                    <TextBlock x:Name="tblMaDauSach" FontSize="15" Height="30"/>
+                    <TextBox x:Name="txbTenDauSach" FontSize="15" Height="30"/>
+                    <ComboBox  x:Name="cbMaTheLoai" FontSize="15" Height="30"/>
+                    <ComboBox x:Name="cbTacGia" FontSize="15" Height="30"/>
+                    <Grid Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnThemTacGia" Content="▼" Click="btnThemTacGia_Click" />
+                        <Button x:Name="btnXoaTacGia" Content="▲"  Grid.Column="1" Click="btnXoaTacGia_Click"/>
+                    </Grid>
+                    <ListBox x:Name="lbTacGia" FontSize="15" Height="100"/>
+                    
                 </StackPanel>
                 <StackPanel Grid.Row="1">
-                    <Button Content="Thêm mới" Margin="0,0,10,10"/>
-                    <Button Content="Cập nhật" Margin="0,0,10,10"/>
+                    <Button x:Name="btnThemMoi" Content="Thêm mới" Margin="0,0,10,10" Click="btnThemMoi_Click"/>
+                    <Button x:Name="btnCapNhat" Content="Cập nhật" Margin="0,0,10,10" Click="btnCapNhat_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Button Content="Lưu" Margin="10,0,5,10"/>
-                    <Button Content="Xóa" Margin="10,0,5,10"/>
+                    <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click"/>
+                    <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10" Click="btnXoa_Click"/>
                 </StackPanel>
 
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách đầu sách" FontSize="15" Margin="5,0,0,0">
-            <DataGrid x:Name="dgvLoaiDocGia"/>
+            <DataGrid x:Name="dgvDanhSachDauSach" SelectionChanged="dgvDanhSachDauSach_SelectionChanged"/>
         </GroupBox>
     </Grid>
 </UserControl>

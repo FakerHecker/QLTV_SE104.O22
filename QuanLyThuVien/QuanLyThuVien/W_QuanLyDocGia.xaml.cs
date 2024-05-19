@@ -31,7 +31,7 @@ namespace QuanLyThuVien
         {
             InitializeComponent();
 
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             HienThiDanhSachDocGia();
             

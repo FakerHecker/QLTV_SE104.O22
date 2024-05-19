@@ -29,7 +29,9 @@ namespace QuanLyThuVien
         public UC_PhieuThuTienPhat()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;"; sqlConnection = new SqlConnection(connectionString);
+
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
+            sqlConnection = new SqlConnection(connectionString);
             InitMaPhieuThu();
             HienThiDanhSachPhieuThuTienPhat();
         }

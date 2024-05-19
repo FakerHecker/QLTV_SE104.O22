@@ -50,13 +50,21 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Label Content="1. Thời hạn thẻ" FontSize="15" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Label Content="1. Thời hạn thẻ (tháng)" FontSize="15" Grid.Row="0" Grid.ColumnSpan="2"/>
                 <Label Content="2. Tuổi tối thiểu" FontSize="15" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <Label Content="3. Tuổi tối đa" FontSize="15" Grid.Row="2" Grid.ColumnSpan="2"/>
                 <Label Content="4. Khoảng cách năm xuất bản" FontSize="15" Grid.Row="3" Grid.ColumnSpan="2"/>
                 <Label Content="5. Số ngày mượn tối đa" FontSize="15" Grid.Row="4" Grid.ColumnSpan="2"/>
                 <Label Content="6. Số sách mượn tối đa" FontSize="15" Grid.Row="5" Grid.ColumnSpan="2"/>
                 <Label Content="7. Số tiền phạt trên một ngày trả trễ" FontSize="15" Grid.Row="6" Grid.ColumnSpan="2"/>
+
+                <TextBlock x:Name="tblThoiHanThe"  FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblTuoiToiThieu"  FontSize="15" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblTuoiToiDa"  FontSize="15" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblKhoangCachNamXuatBan"  FontSize="15" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblSoNgayMuonToiDa"  FontSize="15" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblSoSachMuonToiDa"  FontSize="15" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblSoTienPhat"  FontSize="15" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" FontSize="15"  Header="Thay đổi quy định" Grid.RowSpan="11" Margin="5,0,0,0">
@@ -79,7 +87,7 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Quy định" FontSize="15"/>
-                <ComboBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="15" Height="30">
+                <ComboBox x:Name="cbDieuKien" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="15" Height="30" Margin="0,0,100,0">
                     <ComboBoxItem Content="Thời hạn thẻ" IsSelected="True"/>
                     <ComboBoxItem Content="Tuổi tối thiểu"/>
                     <ComboBoxItem Content="Tuổi tối đa"/>
@@ -89,7 +97,8 @@
                     <ComboBoxItem Content="Số tiền phạt trên một ngày trả trễ"/>
                 </ComboBox>
                 <Label Content="Giá trị" Grid.Column="2" FontSize="15"/>
-                <TextBox Grid.Column="2" Grid.Row="1" FontSize="15" Height="30"/>
+                <TextBox x:Name="txbGiaTri" Grid.Column="2" Grid.Row="1" FontSize="15" Height="30"/>
+                <Button x:Name="btnThayDoi" Content="Thay đổi" Grid.Column="1" Grid.Row="2" FontSize="15" Height="30" Click="btnThayDoi_Click"/>
             </Grid>
         </GroupBox>
     </Grid>

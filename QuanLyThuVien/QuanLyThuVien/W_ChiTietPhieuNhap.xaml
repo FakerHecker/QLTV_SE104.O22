@@ -1,0 +1,86 @@
+﻿<Window x:Class="QuanLyThuVien.W_ChiTietPhieuNhap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyThuVien"
+        mc:Ignorable="d"
+        Title="W_ChiTietPhieuNhap" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+
+
+
+        <Label Content="Chi tiết phiếu nhập sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Button x:Name="btnThemMoi" Content="Thêm mới" Grid.Row="5" Grid.Column="1" Click="btnThemMoi_Click" />
+        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" Click="btnLuu_Click" />
+        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" Click="btnCapNhat_Click" />
+        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" />
+
+
+        <GroupBox x:Name="gb" Header="Thông tin chi tiết phiếu nhập sách" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" FontSize="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Mã CT phiếu nhập" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã phiếu nhập" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã sách" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Số lượng" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Đơn giá" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Thành tiền" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Tổng tiền" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
+
+
+                <TextBlock x:Name="tblMaCTPhieuNhap" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock x:Name="tblMaPhieuNhap" Height="30" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox x:Name="cbMaSach"  Grid.Row="2" Grid.Column="1"/>
+
+                <TextBox x:Name="txbSoLuong" Height="30" Grid.Row="0" Grid.Column="3" TextChanged="txbSoLuong_TextChanged"/>
+                <TextBox x:Name="txbDonGia" Height="30" Grid.Row="1" Grid.Column="3" TextChanged="txbDonGia_TextChanged"/>
+                <TextBlock x:Name="tblThanhTien" Height="30" Grid.Row="2" Grid.Column="3"/>
+
+                <TextBlock x:Name="tblTongTien" Height="30" Grid.Row="0" Grid.Column="5"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Danh sách chi tiết phiếu nhập sách" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
+            <Grid>
+                <DataGrid x:Name="dgvChiTietPhieuNhap"/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

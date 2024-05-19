@@ -37,11 +37,12 @@
         <Label Content="Báo cáo thống kê" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15"/>
         <Label Content="Thời gian" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15"/>
-        <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <ComboBoxItem IsSelected="True">Tình hình mượn sách theo thể loại</ComboBoxItem>
+        <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged">
+            <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
             <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
+            
         </ComboBox>
-        <DatePicker Grid.Row="2" Grid.Column="1" FontSize="15"/>
+        <DatePicker x:Name="dpThoiGian" Grid.Row="2" Grid.Column="1" FontSize="15"/>
 
         <GroupBox Header="Tình hình mượn sách theo thể loại" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
@@ -49,6 +50,6 @@
             </Grid>
         </GroupBox>
         <Label Content="Tổng số lượt mượn" Grid.Row="10" Grid.Column="4" FontSize="14.5"/>
-        <Label Content="0" Grid.Row="10" Grid.Column="5" FontSize="15"/>
+        <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="10" Grid.Column="5" FontSize="15"/>
     </Grid>
 </UserControl>

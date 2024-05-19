@@ -117,6 +117,9 @@
     <Compile Include="W_BaoCaoThongKe.xaml.cs">
       <DependentUpon>W_BaoCaoThongKe.xaml</DependentUpon>
     </Compile>
+    <Compile Include="W_ChiTietPhieuNhap.xaml.cs">
+      <DependentUpon>W_ChiTietPhieuNhap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="W_DauSach.xaml.cs">
       <DependentUpon>W_DauSach.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="W_BaoCaoThongKe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="W_ChiTietPhieuNhap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

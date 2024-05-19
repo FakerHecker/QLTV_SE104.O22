@@ -22,110 +22,42 @@ namespace QuanLyThuVien
     {
         public MainWindow()
         {
-
+            
             InitializeComponent();
-
+            
         }
-        private void Item_MouseEnter(object sender, MouseEventArgs e)
+
+        private void btQuanLyDocGia_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy đối tượng TextBlock từ ListViewItem
-            ListViewItem item = (ListViewItem)sender;
-            TextBlock textBlock = FindVisualChild<TextBlock>(item);
-
-            // Thay đổi kích thước của ListViewItem
-            item.Height = 70; // Đặt kích thước lớn hơn khi con trỏ chuột chạm vào
-
-            // Đặt chữ in đậm
-            if (textBlock != null)
-            {
-                textBlock.FontWeight = FontWeights.Bold;
-            }
+            btnDocGia.Visibility = Visibility.Visible;
+            btnLoaiDocGia.Visibility = Visibility.Visible;
+            btnPhieuThuTienPhat.Visibility = Visibility.Visible;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+            CC.Content = new DocGia();
         }
 
-        private void Item_MouseLeave(object sender, MouseEventArgs e)
+
+        private void btQuanLySach_Click(object sender, RoutedEventArgs e)
         {
-            // Lấy đối tượng TextBlock từ ListViewItem
-            ListViewItem item = (ListViewItem)sender;
-            TextBlock textBlock = FindVisualChild<TextBlock>(item);
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
 
-            // Đặt lại kích thước và font chữ khi con trỏ chuột rời khỏi ListViewItem
-            item.Height = 60; // Đặt lại kích thước khi con trỏ chuột rời khỏi
+            btnSach.Visibility = Visibility.Visible;
+            btnTacGia.Visibility = Visibility.Visible;
+            btnTheLoai.Visibility = Visibility.Visible;
+            btnPhieuNhapSach.Visibility = Visibility.Visible;
+            btnDauSach.Visibility = Visibility.Visible;
 
-            // Đặt chữ trở lại bình thường
-            if (textBlock != null)
-            {
-                textBlock.FontWeight = FontWeights.Normal;
-            }
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+            CC.Content = new UC_Sach();
         }
 
-        // Hàm hỗ trợ để tìm đối tượng TextBlock trong ListViewItem
-        private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is T)
-                {
-                    return (T)child;
-                }
-                else
-                {
-                    T childOfChild = FindVisualChild<T>(child);
-                    if (childOfChild != null)
-                    {
-                        return childOfChild;
-                    }
-                }
-            }
-            return null;
-        }
-        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            GridMain.Children.Clear();
-
-            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
-            {
-                case "ItemPerson":
-                    SP1.Visibility = Visibility.Visible;
-                    SP2.Visibility = Visibility.Hidden;
-                    SP3.Visibility = Visibility.Hidden;
-                    CC.Content = new DocGia();
-                    break;
-                case "ItemBook":
-                    SP2.Visibility = Visibility.Visible;
-                    SP1.Visibility = Visibility.Hidden;
-                    SP3.Visibility = Visibility.Hidden;
-                    CC.Content = new UC_Sach();
-                    break;
-                case "ItemBorrow":
-                    SP3.Visibility = Visibility.Visible;
-                    SP2.Visibility = Visibility.Hidden;
-                    SP1.Visibility = Visibility.Hidden;
-                    CC.Content = new UC_ChoMuonSach();
-                    break;
-                case "ItemSearch":
-                    CC.Content = new UC_TraCuuSach();
-                    SP1.Visibility = Visibility.Hidden;
-                    SP2.Visibility = Visibility.Hidden;
-                    SP3.Visibility = Visibility.Hidden;
-                    break;
-                case "ItemFix":
-                    CC.Content = new UC_ThayDoiQuyDinh();
-                    SP1.Visibility = Visibility.Hidden;
-                    SP2.Visibility = Visibility.Hidden;
-                    SP3.Visibility = Visibility.Hidden;
-                    break;
-                case "ItemReport":
-                    CC.Content = new UC_BaoCaoThongKe();
-                    SP1.Visibility = Visibility.Hidden;
-                    SP2.Visibility = Visibility.Hidden;
-                    SP3.Visibility = Visibility.Hidden;
-                    break;
-                default:
-                    break;
-            }
-        }
         private void btnDocGia_Click(object sender, RoutedEventArgs e)
         {
             CC.Content = new DocGia();
@@ -156,6 +88,19 @@ namespace QuanLyThuVien
             CC.Content = new UC_TacGia();
         }
 
+        private void btnQuanLyMuonTra_Click(object sender, RoutedEventArgs e)
+        {
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Visible;
+            btnPhieuTraSach.Visibility = Visibility.Visible;
+            CC.Content = new UC_ChoMuonSach();
+        }
+
         private void btnPhieuMuonSach_Click(object sender, RoutedEventArgs e)
         {
             CC.Content = new UC_ChoMuonSach();
@@ -165,18 +110,54 @@ namespace QuanLyThuVien
         {
             CC.Content = new UC_NhanTraSach();
         }
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+
+        private void btnTimKiem_Click(object sender, RoutedEventArgs e)
         {
-            ButtonCloseMenu.Visibility = Visibility.Visible;
-            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            CC.Content = new UC_TraCuuSach();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
         }
 
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        private void btnLapBaoCao_Click(object sender, RoutedEventArgs e)
         {
-            ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            ButtonOpenMenu.Visibility = Visibility.Visible;
+            CC.Content = new UC_BaoCaoThongKe();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
         }
 
+        private void btnThayDoiQuyDinh_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_ThayDoiQuyDinh();
+            btnDocGia.Visibility = Visibility.Hidden;
+            btnLoaiDocGia.Visibility = Visibility.Hidden;
+            btnPhieuThuTienPhat.Visibility = Visibility.Hidden;
+            btnSach.Visibility = Visibility.Hidden;
+            btnTacGia.Visibility = Visibility.Hidden;
+            btnTheLoai.Visibility = Visibility.Hidden;
+            btnPhieuMuonSach.Visibility = Visibility.Hidden;
+            btnPhieuTraSach.Visibility = Visibility.Hidden;
+        }
+
+        private void btnPhieuNhapSach_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_PhieuNhapSach();
+        }
+
+        private void btnDauSach_Click(object sender, RoutedEventArgs e)
+        {
+            CC.Content = new UC_DauSach();
+        }
     }
-
 }

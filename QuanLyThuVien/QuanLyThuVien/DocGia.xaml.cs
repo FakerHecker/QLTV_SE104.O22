@@ -30,7 +30,7 @@ namespace QuanLyThuVien
         public DocGia()
         {
             InitializeComponent();
-            string connectionString =@"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
             sqlConnection = new SqlConnection(connectionString);
             InitMaDocGia();
            
@@ -98,8 +98,18 @@ namespace QuanLyThuVien
             txtDiaChi.Text = "";
             txtEmail.Text = "";
             dtNgayLapThe.SelectedDate = DateTime.Now;
-            DateTime date = DateTime.Now.AddDays(180);
-            tblNgayHetHan.Text = date.ToString("MM/dd/yyyy");
+            
+
+            int thoiHanThe;
+            string query = "SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'ThoiHanThe'";
+            sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+            thoiHanThe = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+            sqlConnection.Close();
+            DateTime selectedDate = dtNgayLapThe.SelectedDate.Value;
+            DateTime newDate = selectedDate.AddMonths(thoiHanThe);
+            tblNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
+
             txtTongNo.Text = "0";
             
         }
