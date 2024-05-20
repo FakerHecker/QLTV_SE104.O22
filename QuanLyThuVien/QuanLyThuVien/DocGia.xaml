@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:QuanLyThuVien"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -32,7 +32,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        
+
 
 
         <Label Content="Thông tin độc giả" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -69,17 +69,21 @@
                 <Label Content="Ngày hết hạn" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
                 <Label Content="Tổng nợ" Height="30" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"/>
 
-                <TextBox x:Name="txtMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock x:Name="tblMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
                 <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
+                <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1"/>
+
+                <DatePicker x:Name="dtNgaySinh" Grid.Row="0" Grid.Column="3"/>
                 <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
                 <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
-                <TextBlock x:Name="tblNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5"/>
+
+                <DatePicker x:Name="dtNgayLapThe" Grid.Row="0" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
+                <TextBlock x:Name="tblNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5" Margin="0,7,0,0"/>
                 <TextBox x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5"/>
 
-                <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1">
-                </ComboBox>
-                <DatePicker x:Name="dtNgaySinh" Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dtNgayLapThe" Grid.Row="0" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
+
+
+
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách độc giả" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
