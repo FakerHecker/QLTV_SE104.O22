@@ -114,14 +114,8 @@
     <Compile Include="UC_TraCuuSach.xaml.cs">
       <DependentUpon>UC_TraCuuSach.xaml</DependentUpon>
     </Compile>
-    <Compile Include="W_BaoCaoThongKe.xaml.cs">
-      <DependentUpon>W_BaoCaoThongKe.xaml</DependentUpon>
-    </Compile>
     <Compile Include="W_ChiTietPhieuNhap.xaml.cs">
       <DependentUpon>W_ChiTietPhieuNhap.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="W_DauSach.xaml.cs">
-      <DependentUpon>W_DauSach.xaml</DependentUpon>
     </Compile>
     <Compile Include="W_QuanLyChiTietPhieuNhapSach.xaml.cs">
       <DependentUpon>W_QuanLyChiTietPhieuNhapSach.xaml</DependentUpon>
@@ -224,15 +218,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="W_BaoCaoThongKe.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="W_ChiTietPhieuNhap.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="W_DauSach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

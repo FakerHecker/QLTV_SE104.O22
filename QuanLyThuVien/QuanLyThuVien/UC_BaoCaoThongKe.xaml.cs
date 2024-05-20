@@ -26,10 +26,11 @@ namespace QuanLyThuVien
     public partial class UC_BaoCaoThongKe : UserControl
     {
         SqlConnection sqlConnection;
-        public UC_BaoCaoThongKe()
+        public UC_BaoCaoThongKe() 
+            
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
             sqlConnection = new SqlConnection(connectionString);
             dpThoiGian.Text = DateTime.Now.ToString();
             
