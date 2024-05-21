@@ -34,7 +34,7 @@
 
 
 
-        <Label Content="Báo cáo thống kê" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Báo cáo thống kê" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15"/>
         <Label Content="Thời gian" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15"/>
         <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged">

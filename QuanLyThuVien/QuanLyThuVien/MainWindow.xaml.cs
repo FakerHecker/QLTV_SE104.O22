@@ -41,7 +41,7 @@ namespace QuanLyThuVien
             TextBlock textBlock = FindVisualChild<TextBlock>(item);
 
             // Thay đổi kích thước của ListViewItem
-            item.Height = 70; // Đặt kích thước lớn hơn khi con trỏ chuột chạm vào
+            item.Height = 130; // Đặt kích thước lớn hơn khi con trỏ chuột chạm vào
 
             // Đặt chữ in đậm
             if (textBlock != null)
@@ -57,7 +57,7 @@ namespace QuanLyThuVien
             TextBlock textBlock = FindVisualChild<TextBlock>(item);
 
             // Đặt lại kích thước và font chữ khi con trỏ chuột rời khỏi ListViewItem
-            item.Height = 60; // Đặt lại kích thước khi con trỏ chuột rời khỏi
+            item.Height = 100; // Đặt lại kích thước khi con trỏ chuột rời khỏi
 
             // Đặt chữ trở lại bình thường
             if (textBlock != null)
@@ -94,8 +94,8 @@ namespace QuanLyThuVien
             {
                 button.Background = new SolidColorBrush(Colors.SkyBlue);
             }
-
         }
+
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -105,17 +105,20 @@ namespace QuanLyThuVien
             {
                 case "ItemPerson":
                     SP1.Visibility = Visibility.Visible;
+
                     SP2.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
                     CC.Content = new DocGia();
                     break;
                 case "ItemBook":
+
                     SP2.Visibility = Visibility.Visible;
                     SP1.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
                     CC.Content = new UC_Sach();
                     break;
                 case "ItemBorrow":
+
                     SP3.Visibility = Visibility.Visible;
                     SP2.Visibility = Visibility.Hidden;
                     SP1.Visibility = Visibility.Hidden;
@@ -143,68 +146,108 @@ namespace QuanLyThuVien
                     break;
             }
         }
-        private void btnDocGia_Click(object sender, RoutedEventArgs e)
+        private Button lastClickedButton = null;
+
+        private void ChangeButtonBackground(Button clickedButton)
         {
-            ChangeSize(btnDocGia);
-            CC.Content = new DocGia();
+            // Định nghĩa màu nền khi nút được nhấn
+            var clickedBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#441A90"));
+
+            // Lấy ra StackPanel chứa button được nhấn
+            var parentStackPanel = FindParent<StackPanel>(clickedButton);
+
+            // Đặt lại màu nền cho tất cả các button trong StackPanel trừ button được nhấn
+            if (parentStackPanel != null)
+            {
+                foreach (var child in parentStackPanel.Children)
+                {
+                    if (child is Button button)
+                    {
+                        if (button == clickedButton)
+                        {
+                            button.Background = clickedBackground;
+                        }
+                        else
+                        {
+                            button.Background = Brushes.MediumPurple; // Đặt màu nền cho button không được nhấn
+                        }
+                    }
+                }
+            }
         }
 
-        private void btnLoaiDocGia_Click(object sender, RoutedEventArgs e)
+        // Hàm hỗ trợ để tìm kiếm StackPanel cha của một control
+        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
-            CC.Content = new UC_LoaiDocGia();
+            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+
+            if (parentObject == null)
+                return null;
+
+            T parent = parentObject as T;
+            if (parent != null)
+            {
+                return parent;
+            }
+            else
+            {
+                return FindParent<T>(parentObject);
+            }
         }
 
-        private void btnPhieuThuTienPhat_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            CC.Content = new UC_PhieuThuTienPhat();
+            if (sender is Button clickedButton)
+            {
+                ChangeButtonBackground(clickedButton);
+
+                // Handle the button content change logic
+                if (clickedButton == btnDocGia)
+                {
+                    CC.Content = new DocGia();
+                }
+                else if (clickedButton == btnLoaiDocGia)
+                {
+                    CC.Content = new UC_LoaiDocGia();
+                }
+                else if (clickedButton == btnPhieuThuTienPhat)
+                {
+                    CC.Content = new UC_PhieuThuTienPhat();
+                }
+                else if (clickedButton == btnSach)
+                {
+                    CC.Content = new UC_Sach();
+                }
+                else if (clickedButton == btnTheLoai)
+                {
+                    CC.Content = new UC_TheLoai();
+                }
+                else if (clickedButton == btnTacGia)
+                {
+                    CC.Content = new UC_TacGia();
+                }
+                else if (clickedButton == btnPhieuNhapSach)
+                {
+                    CC.Content = new UC_PhieuNhapSach();
+                }
+                else if (clickedButton == btnDauSach)
+                {
+                    CC.Content = new UC_DauSach();
+                }
+                else if (clickedButton == btnPhieuMuonSach)
+                {
+                    CC.Content = new UC_ChoMuonSach();
+                }
+                else if (clickedButton == btnPhieuTraSach)
+                {
+                    CC.Content = new UC_NhanTraSach();
+                }
+            }
         }
 
-        private void btnSach_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_Sach();
-        }
-
-        private void btnTheLoai_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_TheLoai();
-        }
-
-        private void btnTacGia_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_TacGia();
-        }
-
-        private void btnPhieuMuonSach_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_ChoMuonSach();
-        }
-
-        private void btnPhieuTraSach_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_NhanTraSach();
-        }
-
-        private void btnPhieuNhapSach_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_PhieuNhapSach();
-        }
-
-        private void btnDauSach_Click(object sender, RoutedEventArgs e)
-        {
-            CC.Content = new UC_DauSach();
-        }
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonCloseMenu.Visibility = Visibility.Visible;
-            ButtonOpenMenu.Visibility = Visibility.Collapsed;
-        }
-
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            ButtonOpenMenu.Visibility = Visibility.Visible;
-        }
 
     }
+
 
 }

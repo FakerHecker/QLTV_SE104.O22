@@ -29,25 +29,21 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
-            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
-            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
-        </EventTrigger>
-    </Window.Triggers>
+
     <Grid Background="#FFDEDEDE">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid x:Name="GridMain" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="540" Width="1010"/>
-        <Grid Height="60" VerticalAlignment="Top" Background="#FF5C99D6" Grid.Row="0">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
-            </Grid.Effect>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Grid x:Name="GridMain" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Height="540" Width="800" Margin="210,0,0,0"/>
+        <Grid Height="60" VerticalAlignment="Top" Background="
+#662D9B" Grid.Row="0" Margin="205,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29*"/>
+                <RowDefinition Height="31*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.RowSpan="2">
                 <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10">
                     <StackPanel Width="150">
                         <Button Content="Settings"/>
@@ -58,72 +54,53 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Black" FontSize="30">QUẢN LÝ THƯ VIỆN</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Foreground="AntiqueWhite" FontSize="35" Margin="0,9,0,0" Grid.RowSpan="2" >QUẢN LÝ THƯ VIỆN</TextBlock>
+            <Menu Margin="205,0,0,0" Grid.RowSpan="2"/>
         </Grid>
-        <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E" Grid.Column="0" Margin="0,0,0,270">
+        <Grid x:Name="GridMenu" Width="220" HorizontalAlignment="Left" Background="#27104E" Grid.Column="0" Margin="-15,-1,0,16">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
-            </Grid.Effect>
             <StackPanel Grid.RowSpan="2">
-                <Grid Height="auto" Background="White" RenderTransformOrigin="0.5,0.5" Grid.Column="0">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonOpenMenu_Click">
-                        <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
-                    </Button>
-                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF31577E" Click="ButtonCloseMenu_Click">
-                        <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
-                    </Button>
+                <ListView x:Name="ListViewMenu" Margin="0,60" Foreground="#7BA7D7" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" Height="695" Width="216" Background="#FF7C3535">
 
-                    <Image Height="80" VerticalAlignment="Bottom"/>
-                </Grid>
-                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" Grid.Column="0">
-                    <ListViewItem x:Name="ItemPerson" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemPerson" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="People" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text= "Quản lý độc giả" VerticalAlignment="Center" Margin="10 10"/>
+                            <materialDesign:PackIcon Kind="People" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text= "Quản lý độc giả" FontSize="16" VerticalAlignment="Center" Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemBook" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemBook" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
 
                         <StackPanel Orientation="Horizontal" Height="50" Width="250">
-                            <materialDesign:PackIcon Kind="BookAlphabet" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Quản lý sách" VerticalAlignment="Center" Margin="10 10" />
+                            <materialDesign:PackIcon Kind="BookAlphabet" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text="Quản lý sách" VerticalAlignment="Center" FontSize="16" Margin="5 10" />
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemBorrow" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemBorrow" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="NoteAddOutline" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Quản lý mượn trả" VerticalAlignment="Center"  Margin="10 10"/>
+                            <materialDesign:PackIcon Kind="NoteAddOutline" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text="Quản lý mượn trả" VerticalAlignment="Center" FontSize="16" Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
 
-                    <ListViewItem x:Name="ItemSearch" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemSearch" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Search" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text ="Tìm kiếm" VerticalAlignment="Center"  Margin="10 10"/>
+                            <materialDesign:PackIcon Kind="Search" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text ="Tìm kiếm" VerticalAlignment="Center" FontSize="16" Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemReport" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemReport" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ReportAreaspline" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Báo cáo, thống kê" VerticalAlignment="Center"  Margin="10 10"/>
+                            <materialDesign:PackIcon Kind="ReportAreaspline" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text="Báo cáo, thống kê" FontSize="16" VerticalAlignment="Center"  Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemFix" Height="60" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
+                    <ListViewItem x:Name="ItemFix" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Pencil" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Thay đổi quy định" VerticalAlignment="Center"  Margin="10 10"/>
+                            <materialDesign:PackIcon Kind="Pencil" Height="30" Width="30" Margin="10"/>
+                            <TextBlock Text="Thay đổi quy định" VerticalAlignment="Center" FontSize="16" Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>
@@ -132,30 +109,32 @@
         </Grid>
         <Grid Grid.Column="0" Height="800" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="81*"/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel x:Name="SP1" Visibility="Hidden" Orientation="Horizontal" Margin="160,-320,297,30" Grid.Column="1">
-                <Button x:Name="btnDocGia" MouseEnter="Button_MouseEnter" Content="Độc giả" Margin ="0,0,0,0" Click="btnDocGia_Click" Grid.Column ="0" Grid.Row="0"/>
-                <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="1" Click="btnLoaiDocGia_Click" Grid.RowSpan="2" />
-                <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="1" Click="btnPhieuThuTienPhat_Click" Grid.RowSpan="2"/>
+            <StackPanel x:Name="SP1" Visibility="Hidden" Orientation="Horizontal" Margin="240,59,220,393" Grid.Column="1" >
+                <Button x:Name="btnDocGia" Content="Độc giả" Margin ="0,0,0,0" Click="Button_Click"  Grid.Column ="0" Background="#441A90" Grid.Row="0"/>
+                <Button x:Name="btnLoaiDocGia" Content="Loại độc giả" Grid.Column="1" Click="Button_Click"  Background="MediumPurple" Grid.RowSpan="2"  />
+                <Button x:Name="btnPhieuThuTienPhat" Content="Phiếu thu tiền phạt" Grid.Column="1" Click="Button_Click"  Background="MediumPurple" Grid.RowSpan="2"/>
             </StackPanel>
-            <StackPanel x:Name="SP2"  Orientation="Horizontal" Visibility="Hidden" Margin="160,60,178,30" Grid.Column="1">
-                <Button x:Name="btnSach" Content="Sách" Click="btnSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                <Button x:Name="btnTheLoai" Content="Loại sách" Click="btnTheLoai_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                <Button x:Name="btnTacGia" Content="Tác giả" Grid.ColumnSpan="2" Click="btnTacGia_Click" Margin="0,0,0,380" Grid.RowSpan="2"/>
-                <Button x:Name="btnPhieuNhapSach" Content="Phiếu nhập sách" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,380" Click="btnPhieuNhapSach_Click" />
-                <Button x:Name="btnDauSach" Content="Đầu sách" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,380" Click="btnDauSach_Click" />
+            <StackPanel x:Name="SP2" Visibility="Hidden"  Orientation="Horizontal" Margin="240,79,178,30" Grid.Column="1">
+                <Button x:Name="btnSach" Content="Sách" Click="Button_Click" Margin="0,0,0,380" Grid.RowSpan="2"  Background="#441A90" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnTheLoai" Content="Loại sách" Click="Button_Click" Margin="0,0,0,380"  Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnTacGia" Content="Tác giả" Grid.ColumnSpan="2" Click="Button_Click"  Background="MediumPurple" Margin="0,0,0,380" Grid.RowSpan="2"/>
+                <Button x:Name="btnPhieuNhapSach" Content="Phiếu nhập sách" Grid.ColumnSpan="2"  Background="MediumPurple"  Grid.RowSpan="2" Margin="0,0,0,380" Click="Button_Click" />
+                <Button x:Name="btnDauSach" Content="Đầu sách" Grid.ColumnSpan="2" Grid.RowSpan="2"  Background="MediumPurple" Margin="0,0,0,380" Click="Button_Click" />
             </StackPanel>
-            <StackPanel x:Name="SP3" Visibility="Hidden" Orientation="Horizontal" Margin="160,60,297,30" Grid.Column="1">
-                <Button x:Name="btnPhieuMuonSach" Content="Cho mượn sách" Click="btnPhieuMuonSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                <Button x:Name="btnPhieuTraSach" Content="Nhận trả sách" Click="btnPhieuTraSach_Click" Margin="0,0,0,380" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            <StackPanel x:Name="SP3" Visibility="Hidden" Orientation="Horizontal" Margin="240,79,297,30" Grid.Column="1">
+                <Button x:Name="btnPhieuMuonSach" Content="Cho mượn sách" Click="Button_Click" Margin="0,0,0,380" Background="#441A90" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnPhieuTraSach" Content="Nhận trả sách" Click="Button_Click" Margin="0,0,0,380"  Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </StackPanel>
-            <ContentControl x:Name="CC" Margin="160,118,25,26" Grid.Column="1" Grid.RowSpan="2" Background="#FF8E629B"/>
+            <Border BorderThickness="1" BorderBrush="#27104E" CornerRadius="5" Margin="220,109,20,26" Grid.Column="1" Grid.RowSpan="2" >
+                <ContentControl x:Name="CC" Grid.Column="1" Grid.RowSpan="2" Margin="20,0" />
+            </Border>
 
         </Grid>
     </Grid>

@@ -34,7 +34,7 @@
 
 
 
-        <Label Content="Tra cứu sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Tra cứu sách" FontWeight="Bold" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Button x:Name="btnTimSach" Content="Tìm sách"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="btnTimSach_Click"/>
 

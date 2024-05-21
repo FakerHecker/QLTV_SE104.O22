@@ -34,7 +34,7 @@
 
 
 
-        <Label Content="Thông tin sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Thông tin sách" Grid.Row="0" FontWeight="Bold" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Button x:Name="btnThemMoi" Content="Thêm mới" Grid.Row="5" Grid.Column="1" Click="btnThemMoi_Click" />
         <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" Click="btnLuu_Click" />

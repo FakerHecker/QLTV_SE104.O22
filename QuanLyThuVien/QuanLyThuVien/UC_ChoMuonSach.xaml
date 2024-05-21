@@ -34,7 +34,7 @@
 
 
 
-        <Label Content="Cho mượn sách" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Cho mượn sách" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Button x:Name="btnChoMuon" Content="Cho mượn"  Grid.Row="5" Grid.Column="1" Click="btnChoMuon_Click" />
         
