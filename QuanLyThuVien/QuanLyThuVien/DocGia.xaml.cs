@@ -30,8 +30,7 @@ namespace QuanLyThuVien
         public DocGia()
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
-            sqlConnection = new SqlConnection(connectionString);
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;"; sqlConnection = new SqlConnection(connectionString);
             InitMaDocGia();
             InitLoaiDocGia();
             HienThiDanhSachDocGia();
