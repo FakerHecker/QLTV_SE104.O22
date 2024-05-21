@@ -69,12 +69,13 @@ namespace QuanLyThuVien
         {
             
             sqlConnection.Open();
-            string query = "SELECT * FROM DOCGIA";
+            string query = "SELECT MaDocGia AS 'Mã độc giả', HoVaTen AS 'Họ và tên', MaLoaiDocGia AS 'Loại độc giả', NgaySinh AS 'Ngày sinh', DiaChi AS 'Địa chỉ', Email, NgayLapThe AS 'Ngày lập thẻ', NgayHetHan AS 'Ngày hết hạn', TongNo AS 'Tổng nợ'  FROM DOCGIA";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView.ItemsSource = dt.DefaultView;
             sqlConnection.Close();
+            
            
         }
         private string IncreasePrimaryKey()
@@ -269,15 +270,15 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaDocGia.Text = row_selected.Row["MaDocGia"].ToString();
-                txtHoTen.Text = row_selected.Row["HoVaTen"].ToString();
-                cbLoaiDG.Text = row_selected.Row["MaLoaiDocGia"].ToString();
-                dtNgaySinh.SelectedDate = Convert.ToDateTime(row_selected.Row["NgaySinh"].ToString());
-                txtDiaChi.Text = row_selected.Row["DiaChi"].ToString();
+                tblMaDocGia.Text = row_selected.Row["Mã độc giả"].ToString();
+                txtHoTen.Text = row_selected.Row["Họ và tên"].ToString();
+                cbLoaiDG.Text = row_selected.Row["Loại độc giả"].ToString();
+                dtNgaySinh.SelectedDate = Convert.ToDateTime(row_selected.Row["Ngày sinh"].ToString());
+                txtDiaChi.Text = row_selected.Row["Địa chỉ"].ToString();
                 txtEmail.Text = row_selected.Row["Email"].ToString();
-                dtNgayLapThe.SelectedDate = Convert.ToDateTime(row_selected.Row["NgayLapThe"].ToString());
-                tblNgayHetHan.Text = ((DateTime)(row_selected.Row["NgayHetHan"])).ToString("MM/dd/yyyy");
-                txtTongNo.Text = row_selected.Row["TongNo"].ToString();
+                dtNgayLapThe.SelectedDate = Convert.ToDateTime(row_selected.Row["Ngày lập thẻ"].ToString());
+                tblNgayHetHan.Text = ((DateTime)(row_selected.Row["Ngày hết hạn"])).ToString("MM/dd/yyyy");
+                txtTongNo.Text = row_selected.Row["Tổng nợ"].ToString();
             }
         }
 

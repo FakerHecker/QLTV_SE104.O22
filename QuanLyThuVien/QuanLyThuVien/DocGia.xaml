@@ -80,15 +80,13 @@
                 <DatePicker x:Name="dtNgayLapThe" Grid.Row="0" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
                 <TextBlock x:Name="tblNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5" Margin="0,7,0,0"/>
                 <TextBox x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5"/>
-
-
-
-
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách độc giả" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView" SelectionChanged="dataGridView_SelectionChanged"/>
+                <DataGrid x:Name="dataGridView" SelectionChanged="dataGridView_SelectionChanged" IsReadOnly="True">
+                    
+                </DataGrid>
             </Grid>
         </GroupBox>
     </Grid>
