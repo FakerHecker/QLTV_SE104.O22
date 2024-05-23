@@ -30,10 +30,11 @@ namespace QuanLyThuVien
         public DocGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;"; sqlConnection = new SqlConnection(connectionString);
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; sqlConnection = new SqlConnection(connectionString);
             InitMaDocGia();
             InitLoaiDocGia();
             HienThiDanhSachDocGia();
+
         }
 
         private void InitMaDocGia()
@@ -68,7 +69,7 @@ namespace QuanLyThuVien
         {
             
             sqlConnection.Open();
-            string query = "SELECT MaDocGia AS 'Mã độc giả', HoVaTen AS 'Họ và tên', MaLoaiDocGia AS 'Loại độc giả', NgaySinh AS 'Ngày sinh', DiaChi AS 'Địa chỉ', Email, NgayLapThe AS 'Ngày lập thẻ', NgayHetHan AS 'Ngày hết hạn', TongNo AS 'Tổng nợ'  FROM DOCGIA";
+            string query = "SELECT MaDocGia AS 'Mã độc giả', HoVaTen AS 'Họ và tên', TenLoaiDocGia AS 'Loại độc giả', NgaySinh AS 'Ngày sinh', DiaChi AS 'Địa chỉ', Email, NgayLapThe AS 'Ngày lập thẻ', NgayHetHan AS 'Ngày hết hạn', TongNo AS 'Tổng nợ'  FROM DOCGIA JOIN LOAIDOCGIA ON DOCGIA.MaLoaiDocGia = LOAIDOCGIA.MaLoaiDocGia";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -94,7 +95,6 @@ namespace QuanLyThuVien
             tblMaDocGia.Text = IncreasePrimaryKey();
             txtHoTen.Text = "";
 
-
             InitLoaiDocGia();
             cbLoaiDG.SelectedIndex = 0;
 
@@ -102,7 +102,6 @@ namespace QuanLyThuVien
             txtDiaChi.Text = "";
             txtEmail.Text = "";
             dtNgayLapThe.SelectedDate = DateTime.Now;
-
 
             int thoiHanThe;
             string query = "SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'ThoiHanThe'";
@@ -122,11 +121,31 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "DELETE FROM DOCGIA WHERE MaDocGia = @MaDocGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                string query = "SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
-                sqlCommand.ExecuteScalar();
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tìm thấy độc giả");
+                else
+                {
+                    query = "DELETE FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+                    sqlCommand.ExecuteScalar();
+
+                    tblMaDocGia.Text = "";
+                    txtHoTen.Text = "";
+                    cbLoaiDG.SelectedIndex = -1;
+                    dtNgaySinh.Text = "";
+                    txtDiaChi.Text = "";
+                    txtEmail.Text = "";
+                    dtNgayLapThe.Text = "";
+                    tblNgayHetHan.Text = "";
+                    txtTongNo.Text = "";
+                } 
+                    
+                
             }
             catch (Exception ex)
             {
@@ -146,11 +165,15 @@ namespace QuanLyThuVien
             {
                 string query = "INSERT INTO DOCGIA (MaDocGia, HoVaTen, MaLoaiDocGia, NgaySinh, DiaChi, Email, NgayLapThe, NgayHetHan, TongNo) VALUES (@MaDocGia, @HoVaTen, @MaLoaiDocGia, @NgaySinh, @DiaChi, @Email, @NgayLapThe, @NgayHetHan, @TongNo)";
                 sqlConnection.Open();
-                int age;
-                DateTime start = dtNgaySinh.SelectedDate.Value.Date;
-                DateTime finish = dtNgayLapThe.SelectedDate.Value.Date;
-                TimeSpan difference = finish - start;
-                age = (int)difference.TotalDays / 365;
+                int age = 0;
+                if (dtNgaySinh.SelectedDate != null && dtNgayLapThe.SelectedDate != null)
+                {
+                    DateTime start = dtNgaySinh.SelectedDate.Value.Date;
+                    DateTime finish = dtNgayLapThe.SelectedDate.Value.Date;
+                    TimeSpan difference = finish - start;
+                    age = (int)difference.TotalDays / 365;
+                }    
+                
 
                 SqlCommand sqlCommand = new SqlCommand("SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'TuoiToiThieu'", sqlConnection);
                 int minAge = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
@@ -158,15 +181,23 @@ namespace QuanLyThuVien
                 sqlCommand = new SqlCommand("SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'TuoiToiDa'", sqlConnection);
                 int maxAge = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
 
-                if (age > minAge && age < maxAge)
+
+                sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+
+                if (tblMaDocGia.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (txtHoTen.Text == "")
+                    MessageBox.Show("Tên độc giả không được để trống");
+                else if (sqlCommand.ExecuteScalar() != null)
+                    MessageBox.Show("Đã tồn tại độc giả");
+                else if (age > minAge && age < maxAge)
                 {
 
                     string maLoaiDG;
                     sqlCommand = new SqlCommand("SELECT MaLoaiDocGia FROM LOAIDOCGIA WHERE TenLoaiDocGia = @TenLoaiDocGia", sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", cbLoaiDG.Text);
-                    MessageBox.Show(cbLoaiDG.Text);
                     maLoaiDG = sqlCommand.ExecuteScalar().ToString();
-
 
                     MessageBox.Show("Thêm thành công");
                     sqlCommand = new SqlCommand(query, sqlConnection);
@@ -177,11 +208,10 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                     sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
                     sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", dtNgayLapThe.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", tblNgayHetHan.Text);
                     sqlCommand.Parameters.AddWithValue("@TongNo", 0);
                     sqlCommand.ExecuteScalar();
                 }
-
                 else
                     MessageBox.Show("Tuổi không hợp lệ");
 
@@ -221,11 +251,14 @@ namespace QuanLyThuVien
                 string query = "UPDATE DOCGIA SET HoVaTen = @HoVaTen, MaLoaiDocGia = @MaLoaiDocGia, NgaySinh = @NgaySinh, DiaChi = @DiaChi, Email = @Email, NgayLapThe = @NgayLapThe, NgayHetHan = @NgayHetHan, TongNo = @TongNo WHERE MaDocGia = @MaDocGia";
 
                 sqlConnection.Open();
-                int age;
-                DateTime start = dtNgaySinh.SelectedDate.Value.Date;
-                DateTime finish = dtNgayLapThe.SelectedDate.Value.Date;
-                TimeSpan difference = finish - start;
-                age = (int)difference.TotalDays / 365;
+                int age = 0;
+                if (dtNgaySinh.SelectedDate != null && dtNgayLapThe.SelectedDate != null)
+                {
+                    DateTime start = dtNgaySinh.SelectedDate.Value.Date;
+                    DateTime finish = dtNgayLapThe.SelectedDate.Value.Date;
+                    TimeSpan difference = finish - start;
+                    age = (int)difference.TotalDays / 365;
+                }
 
                 SqlCommand sqlCommand = new SqlCommand("SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'TuoiToiThieu'", sqlConnection);
                 int minAge = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
@@ -233,22 +266,35 @@ namespace QuanLyThuVien
                 sqlCommand = new SqlCommand("SELECT GIATRI FROM THAMSO WHERE TenThamSo = 'TuoiToiDa'", sqlConnection);
                 int maxAge = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
 
-                if (age > minAge && age < maxAge)
+                sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+
+
+                if (txtHoTen.Text == "")
+                    MessageBox.Show("Tên độc giả không được để trống");
+                else if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tìm thấy độc giả");
+                else if (age > minAge && age < maxAge)
                 {
+
+                    string maLoaiDG;
+                    sqlCommand = new SqlCommand("SELECT MaLoaiDocGia FROM LOAIDOCGIA WHERE TenLoaiDocGia = @TenLoaiDocGia", sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", cbLoaiDG.Text);
+                    maLoaiDG = sqlCommand.ExecuteScalar().ToString();
+
                     MessageBox.Show("Cập nhật thành công");
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
                     sqlCommand.Parameters.AddWithValue("@HoVaTen", txtHoTen.Text);
-                    sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", cbLoaiDG.Text);
+                    sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", maLoaiDG);
                     sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
                     sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                     sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
                     sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", dtNgayLapThe.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", tblNgayHetHan.Text);
                     sqlCommand.Parameters.AddWithValue("@TongNo", txtTongNo.Text);
                     sqlCommand.ExecuteScalar();
                 }
-
                 else
                     MessageBox.Show("Tuổi không hợp lệ");
             }
@@ -280,7 +326,5 @@ namespace QuanLyThuVien
                 txtTongNo.Text = row_selected.Row["Tổng nợ"].ToString();
             }
         }
-
-
     }
 }

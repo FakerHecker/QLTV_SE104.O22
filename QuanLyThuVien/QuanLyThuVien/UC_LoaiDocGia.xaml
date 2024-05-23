@@ -45,7 +45,7 @@
                     <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click"/>
                     <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10" Click="btnXoa_Click"/>
                 </StackPanel>
-                
+
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách loại độc giả" FontSize="15" Margin="5,0,5,0">

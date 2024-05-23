@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +71,7 @@
     <Compile Include="DocGia.xaml.cs">
       <DependentUpon>DocGia.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrintCapabilities.cs" />
     <Compile Include="QLTV_DBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

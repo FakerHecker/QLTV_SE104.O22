@@ -49,7 +49,7 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách tác giả" FontSize="15" Margin="5,0,0,0">
-            <DataGrid x:Name="dgvTacGia" SelectionChanged="dgvTacGia_SelectionChanged"/>
+            <DataGrid x:Name="dgvTacGia" SelectionChanged="dgvTacGia_SelectionChanged" IsReadOnly="True"/>
         </GroupBox>
     </Grid>
 </UserControl>

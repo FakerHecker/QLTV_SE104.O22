@@ -215,6 +215,10 @@ namespace QuanLyThuVien
                 {
                     CC.Content = new UC_PhieuThuTienPhat();
                 }
+                else if (clickedButton == btnCuonSach)
+                {
+                    CC.Content = new UC_Sach();
+                }
                 else if (clickedButton == btnSach)
                 {
                     CC.Content = new UC_Sach();

@@ -52,33 +52,34 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="Mã phiếu mượn" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
                 <Label Content="Tên độc giả" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Ngày mượn" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                <Label Content="Mã sách" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
 
-                <Label Content="Ngày phải trả" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Ngày trả" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Tiền phạt kỳ này" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
-
-                <Label Content="Số tiền trả" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
-                <Label Content="Còn lại" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
+                <Label Content="Ngày mượn" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Ngày phải trả" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                <Label Content="Ngày trả" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
                 
-                <TextBox x:Name="txbMaPhieuMuon" Height="30" Grid.Row="0" Grid.Column="1" KeyDown="txbMaPhieuMuon_KeyDown"/>
+                <Label Content="Tiền phạt kỳ này" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
+                <Label Content="Số tiền trả" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
+                <Label Content="Còn lại" Height="30" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"/>
+                
+                <TextBox x:Name="txbMaPhieuMuon" Height="30" Grid.Row="0" Grid.Column="1" TextChanged="txbMaPhieuMuon_TextChanged"/>
                 <TextBlock x:Name="tblHoVaTen" Height="30" Grid.Row="1" Grid.Column="1"/>
-                <DatePicker x:Name="dpNgayMuon" Height="30" Grid.Row="2" Grid.Column="1"/>
+                <TextBlock x:Name="tblMaSach" Height="30" Grid.Row="2" Grid.Column="1"/>
 
-                <DatePicker x:Name="dpNgayPhaiTra"  Grid.Row="0" Grid.Column="3"/>
-                <DatePicker x:Name="dpNgayTra" Height="30" Grid.Row="1" Grid.Column="3" SelectedDateChanged="dpNgayTra_SelectedDateChanged"/>
-                <TextBlock x:Name="tblTienPhatKyNay" Height="30" Grid.Row="2" Grid.Column="3"/>
+                <DatePicker x:Name="dpNgayMuon" Height="30" Grid.Row="0" Grid.Column="3"/>
+                <DatePicker x:Name="dpNgayPhaiTra"  Grid.Row="1" Grid.Column="3"/>
+                <DatePicker x:Name="dpNgayTra" Height="30" Grid.Row="2" Grid.Column="3" SelectedDateChanged="dpNgayTra_SelectedDateChanged"/>
 
-                <TextBox x:Name="txbSoTienTra"  Height ="30" Grid.Row="0" Grid.Column="5" KeyDown="txbSoTienTra_KeyDown" />
-                <TextBlock x:Name="tblConlai" Height ="30" Grid.Row="1" Grid.Column="5" />
-                <TextBlock x:Name="tblTongNo" Height ="30" Grid.Row="1" Grid.Column="5" />
+                <TextBlock x:Name="tblTienPhatKyNay" Height="30" Grid.Row="0" Grid.Column="5"/>
+                <TextBox x:Name="txbSoTienTra"  Height ="30" Grid.Row="1" Grid.Column="5" TextChanged="txbSoTienTra_TextChanged" />
+                <TextBlock x:Name="tblConlai" Height ="30" Grid.Row="2" Grid.Column="5" />
 
             </Grid>
         </GroupBox>
         
         <GroupBox Header="Danh sách phiếu mượn" Grid.Row="7" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dgvPhieuMuon"/>
+                <DataGrid x:Name="dgvPhieuMuon" IsReadOnly="True"/>
             </Grid>
         </GroupBox>
     </Grid>

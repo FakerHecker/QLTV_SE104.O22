@@ -31,25 +31,58 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
+        <GroupBox Header="Thông tin báo cáo" FontSize="15" Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="3" Margin="0,0,5,0">
+            <Grid x:Name="gr">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Mã báo cáo" Grid.Column="0" Height="30" Grid.Row="0" FontSize="15" HorizontalAlignment="Center"/>
+                <Label Content="Ngày lập" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15" HorizontalAlignment="Center"/>
+                <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15" HorizontalAlignment="Center"/>
+                <Label Content="Tháng" Grid.Row="3" Height="30"  FontSize="15" HorizontalAlignment="Center"/>
+                <Label Content="Năm" Grid.Row="4" Height="30"  FontSize="15" HorizontalAlignment="Center"/>
 
+                <TextBlock x:Name="tblMaBaoCao"  Grid.Row="0" Grid.Column="1" FontSize="15" Margin="0,15,0,0"/>
+                <DatePicker x:Name="dpNgayLap"  Grid.Row="1" Grid.Column="1" />
+                <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="2" Grid.Column="1" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged" Margin="0,0,0,0">
+                    <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
+                    <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
+                </ComboBox>
+                <ComboBox x:Name="cbThang" Grid.Row="3" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbThang_SelectionChanged"/>
+                <ComboBox x:Name="cbNam" Grid.Row="4" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbNam_SelectionChanged"/>
+            </Grid>
+        </GroupBox>
 
 
         <Label Content="Báo cáo thống kê" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15"/>
-        <Label Content="Thời gian" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15"/>
-        <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged">
-            <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
-            <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
-            
-        </ComboBox>
-        <DatePicker x:Name="dpThoiGian" Grid.Row="2" Grid.Column="1" FontSize="15"/>
 
-        <GroupBox Header="Tình hình mượn sách theo thể loại" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
+        <GroupBox Header="Chi tiết báo cáo" Grid.Row="1" Grid.RowSpan="9" Grid.Column="3" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.11*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbTongSoLuotMuon"  Content="Tổng số lượt mượn:" Grid.Row="1" Grid.Column="0" FontSize="15" Margin="0,10,0,0" Visibility="Hidden"/>
+                <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="0,15,0,0" Visibility="Hidden"/>
             </Grid>
         </GroupBox>
-        <Label Content="Tổng số lượt mượn" Grid.Row="10" Grid.Column="4" FontSize="14.5"/>
-        <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="10" Grid.Column="5" FontSize="15"/>
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnLuu" Content="Lưu" Grid.Row="7" Grid.Column="1" Margin="5,0,5,0" Width="150" Click="btnLuu_Click"/>
+            <Button x:Name="btnInBaoCao" Content="In báo cáo" Grid.Row="7" Grid.Column="2" Width="150" Margin="5,0,5,0" Click="btnInBaoCao_Click"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -347,7 +347,6 @@ D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_BaoCao
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_ChiTietPhieuNhapSach.baml
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_ChoMuonSach.baml
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_DauSach.baml
-D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_LoaiDocGia.baml
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_NhanTraSach.baml
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_PhieuNhapSach.baml
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_PhieuThuTienPhat.baml
@@ -452,3 +451,4 @@ D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.
 D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyTh.B5137F7B.Up2Date
 D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.exe
 D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.pdb
+D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_LoaiDocGia.baml

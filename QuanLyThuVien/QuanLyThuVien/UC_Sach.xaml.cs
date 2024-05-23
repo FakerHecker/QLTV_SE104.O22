@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -28,8 +29,9 @@ namespace QuanLyThuVien
         public UC_Sach()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
+            InitTenDauSach();
             InitMaSach();
             HienThiDanhSachSach();
         }
@@ -44,9 +46,9 @@ namespace QuanLyThuVien
             sqlConnection.Close();
         }
 
-        private void InitMaDauSach()
+        private void InitTenDauSach()
         {
-            string query = "SELECT MaDauSach FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
+            string query = "SELECT TenDauSach FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
 
             sqlConnection.Open();
             SqlCommand command = new SqlCommand(query, sqlConnection);
@@ -54,8 +56,8 @@ namespace QuanLyThuVien
 
             while (reader.Read())
             {
-                string maDS = reader["MaDauSach"].ToString();
-                cbMaDauSach.Items.Add(maDS);
+                string maDS = reader["TenDauSach"].ToString();
+                cbTenDauSach.Items.Add(maDS);
             }
             sqlConnection.Close();
         }
@@ -63,7 +65,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT * FROM SACH";
+            string query = "SELECT MaSach AS 'Mã sách', TenSach AS 'Tên sách', TenDauSach AS 'Tên đầu sách', NamXuatBan AS 'Năm xuất bản', NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -77,14 +79,11 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaSach.Text = row_selected.Row["MaSach"].ToString();
-                txbTenSach.Text = row_selected.Row["TenSach"].ToString();
-                cbMaDauSach.Text = row_selected.Row["MaDauSach"].ToString();
-
-                //tblTenDauSach.Text = row_selected.Row["TenDauSach"].ToString();
-
-                txbNamXuatBan.Text = row_selected.Row["NamXuatBan"].ToString();
-                txbNhaXuatBan.Text = row_selected.Row["NhaXuatBan"].ToString();
+                tblMaSach.Text = row_selected.Row["Mã sách"].ToString();
+                txbTenSach.Text = row_selected.Row["Tên sách"].ToString();
+                cbTenDauSach.Text = row_selected.Row["Tên đầu sách"].ToString();
+                txbNamXuatBan.Text = row_selected.Row["Năm xuất bản"].ToString();
+                txbNhaXuatBan.Text = row_selected.Row["Nhà xuất bản"].ToString();
             }
         }
         private string IncreasePrimaryKey()
@@ -96,10 +95,9 @@ namespace QuanLyThuVien
         }
         private void btnThemMoi_Click(object sender, RoutedEventArgs e)
         {
-            InitMaDauSach();
             tblMaSach.Text = IncreasePrimaryKey();
             txbTenSach.Text = "";
-            cbMaDauSach.SelectedIndex = -1;
+            cbTenDauSach.SelectedIndex = -1;
             txbNamXuatBan.Text = "";
             txbNhaXuatBan.Text = "";
         }
@@ -108,24 +106,44 @@ namespace QuanLyThuVien
         {
             try
             {
-                if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
+                sqlConnection.Open();
+                string query = "SELECT GiaTri FROM THAMSO WHERE TenThamSo = 'KhoangCachNamXuatBan'";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                int khoangCachNamXuatBan = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+
+                query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+
+                if (tblMaSach.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (sqlCommand.ExecuteScalar() != null)
+                    MessageBox.Show("Đã tồn tại sách");
+                else if (txbTenSach.Text == "")
+                    MessageBox.Show("Tên sách không được để trống");
+                else if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
                 {
-                    if (DateTime.Now.Year - namXuatBan <= 8 && DateTime.Now.Year - namXuatBan >= 0)
+                    if (DateTime.Now.Year - namXuatBan <= khoangCachNamXuatBan && DateTime.Now.Year - namXuatBan >= 0)
                     {
-                        string query = "INSERT INTO SACH (MaSach, TenSach, MaDauSach, NamXuatBan, NhaXuatBan) VALUES (@MaSach, @TenSach, @MaDauSach, @NamXuatBan, @NhaXuatBan)";
-                        sqlConnection.Open();
-                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                        query = "SELECT MaDauSach FROM DAUSACH WHERE TenDauSach = @TenDauSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@TenDauSach", cbTenDauSach.Text);
+                        string maDauSach = sqlCommand.ExecuteScalar().ToString();
+
+                        query = "INSERT INTO SACH (MaSach, TenSach, MaDauSach, NamXuatBan, NhaXuatBan) VALUES (@MaSach, @TenSach, @MaDauSach, @NamXuatBan, @NhaXuatBan)";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
                         sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
-                        sqlCommand.Parameters.AddWithValue("@MaDauSach", cbMaDauSach.Text);
+                        sqlCommand.Parameters.AddWithValue("@MaDauSach", maDauSach);
                         sqlCommand.Parameters.AddWithValue("@NamXuatBan", txbNamXuatBan.Text);
                         sqlCommand.Parameters.AddWithValue("@NhaXuatBan", txbNhaXuatBan.Text);
                         sqlCommand.ExecuteScalar();
                         MessageBox.Show("Thêm thành công");
-                    }    
+                    }
                     else
                     {
-                        MessageBox.Show("Khoảng cách năm xuất bản là 8");
+                        MessageBox.Show("Khoảng cách năm xuất bản là " + khoangCachNamXuatBan.ToString());
                     }
 
                 }
@@ -143,6 +161,103 @@ namespace QuanLyThuVien
 
                 sqlConnection.Close();
                 HienThiDanhSachSach();
+            }
+        }
+
+        private void btnCapNhat_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sqlConnection.Open();
+                string query = "SELECT GiaTri FROM THAMSO WHERE TenThamSo = 'KhoangCachNamXuatBan'";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                int khoangCachNamXuatBan = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+
+                query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+
+                if (tblMaSach.Text == "")
+                    MessageBox.Show("Vui lòng chọn sách để cập nhật thông tin");
+                else if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại sách");
+                else if (txbTenSach.Text == "")
+                    MessageBox.Show("Tên sách không được để trống");
+                else if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
+                {
+                    if (DateTime.Now.Year - namXuatBan <= khoangCachNamXuatBan && DateTime.Now.Year - namXuatBan >= 0)
+                    {
+
+                        query = "SELECT MaDauSach FROM DAUSACH WHERE TenDauSach = @TenDauSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@TenDauSach", cbTenDauSach.Text);
+                        string maDauSach = sqlCommand.ExecuteScalar().ToString();
+
+                        query = "UPDATE SACH  SET TenSach = @TenSach, MaDauSach = @MaDauSach, NamXuatBan = @NamXuatBan, NhaXuatBan = @NhaXuatBan WHERE MaSach = @MaSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                        sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                        sqlCommand.Parameters.AddWithValue("@MaDauSach", maDauSach);
+                        sqlCommand.Parameters.AddWithValue("@NamXuatBan", txbNamXuatBan.Text);
+                        sqlCommand.Parameters.AddWithValue("@NhaXuatBan", txbNhaXuatBan.Text);
+                        sqlCommand.ExecuteScalar();
+                        MessageBox.Show("Cập nhật thành công");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Khoảng cách năm xuất bản là " + khoangCachNamXuatBan.ToString());
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Năm xuất bản không hợp lệ");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+
+                sqlConnection.Close();
+                HienThiDanhSachSach();
+            }
+        }
+
+        private void btnXoa_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sqlConnection.Open();
+                string query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại sách");
+                else
+                {
+                    query = "DELETE FROM SACH WHERE MaSach = @MaSach";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                    sqlCommand.ExecuteScalar();
+                }    
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+                HienThiDanhSachSach();
+
+                tblMaSach.Text = "";
+                txbTenSach.Text = "";
+                cbTenDauSach.SelectedIndex = -1;
+                txbNamXuatBan.Text = "";
+                txbNhaXuatBan.Text = "";
             }
         }
     }

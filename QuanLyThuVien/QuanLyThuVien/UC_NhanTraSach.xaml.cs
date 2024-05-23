@@ -27,7 +27,7 @@ namespace QuanLyThuVien
         public UC_NhanTraSach()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             HienThiDanhSachPhieuMuon();
         }
@@ -35,39 +35,12 @@ namespace QuanLyThuVien
         private void HienThiDanhSachPhieuMuon()
         {
             sqlConnection.Open();
-            string query = "SELECT * FROM  PHIEUMUONTRASACH";
+            string query = "SELECT MaPhieuMuonTraSach AS 'Mã phiếu mượn trả sách', MaDocGia AS 'Mã độc giả', NgayMuon AS 'Ngày mượn', MaCuonSach AS 'Mã cuốn sách', NgayPhaiTra AS 'Ngày phải trả', NgayTra AS 'Ngày trả', TienPhatKyNay AS 'Tiền phạt kỳ này', SoTienTra AS 'Số tiền trả', ConLai AS 'Còn lại' FROM  PHIEUMUONTRASACH";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dgvPhieuMuon.ItemsSource = dt.DefaultView;
             sqlConnection.Close();
-        }
-
-        private void txbMaPhieuMuon_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                // Xử lý sự kiện khi người dùng nhấn Enter
-                //MessageBox.Show("Enter đã được nhấn!");
-                sqlConnection.Open();
-                string query = "SELECT * FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
-                using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        // Thêm giá trị vào TextBox (ví dụ: txbTenCot.Text = tenCotValue;)
-                        tblHoVaTen.Text = reader["MaDocGia"].ToString();
-                        dpNgayMuon.Text = reader["NgayMuon"].ToString();
-                        dpNgayPhaiTra.Text = reader["NgayPhaiTra"].ToString();
-                        dpNgayTra.Text = DateTime.Now.ToString();
-                    }
-                }
-
-                sqlConnection.Close();
-
-            }
         }
 
         private void dpNgayTra_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -106,67 +79,120 @@ namespace QuanLyThuVien
             }
         }
 
-        private void txbSoTienTra_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (double.TryParse(txbSoTienTra.Text, out double soTienTra)) 
-                {   
-                    double conLai = (double.Parse(tblTienPhatKyNay.Text) - soTienTra);
-                    if (conLai < 0)
-                    {
-                        MessageBox.Show("Số tiền trả không được vượt quá tiền phạt");
-                    }
-                    else
-                    {
-                        tblConlai.Text = conLai.ToString();
-                    }    
-                }
-                else
-                {
-                    MessageBox.Show("Số tiền trả không hợp lệ");
-                }
-
-            }
-        }
 
         private void btnInPhieuTra_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (txbMaPhieuMuon.Text == "")
+                MessageBox.Show("Mã phiếu mượn trả không được để trống");
+
+            else
             {
-                string query = "UPDATE PHIEUMUONTRASACH SET NgayTra = @NgayTra, TienPhatKyNay = @TienPhatKyNay, SoTienTra = @SoTienTra, ConLai = @ConLai WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
+                try
+                {
+
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
+                    object IsPhieuMuonExisted = sqlCommand.ExecuteScalar();
+
+                    query = "SELECT * FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach AND NgayTra IS NOT NULL";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
+                    object IsReturned = sqlCommand.ExecuteScalar();
+
+                    if (IsPhieuMuonExisted == null)
+                        MessageBox.Show("Không tồn tại phiếu mượn");
+                    else if (IsReturned != null)
+                        MessageBox.Show("Phiếu mượn đã được trả");
+                    else if (!float.TryParse(txbSoTienTra.Text, out float soTienTra))
+                        MessageBox.Show("Số tiền trả không hợp lệ");
+                    else if (double.TryParse(tblConlai.Text, out double conLai) && conLai < 0)
+                        MessageBox.Show("Số tiền trả không được lớn hơn số tiền nợ");
+                    else
+                    {
+                        //cập nhật phiếu mượn trả sách
+                        query = "UPDATE PHIEUMUONTRASACH SET NgayTra = @NgayTra, TienPhatKyNay = @TienPhatKyNay, SoTienTra = @SoTienTra, ConLai = @ConLai WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
+                        sqlCommand.Parameters.AddWithValue("@NgayTra", dpNgayTra.Text);
+                        sqlCommand.Parameters.AddWithValue("@TienPhatKyNay", tblTienPhatKyNay.Text);
+                        sqlCommand.Parameters.AddWithValue("@SoTienTra", txbSoTienTra.Text);
+                        sqlCommand.Parameters.AddWithValue("@ConLai", tblConlai.Text);
+                        sqlCommand.ExecuteScalar();
+                        MessageBox.Show("Trả sách thành công");
+
+                        //tính lại tổng nợ cho độc giả
+                        query = "SELECT TongNo FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaDocGia", tblHoVaTen.Text);
+                        string tongNo = sqlCommand.ExecuteScalar().ToString();
+
+                        double newTongNo = double.Parse(tongNo) + double.Parse(tblConlai.Text);
+                        query = "UPDATE DOCGIA SET TongNo = @TongNo WHERE MaDocGia = @MaDocGia";
+                        sqlCommand = new SqlCommand( query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaDocGia", tblHoVaTen.Text);
+                        sqlCommand.Parameters.AddWithValue("@TongNo", newTongNo.ToString());
+                        sqlCommand.ExecuteScalar();
+
+                        //cập nhật tình trạng cuốn sách thành chưa mượn
+                        query = "SELECT MaCuonSach FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
+                        string maCuonSach = sqlCommand.ExecuteScalar().ToString();
+
+                        query = "UPDATE CUONSACH SET TinhTrang = 0 WHERE MaCuonSach = @MaCuonSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
+                        sqlCommand.ExecuteScalar();
+                    }    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+
+                    sqlConnection.Close();
+                    HienThiDanhSachPhieuMuon();
+                }
+            }    
+           
+        }
+
+        private void txbMaPhieuMuon_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txbMaPhieuMuon.Text.Length == 7)
+            {
                 sqlConnection.Open();
+                string query = "SELECT * FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
-                sqlCommand.Parameters.AddWithValue("@NgayTra", dpNgayPhaiTra.Text);
-                sqlCommand.Parameters.AddWithValue("@TienPhatKyNay", tblTienPhatKyNay.Text);
-                sqlCommand.Parameters.AddWithValue("@SoTienTra", txbSoTienTra.Text);
-                sqlCommand.Parameters.AddWithValue("@ConLai", tblConlai.Text);
-                sqlCommand.ExecuteScalar();
-                MessageBox.Show("Thêm thành công");
-
-                sqlCommand = new SqlCommand("SELECT TongNo FROM DOCGIA WHERE MaDocGia = @MaDocGia", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaDocGia", tblHoVaTen.Text);
-                string tongNo = sqlCommand.ExecuteScalar().ToString();
-
-                double newTongNo = double.Parse(tongNo) + double.Parse(tblConlai.Text);
-                sqlCommand = new SqlCommand("UPDATE DOCGIA SET TongNo = @TongNo WHERE MaDocGia = @MaDocGia", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaDocGia", tblHoVaTen.Text);
-                sqlCommand.Parameters.AddWithValue("@TongNo", newTongNo.ToString());
-                sqlCommand.ExecuteScalar();
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        // Thêm giá trị vào TextBox (ví dụ: txbTenCot.Text = tenCotValue;)
+                        tblHoVaTen.Text = reader["MaDocGia"].ToString();
+                        tblMaSach.Text = reader["MaCuonSach"].ToString();
+                        dpNgayMuon.Text = reader["NgayMuon"].ToString();
+                        dpNgayPhaiTra.Text = reader["NgayPhaiTra"].ToString();
+                        dpNgayTra.Text = DateTime.Now.ToString();
+                    }
+                }
 
                 sqlConnection.Close();
-                HienThiDanhSachPhieuMuon();
-            }
+            }    
+        }
+
+        private void txbSoTienTra_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (float.TryParse(txbSoTienTra.Text, out float soTienTra) && float.TryParse(tblTienPhatKyNay.Text, out float tienPhatKyNay))
+            {
+                float conLai = tienPhatKyNay- soTienTra;
+                tblConlai.Text = conLai.ToString();
+            }       
         }
     }
 }

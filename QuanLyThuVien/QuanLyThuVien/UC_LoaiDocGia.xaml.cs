@@ -28,7 +28,7 @@ namespace QuanLyThuVien
         public UC_LoaiDocGia()
         {
             InitializeComponent();
-            string connectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVien.Properties.Settings.QLTV_DBConnectionString"].ConnectionString;
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaLoaiDocGia();
             HienThiDanhSachLoaiDocGia();
@@ -48,7 +48,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachLoaiDocGia()
         {
             sqlConnection.Open();
-            string query = "SELECT * FROM LOAIDOCGIA";
+            string query = "SELECT MaLoaiDocGia AS 'Mã loại độc giả', TenLoaiDocGia AS 'Tên loại độc giả' FROM LOAIDOCGIA";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -62,8 +62,8 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaLoaiDocGia.Text = row_selected.Row["MaLoaiDocGia"].ToString();
-                txbTenLoaiDocGia.Text = row_selected.Row["TenLoaiDocGia"].ToString();
+                tblMaLoaiDocGia.Text = row_selected.Row["Mã loại độc giả"].ToString();
+                txbTenLoaiDocGia.Text = row_selected.Row["Tên loại độc giả"].ToString();
             }
         }
 
@@ -85,23 +85,35 @@ namespace QuanLyThuVien
             txbTenLoaiDocGia.Text = "";
         }
 
+
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string query = "INSERT INTO LOAIDOCGIA (MaLoaiDocGia, TenLoaiDocGia) VALUES (@MaLoaiDocGia, @TenLoaiDocGia)";
                 sqlConnection.Open();
-               
-                MessageBox.Show("Thêm thành công");
+                string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
-                sqlCommand.ExecuteScalar();
-
+                if (tblMaLoaiDocGia.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (sqlCommand.ExecuteScalar() != null)
+                    MessageBox.Show("Đã tồn tại loại độc giả");
+                else if (txbTenLoaiDocGia.Text == "")
+                    MessageBox.Show("Tên loại độc giả không được để trống");
+                else
+                {
+                    MessageBox.Show("Thêm thành công");
+                    query = "INSERT INTO LOAIDOCGIA (MaLoaiDocGia, TenLoaiDocGia) VALUES (@MaLoaiDocGia, @TenLoaiDocGia)";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
+                    sqlCommand.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Không thể lưu");
             }
             finally
             {
@@ -114,19 +126,31 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "UPDATE LOAIDOCGIA SET TenLoaiDocGia = @TenLoaiDocGia  WHERE MaLoaiDocGia = @MaLoaiDocGia";
                 sqlConnection.Open();
 
-                MessageBox.Show("Cập nhật thành công");
+                string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
-                sqlCommand.ExecuteScalar();
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại loại độc giả");
+                else if (txbTenLoaiDocGia.Text == "")
+                    MessageBox.Show("Tên loại độc giả không được để trống");
+                else
+                {
+                    MessageBox.Show("Cập nhật thành công");
+                    query = "UPDATE LOAIDOCGIA SET TenLoaiDocGia = @TenLoaiDocGia  WHERE MaLoaiDocGia = @MaLoaiDocGia";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Không thể cập nhật");
             }
             finally
             {
@@ -138,16 +162,28 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "DELETE FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                sqlCommand.ExecuteScalar();
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại loại độc giả");
+                else
+                {
+                    query = "DELETE FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
+                    sqlCommand.ExecuteScalar();
+
+                    tblMaLoaiDocGia.Text = "";
+                    txbTenLoaiDocGia.Text = "";
+                }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Loại độc giả đang được sử dụng");
             }
             finally
             {

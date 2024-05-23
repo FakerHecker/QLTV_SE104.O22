@@ -40,18 +40,18 @@
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <Button x:Name="btnThem" Content="Thêm mới" Margin="0,0,10,10" Click="btnThem_Click"/>
-                    <Button x:Name="btnXemChiTietPhieu" Content="Xem chi tiết phiếu" Margin="0,0,10,10" Click="btnXemChiTietPhieu_Click"/>
+                    <Button x:Name="btnXemChiTietPhieu" Content="Nhập chi tiết phiếu" Margin="0,0,10,10" Click="btnXemChiTietPhieu_Click"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="1">
                     <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click"/>
-                    <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10"/>
+                    <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10" Click="btnXoa_Click"/>
                 </StackPanel>
 
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Grid.Row="1" Header="Danh sách phiếu nhập" FontSize="15" Margin="5,0,0,0">
-            <DataGrid x:Name="dgvPhieuNhap" Grid.ColumnSpan="2" SelectionChanged="dgvPhieuNhap_SelectionChanged" />
+            <DataGrid x:Name="dgvPhieuNhap" Grid.ColumnSpan="2" SelectionChanged="dgvPhieuNhap_SelectionChanged" IsReadOnly="True" />
         </GroupBox>
     </Grid>
 </UserControl>

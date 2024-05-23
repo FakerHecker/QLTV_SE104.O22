@@ -28,7 +28,7 @@ namespace QuanLyThuVien
         public UC_TheLoai()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaTheLoai();
             HienThiDanhSachTheLoaiSach();
@@ -45,7 +45,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachTheLoaiSach()
         {
             sqlConnection.Open();
-            string query = "SELECT * FROM THELOAI";
+            string query = "SELECT MaTheLoai AS 'Mã thể loại', TenTheLoai AS 'Tên thể loại' FROM THELOAI";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -59,8 +59,8 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaTheLoai.Text = row_selected.Row["MaTheLoai"].ToString();
-                txbTenTheLoai.Text = row_selected.Row["TenTheLoai"].ToString();
+                tblMaTheLoai.Text = row_selected.Row["Mã thể loại"].ToString();
+                txbTenTheLoai.Text = row_selected.Row["Tên thể loại"].ToString();
             }
         }
 
@@ -85,14 +85,26 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "INSERT INTO THELOAI (MaTheLoai, TenTheLoai) VALUES (@MaTheLoai, @TenTheLoai)";
                 sqlConnection.Open();
-                MessageBox.Show("Thêm thành công");
+                string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-                sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
-                sqlCommand.ExecuteScalar();
 
+                if (tblMaTheLoai.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (txbTenTheLoai.Text == "")
+                    MessageBox.Show("Tên thể loại không được bỏ trống");
+                else if (sqlCommand.ExecuteScalar() != null)
+                    MessageBox.Show("Đã tồn tại thể loại");
+                else
+                {
+                    query = "INSERT INTO THELOAI (MaTheLoai, TenTheLoai) VALUES (@MaTheLoai, @TenTheLoai)";                   
+                    MessageBox.Show("Thêm thành công");
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
+                    sqlCommand.ExecuteScalar();
+                }    
             }
             catch (Exception ex)
             {
@@ -109,13 +121,26 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "UPDATE THELOAI SET TenTheLoai = @TenTheLoai  WHERE MaTheLoai = @MaTheLoai";
+
                 sqlConnection.Open();
-                MessageBox.Show("Cập nhật thành công");
+                string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-                sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
-                sqlCommand.ExecuteScalar();
+               
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại thể loại");
+                else if (txbTenTheLoai.Text == "")
+                    MessageBox.Show("Tên thể loại không được bỏ trống");
+                else
+                {
+                    query = "UPDATE THELOAI SET TenTheLoai = @TenTheLoai  WHERE MaTheLoai = @MaTheLoai";
+                    MessageBox.Show("Cập nhật thành công");
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
+                    sqlCommand.ExecuteScalar();
+                }    
+                
 
             }
             catch (Exception ex)
@@ -133,11 +158,22 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "DELETE FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-                sqlCommand.ExecuteScalar();
+
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại thể loại");
+                else
+                {
+                    query = "DELETE FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
+                    sqlCommand.ExecuteScalar();
+
+                }    
+                
 
             }
             catch (Exception ex)
@@ -148,6 +184,8 @@ namespace QuanLyThuVien
             {
                 sqlConnection.Close();
                 HienThiDanhSachTheLoaiSach();
+                tblMaTheLoai.Text = "";
+                txbTenTheLoai.Text = "";
             }
         }
     }

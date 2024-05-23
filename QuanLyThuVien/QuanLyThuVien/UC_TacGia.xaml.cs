@@ -28,7 +28,7 @@ namespace QuanLyThuVien
         public UC_TacGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaTacGia();
             HienThiDanhSachTacGia();
@@ -47,7 +47,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachTacGia()
         {
             sqlConnection.Open();
-            string query = "SELECT * FROM TACGIA";
+            string query = "SELECT MaTacGia AS 'Mã tác giả', TenTacGia AS 'Tên tác giả' FROM TACGIA";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -61,8 +61,8 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaTacGia.Text = row_selected.Row["MaTacGia"].ToString();
-                txbTenTacGia.Text = row_selected.Row["TenTacGia"].ToString();
+                tblMaTacGia.Text = row_selected.Row["Mã tác giả"].ToString();
+                txbTenTacGia.Text = row_selected.Row["Tên tác giả"].ToString();
             }
         }
 
@@ -88,15 +88,26 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "INSERT INTO TACGIA (MaTacGia, TenTacGia) VALUES (@MaTacGia, @TenTacGia)";
                 sqlConnection.Open();
-
-                MessageBox.Show("Thêm thành công");
+                string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-                sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
-                sqlCommand.ExecuteScalar();
 
+                if (tblMaTacGia.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (txbTenTacGia.Text == "")
+                    MessageBox.Show("Tên tác giả không được bỏ trống");
+                else if (sqlCommand.ExecuteScalar() != null)
+                    MessageBox.Show("Đã tồn tại tác giả");
+                else
+                {
+                    query = "INSERT INTO TACGIA (MaTacGia, TenTacGia) VALUES (@MaTacGia, @TenTacGia)";
+                    MessageBox.Show("Thêm thành công");
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
+                    sqlCommand.ExecuteScalar();
+                }                  
             }
             catch (Exception ex)
             {
@@ -113,14 +124,27 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "UPDATE TACGIA SET TenTacGia = @TenTacGia  WHERE MaTacGia = @MaTacGia";
-                sqlConnection.Open();
 
-                MessageBox.Show("Cập nhật thành công");
+                sqlConnection.Open();
+                string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-                sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
-                sqlCommand.ExecuteScalar();
+
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại tác giả");
+                else if (txbTenTacGia.Text == "")
+                    MessageBox.Show("Tên tác giả không được bỏ trống");
+                else
+                {
+                    query = "UPDATE TACGIA SET TenTacGia = @TenTacGia  WHERE MaTacGia = @MaTacGia";
+                    MessageBox.Show("Cập nhật thành công");
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                    sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
+                    sqlCommand.ExecuteScalar();
+
+                }    
+               
 
             }
             catch (Exception ex)
@@ -137,11 +161,21 @@ namespace QuanLyThuVien
         {
             try
             {
-                string query = "DELETE FROM TACGIA WHERE MaTacGia = @MaTacGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-                sqlCommand.ExecuteScalar();
+
+                if (sqlCommand.ExecuteScalar() == null)
+                    MessageBox.Show("Không tồn tại tác giả");
+                else
+                {
+                    query = "DELETE FROM TACGIA WHERE MaTacGia = @MaTacGia";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                    sqlCommand.ExecuteScalar();
+                }    
+               
 
             }
             catch (Exception ex)
@@ -152,6 +186,8 @@ namespace QuanLyThuVien
             {
                 sqlConnection.Close();
                 HienThiDanhSachTacGia();
+                tblMaTacGia.Text = "";
+                txbTenTacGia.Text = "";
             }
 
         }

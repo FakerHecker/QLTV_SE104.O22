@@ -36,37 +36,22 @@
 
         <Label Content="Tra cứu sách" FontWeight="Bold" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Button x:Name="btnTimSach" Content="Tìm sách"  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="btnTimSach_Click"/>
+        <Button x:Name="btnTimSach" Content="Tìm sách"  Grid.Row="5" Grid.Column="1"  Click="btnTimSach_Click"/>
 
-        <GroupBox x:Name="gb" Header="Thông tin phiếu mượn sách" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="4" FontSize="15" Margin="0,0,5,0">
+        <GroupBox x:Name="gb" Header="Tìm sách" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4" FontSize="15" Margin="0,0,5,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <RadioButton x:Name="rbMaSach" IsChecked="True" Content="Mã sách" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <RadioButton x:Name="rbTenSach" Content="Tên sách" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-
-                <RadioButton x:Name="rbTheLoai" Content="Thể loại" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
-                <RadioButton x:Name="rbTacGia" Content="Tác giả" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
-
-                <TextBox x:Name="txbMaCuonSach" Height="30" Grid.Row="0" Grid.Column="1"/>
-                <TextBox x:Name="txbTenSach" Height="30" Grid.Row="1" Grid.Column="1"/>
-                
-                <TextBox x:Name="txbTheLoai" Height="30" Grid.Row="0" Grid.Column="3"/>
-                <TextBox x:Name="txbTacGia" Height="30" Grid.Row="1" Grid.Column="3"/>
-                
-
-
+                <ComboBox x:Name="cbKey" Height="30" FontSize="15"  HorizontalAlignment="Center"/>
+                <TextBox x:Name="txbValue" Grid.Column="1" Height="30" FontSize="15" Margin="10,0,10,0"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Kết quả tìm"  Grid.Column="4" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2" FontSize="15">
+        <GroupBox Header="Kết quả tìm"  Grid.Column="0" Grid.Row="6" Grid.RowSpan="4" Grid.ColumnSpan="3" FontSize="15" Margin="0,0,5,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -83,9 +68,9 @@
                 <TextBlock x:Name="tblSoSachTimThay" Height="30" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Danh sách sách" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
+        <GroupBox Header="Danh sách cuốn sách" Grid.Row="1" Grid.Column="3" Grid.RowSpan="11" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dgvCuonSach"/>
+                <DataGrid x:Name="dgvCuonSach" IsReadOnly="True"/>
             </Grid>
         </GroupBox>
     </Grid>

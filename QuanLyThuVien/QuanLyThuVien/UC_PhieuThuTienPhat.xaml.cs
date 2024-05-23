@@ -30,7 +30,7 @@ namespace QuanLyThuVien
         {
             InitializeComponent();
 
-            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security=True;";
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaPhieuThu();
             HienThiDanhSachPhieuThuTienPhat();
@@ -50,7 +50,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachPhieuThuTienPhat()
         {
             sqlConnection.Open();
-            string query = "SELECT PHIEUTHUTIENPHAT.MaPhieuThuTien, PHIEUTHUTIENPHAT.MaDocGia, DOCGIA.HoVaTen, PHIEUTHUTIENPHAT.NgayThu, DOCGIA.TongNo, PHIEUTHUTIENPHAT.SoTienThu, PHIEUTHUTIENPHAT.ConLai FROM PHIEUTHUTIENPHAT JOIN DOCGIA ON PHIEUTHUTIENPHAT.MaDocGia = DOCGIA.MaDocGia";
+            string query = "SELECT MaPhieuThuTien AS 'Mã phiếu thu tiền', MaDocGia AS 'Mã độc giả', NgayThu AS 'Ngày thu', SoTienThu AS 'Số tiền thu', ConLai AS 'Còn lại' FROM PHIEUTHUTIENPHAT";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -64,13 +64,12 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                tblMaPhieuThu.Text = row_selected.Row["MaPhieuThuTien"].ToString();
-                cbMaDocGia.Text = row_selected.Row["MaDocGia"].ToString();
-                tblHoTen.Text = row_selected.Row["HoVaTen"].ToString();
-                tblTongNo.Text = row_selected.Row["TongNo"].ToString();
-                txbSoTienThu.Text = row_selected.Row["SoTienThu"].ToString();
-                tblConLai.Text = row_selected.Row["ConLai"].ToString();
-                dpNgayThu.Text = row_selected.Row["NgayThu"].ToString();
+                tblMaPhieuThu.Text = row_selected.Row["Mã phiếu thu tiền"].ToString();
+                cbMaDocGia.Text = row_selected.Row["Mã độc giả"].ToString();
+                txbSoTienThu.Text = row_selected.Row["Số tiền thu"].ToString();
+                tblTongNo.Text = "";
+                tblConLai.Text = row_selected.Row["Còn lại"].ToString();
+                dpNgayThu.Text = row_selected.Row["Ngày thu"].ToString();
             }
         }
 
@@ -95,62 +94,64 @@ namespace QuanLyThuVien
             dpNgayThu.Text = DateTime.Now.ToString();
         }
 
+
         private void cbMaDocGia_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            string selectedMaDocGia = "";
-            if ((cbMaDocGia.SelectedItem) != null)
-                selectedMaDocGia = ((ComboBoxItem)cbMaDocGia.SelectedItem).Content.ToString();
-            if (selectedMaDocGia != "")
+            if (cbMaDocGia.SelectedIndex != -1)
             {
-                try
-                {
-                    
-                    
+                sqlConnection.Open();
+                string maDocGia = ((ComboBoxItem)cbMaDocGia.SelectedItem).Content.ToString();
+                string query = "SELECT HoVaTen FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaDocGia", maDocGia);
+                tblHoTen.Text = sqlCommand.ExecuteScalar().ToString();
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                finally
-                {
-                    sqlConnection.Open();   
-                    string query = "SELECT HoVaTen FROM DOCGIA WHERE MaDocGia = @MaDocGia";
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaDocGia", selectedMaDocGia);
-                    tblHoTen.Text = sqlCommand.ExecuteScalar().ToString();
+                query = "SELECT TongNo FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaDocGia", maDocGia);
+                tblTongNo.Text = sqlCommand.ExecuteScalar().ToString();
+                sqlConnection.Close();
 
-                    query = "SELECT TongNo FROM DOCGIA WHERE MaDocGia = @MaDocGia";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaDocGia", selectedMaDocGia);
-                    tblTongNo.Text = sqlCommand.ExecuteScalar().ToString();
-
-                    sqlConnection.Close();
-
-                }
+                txbSoTienThu.Text = "";
+                tblConLai.Text = "";
             }    
-           
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string query = "INSERT INTO PHIEUTHUTIENPHAT (MaPhieuThuTien, MaDocGia, SoTienThu, ConLai, NgayThu) VALUES (@MaPhieuThuTien, @MaDocGia, @SoTienThu, @ConLai, @NgayThu)";
                 sqlConnection.Open();
-               
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                string query = "SELECT * FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
+                SqlCommand sqlCommand = new SqlCommand( query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
-                sqlCommand.Parameters.AddWithValue("@MaDocGia", cbMaDocGia.Text);
-                sqlCommand.Parameters.AddWithValue("@SoTienThu", txbSoTienThu.Text);
-                sqlCommand.Parameters.AddWithValue("@ConLai", tblConLai.Text);
-                sqlCommand.Parameters.AddWithValue("@NgayThu", dpNgayThu.Text);
-                if (double.Parse(tblConLai.Text) < 0)
-                    MessageBox.Show("Tiền thu không được lớn hơn tổng nợ");
+
+                if (tblMaPhieuThu.Text == "")
+                    MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
+                else if (cbMaDocGia.Text == "")
+                    MessageBox.Show("Mã độc giả không được để trống");
+                else if (txbSoTienThu.Text == "")
+                    MessageBox.Show("Số tiền thu không được để trống");
+                else if (double.Parse(tblConLai.Text) < 0)
+                    MessageBox.Show("Số tiền thu không được lớn hơn tổng nợ");
+                else if (double.Parse(txbSoTienThu.Text) == 0)
+                    MessageBox.Show("Số tiền thu phải lớn hơn 0");
+                else if (sqlCommand.ExecuteScalar() != null)
+                {
+                    MessageBox.Show("Đã tồn tại phiếu thu tiền phạt");
+                }
                 else
                 {
+
+                    query = "INSERT INTO PHIEUTHUTIENPHAT (MaPhieuThuTien, MaDocGia, SoTienThu, ConLai, NgayThu) VALUES (@MaPhieuThuTien, @MaDocGia, @SoTienThu, @ConLai, @NgayThu)";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
+                    sqlCommand.Parameters.AddWithValue("@MaDocGia", cbMaDocGia.Text);
+                    sqlCommand.Parameters.AddWithValue("@SoTienThu", txbSoTienThu.Text);
+                    sqlCommand.Parameters.AddWithValue("@ConLai", tblConLai.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayThu", dpNgayThu.Text);
                     sqlCommand.ExecuteScalar();
+                    MessageBox.Show("Thêm thành công");
 
                     query = "UPDATE DOCGIA SET TongNo = @TongNo WHERE MaDocGia = @MaDocGia";
                     sqlCommand = new SqlCommand(query, sqlConnection);
@@ -167,47 +168,33 @@ namespace QuanLyThuVien
             }
             finally
             {
-                MessageBox.Show("Thêm thành công");
+               
                 sqlConnection.Close();
                 HienThiDanhSachPhieuThuTienPhat();
             }
         }
 
-        private void btnCapNhat_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                string query = "UPDATE PHIEUTHUTIENPHAT  SET MaDocGia = @MaDocGia, SoTienThu = @SoTienThu, NgayThu = @NgayThu WHERE MaPhieuThuTien = @MaPhieuThuTien";
-                sqlConnection.Open();
-                MessageBox.Show("Thêm thành công");
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
-                sqlCommand.Parameters.AddWithValue("@MaDocGia", cbMaDocGia.Text);
-                sqlCommand.Parameters.AddWithValue("@SoTienThu", txbSoTienThu.Text);
-                sqlCommand.Parameters.AddWithValue("@NgayThu", dpNgayThu.Text);
-                sqlCommand.ExecuteScalar();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachPhieuThuTienPhat();
-            }
-        }
+       
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string query = "DELETE FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlConnection.Open();
+                string query = "SELECT * FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
-                sqlCommand.ExecuteScalar();
+                if (sqlCommand.ExecuteScalar() == null)
+                {
+                    MessageBox.Show("Không tồn tại phiếu thu tiền phạt");
+                }
+                {
+                    query = "DELETE FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -217,6 +204,13 @@ namespace QuanLyThuVien
             {
                 sqlConnection.Close();
                 HienThiDanhSachPhieuThuTienPhat();
+                tblMaPhieuThu.Text = "";
+                cbMaDocGia.SelectedIndex = -1;
+                tblHoTen.Text = "";
+                tblTongNo.Text = "";
+                txbSoTienThu.Text = "";
+                tblConLai.Text = "";
+                dpNgayThu.Text = "";
             }
         }
 
@@ -241,8 +235,18 @@ namespace QuanLyThuVien
             else
             {
                 // Người dùng đã nhập chữ
-                MessageBox.Show("Invalid input"); // Thay thế bằng thông báo hoặc xử lý khác
+                MessageBox.Show("Phải nhập số"); // Thay thế bằng thông báo hoặc xử lý khác
+                txbSoTienThu.Text = "";
             }
+        }
+
+        private void btnInPhieuThu_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDlg = new PrintDialog();
+            if (printDlg.ShowDialog() == true)
+            {
+                printDlg.PrintVisual(a, "My Control Print");
+            }  
         }
     }
 }
