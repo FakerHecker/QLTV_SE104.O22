@@ -109,7 +109,6 @@ namespace QuanLyThuVien
         {
             if (txbMaPhieuMuon.Text == "")
                 MessageBox.Show("Mã phiếu mượn trả không được để trống");
-
             else
             {
                 try
@@ -131,7 +130,7 @@ namespace QuanLyThuVien
                         MessageBox.Show("Không tồn tại phiếu mượn");
                     else if (IsReturned != null)
                         MessageBox.Show("Phiếu mượn đã được trả");
-                    else if (!float.TryParse(txbSoTienTra.Text, out float soTienTra))
+                    else if (!float.TryParse(txbSoTienTra.Text, out float soTienTra) || soTienTra < 0)
                         MessageBox.Show("Số tiền trả không hợp lệ");
                     else if (double.TryParse(tblConlai.Text, out double conLai) && conLai < 0)
                         MessageBox.Show("Số tiền trả không được lớn hơn số tiền nợ");
@@ -242,7 +241,7 @@ namespace QuanLyThuVien
             if (selectedItem != null)
             {
                 string maPhieu = selectedItem.Row["Mã phiếu mượn trả"].ToString();
-                MessageBox.Show(maPhieu);
+                //MessageBox.Show(maPhieu);
 
                 string ngayTra = selectedItem.Row["Ngày trả"].ToString();
                 if (ngayTra == "")

@@ -104,6 +104,7 @@ namespace QuanLyThuVien
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "ItemPerson":
+                    ChangeButtonBackground(btnDocGia);
                     SP1.Visibility = Visibility.Visible;
 
                     SP2.Visibility = Visibility.Hidden;
@@ -112,7 +113,7 @@ namespace QuanLyThuVien
                     CC.Content = new DocGia();
                     break;
                 case "ItemBook":
-
+                    ChangeButtonBackground(btnCuonSach);
                     SP2.Visibility = Visibility.Visible;
                     SP1.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
@@ -120,7 +121,7 @@ namespace QuanLyThuVien
                     CC.Content = new UC_CuonSach();
                     break;
                 case "ItemBorrow":
-
+                    ChangeButtonBackground(btnPhieuMuonSach);
                     SP3.Visibility = Visibility.Visible;
                     SP2.Visibility = Visibility.Hidden;
                     SP1.Visibility = Visibility.Hidden;
@@ -128,6 +129,7 @@ namespace QuanLyThuVien
                     CC.Content = new UC_ChoMuonSach();
                     break;
                 case "ItemSearch":
+                    
                     CC.Content = new UC_TraCuuSach();
                     SP1.Visibility = Visibility.Hidden;
                     SP2.Visibility = Visibility.Hidden;
@@ -142,7 +144,7 @@ namespace QuanLyThuVien
                     SP4.Visibility = Visibility.Hidden;
                     break;
                 case "ItemReport":
-                    CC.Content = new UC_BaoCaoThongKe();
+                    ChangeButtonBackground(btnTaoBaoCao);
                     CC.Content = new UC_BaoCaoThongKe();
                     SP1.Visibility = Visibility.Hidden;
                     SP2.Visibility = Visibility.Hidden;
@@ -264,9 +266,5 @@ namespace QuanLyThuVien
                 }
             }
         }
-
-
     }
-
-
 }

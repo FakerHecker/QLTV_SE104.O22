@@ -161,7 +161,10 @@ namespace QuanLyThuVien
                         //tạo mã sách
                         query = "SELECT TOP 1 MaCuonSach FROM CUONSACH ORDER BY MaCuonSach DESC";
                         sqlCommand = new SqlCommand(query, sqlConnection);
-                        string maCuonSach = sqlCommand.ExecuteScalar().ToString();
+                        object maCS = sqlCommand.ExecuteScalar();
+                        string maCuonSach = "CS000";
+                        if (maCS != null)
+                            maCuonSach = maCS.ToString();
 
                         int currentNumber = int.Parse(maCuonSach.Substring(2));
                         currentNumber++;
@@ -322,7 +325,8 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
                     string maSach = sqlCommand.ExecuteScalar().ToString();
 
-                    query = "SELECT COUNT(*) FROM (SELECT MaCuonSach FROM CUONSACH WHERE TinhTrang = 0 AND MaSach = @MaSach EXCEPT SELECT MaCuonSach FROM BAOCAOTRATRE) AS SUB_CUONSACH";
+                    query = "SELECT COUNT(*) FROM (SELECT SUB_CUONSACH.MaCuonSach FROM (SELECT MaCuonSach FROM CUONSACH WHERE TinhTrang = 0 AND MaSach = @MaSach EXCEPT SELECT MaCuonSach FROM BAOCAOTRATRE) AS SUB_CUONSACH" +
+                        " EXCEPT (SELECT MaCuonSach FROM PHIEUMUONTRASACH) ) AS ABC";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaSach", maSach);
                     int soLuong = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
@@ -333,10 +337,10 @@ namespace QuanLyThuVien
                         MessageBox.Show("Không thể xóa, vì số lượng sách không đủ");
                     else
                     {
-                        query = "SELECT TOP (@x) MaCuonSach FROM (SELECT MaCuonSach FROM CUONSACH WHERE TinhTrang = 0 AND MaSach = @MaSach EXCEPT SELECT MaCuonSach FROM BAOCAOTRATRE) AS SUB_CUONSACH";
+                        query = "SELECT TOP (@x) MaCuonSach FROM (SELECT SUB_CUONSACH.MaCuonSach FROM (SELECT MaCuonSach FROM CUONSACH WHERE TinhTrang = 0 AND MaSach = @MaSach EXCEPT SELECT MaCuonSach FROM BAOCAOTRATRE) AS SUB_CUONSACH EXCEPT (SELECT MaCuonSach FROM PHIEUMUONTRASACH) ) AS ABC";
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaSach", maSach);
-                        MessageBox.Show(soLuongXoa.ToString());
+                        //MessageBox.Show(soLuongXoa.ToString());
                         sqlCommand.Parameters.AddWithValue("@x", soLuongXoa);
                         SqlDataReader reader = sqlCommand.ExecuteReader();
 
@@ -356,11 +360,12 @@ namespace QuanLyThuVien
 
                         for (int j = 0; j < soLuongXoa; j++)
                         {
+                            MessageBox.Show(maCuonSach[j]);
                             query = "DELETE FROM CUONSACH WHERE MaCuonSach = @MaCuonSach";
                             sqlCommand = new SqlCommand(query, sqlConnection);
                             sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach[j]);
                             sqlCommand.ExecuteScalar();
-                            MessageBox.Show(maCuonSach[j]);
+                            
                         }    
                        
 

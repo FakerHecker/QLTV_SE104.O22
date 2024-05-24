@@ -143,18 +143,19 @@ namespace QuanLyThuVien
 
         private void btnThemTacGia_Click(object sender, RoutedEventArgs e)
         {
-            string tacGia = cbTacGia.Text;
-            
-
-            bool check = false;
-            for (int i = 0; i < lbTacGia.Items.Count; i++)
+           if (cbTacGia.SelectedIndex != -1)
             {
-                var item = lbTacGia.Items[i].ToString();
-                if (tacGia == item)
-                    check = true;
-            }
-            if (check == false)
-                lbTacGia.Items.Add(tacGia);
+                string tacGia = cbTacGia.Text;
+                bool check = false;
+                for (int i = 0; i < lbTacGia.Items.Count; i++)
+                {
+                    var item = lbTacGia.Items[i].ToString();
+                    if (tacGia == item)
+                        check = true;
+                }
+                if (check == false)
+                    lbTacGia.Items.Add(tacGia);
+            }    
         }
 
         private void btnXoaTacGia_Click(object sender, RoutedEventArgs e)

@@ -30,7 +30,8 @@ namespace QuanLyThuVien
         public DocGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; sqlConnection = new SqlConnection(connectionString);
+            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; 
+            sqlConnection = new SqlConnection(connectionString);
             InitMaDocGia();
             InitLoaiDocGia();
             HienThiDanhSachDocGia();

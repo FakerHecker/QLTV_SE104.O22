@@ -136,9 +136,10 @@ namespace QuanLyThuVien
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
                 object khongTonTai = sqlCommand.ExecuteScalar();
 
-                query = "SELECT * FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                query = "SELECT * FROM THELOAI WHERE TenTheLoai = @TenTheLoai AND MaTheLoai <> @MaTheLoai";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
+                sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
                 object trungTen = sqlCommand.ExecuteScalar();
 
                 if (khongTonTai == null)

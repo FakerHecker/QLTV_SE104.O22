@@ -326,5 +326,17 @@ namespace QuanLyThuVien
                 MessageBox.Show("Vui lòng chọn loại báo cáo");
             }    
         }
+
+        private void dpNgayLap_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbLoaiBaoCao.SelectedIndex == 0)
+            {
+                HienThiBaoCaoTheoTheLoai();
+            }
+            else if (cbLoaiBaoCao.SelectedIndex == 1)
+            {
+                HienThiBaoCaoSachTraTre();
+            }
+        }
     }
 }

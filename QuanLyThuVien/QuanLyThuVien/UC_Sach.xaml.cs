@@ -114,13 +114,25 @@ namespace QuanLyThuVien
                 query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                object tonTaiMaSach = sqlCommand.ExecuteScalar();
+
+                query = "SELECT * FROM SACH WHERE TenSach = @TenSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                object tonTaiTenSach = sqlCommand.ExecuteScalar();
 
                 if (tblMaSach.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
-                else if (sqlCommand.ExecuteScalar() != null)
+                else if (tonTaiMaSach != null)
                     MessageBox.Show("Đã tồn tại sách");
                 else if (txbTenSach.Text == "")
                     MessageBox.Show("Tên sách không được để trống");
+                else if (tonTaiTenSach != null)
+                    MessageBox.Show("Tên sách không được trùng");
+                else if (cbTenDauSach.SelectedIndex == -1)
+                    MessageBox.Show("Tên đầu sách không được để trống");
+                else if (txbNhaXuatBan.Text == "")
+                    MessageBox.Show("Nhà xuất bản không được để trống");
                 else if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
                 {
                     if (DateTime.Now.Year - namXuatBan <= khoangCachNamXuatBan && DateTime.Now.Year - namXuatBan >= 0)
@@ -176,13 +188,24 @@ namespace QuanLyThuVien
                 query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                object tonTaiMaSach = sqlCommand.ExecuteScalar();
+
+                query = "SELECT * FROM SACH WHERE TenSach = @TenSach AND MaSach <> @MaSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                object tonTaiTenSach = sqlCommand.ExecuteScalar();
 
                 if (tblMaSach.Text == "")
                     MessageBox.Show("Vui lòng chọn sách để cập nhật thông tin");
-                else if (sqlCommand.ExecuteScalar() == null)
+                else if (tonTaiMaSach == null)
                     MessageBox.Show("Không tồn tại sách");
+                else if (tonTaiTenSach != null)
+                    MessageBox.Show("Không được trùng tên sách");
                 else if (txbTenSach.Text == "")
                     MessageBox.Show("Tên sách không được để trống");
+                else if (txbNhaXuatBan.Text == "")
+                    MessageBox.Show("Nhà xuất bản không được để trống");
                 else if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
                 {
                     if (DateTime.Now.Year - namXuatBan <= khoangCachNamXuatBan && DateTime.Now.Year - namXuatBan >= 0)
