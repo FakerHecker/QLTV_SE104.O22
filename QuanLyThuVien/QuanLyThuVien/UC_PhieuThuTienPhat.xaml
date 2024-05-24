@@ -80,8 +80,6 @@
 
                 <TextBlock x:Name="tblMaPhieuThu" Height="30" Grid.Row="0" Grid.Column="1"/>
                 <ComboBox x:Name="cbMaDocGia" Height="30" Grid.Row="1" Grid.Column="1" SelectionChanged="cbMaDocGia_SelectionChanged">
-                    <ComboBoxItem Content="DG001"/>
-                    <ComboBoxItem Content="DG002"/>
                 </ComboBox>
                 <TextBlock x:Name="tblHoTen" Height="30" Grid.Row="2" Grid.Column="1"/>
 

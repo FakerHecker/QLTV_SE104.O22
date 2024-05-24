@@ -140,7 +140,7 @@ namespace QuanLyThuVien
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     string soNgayMuonToiDa = sqlCommand.ExecuteScalar().ToString();
 
-                    query = "SELECT COUNT(*) FROM PHIEUMUONTRASACH WHERE MaDocGia = @MaDocGia AND GETDATE() - NgayMuon <= @SoNgayMuonToiDa";
+                    query = "SELECT COUNT(*) FROM PHIEUMUONTRASACH WHERE MaDocGia = @MaDocGia AND GETDATE() - NgayMuon <= @SoNgayMuonToiDa AND NgayTra IS NULL";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", maDocGia);
                     sqlCommand.Parameters.AddWithValue("@SoNgayMuonToiDa", Int32.Parse(soNgayMuonToiDa));

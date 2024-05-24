@@ -33,7 +33,24 @@ namespace QuanLyThuVien
             string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaPhieuThu();
+            InitMaDocGia();
             HienThiDanhSachPhieuThuTienPhat();
+        }
+
+        private void InitMaDocGia()
+        {
+            string query = "SELECT * FROM DOCGIA"; // Thay thế YourTableName bằng tên bảng của bạn
+
+            sqlConnection.Open();
+            SqlCommand command = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string companyName = reader["MaDocGia"].ToString();
+                cbMaDocGia.Items.Add(companyName);
+            }
+            sqlConnection.Close();
         }
 
         private void InitMaPhieuThu()
@@ -100,7 +117,7 @@ namespace QuanLyThuVien
             if (cbMaDocGia.SelectedIndex != -1)
             {
                 sqlConnection.Open();
-                string maDocGia = ((ComboBoxItem)cbMaDocGia.SelectedItem).Content.ToString();
+                string maDocGia = cbMaDocGia.SelectedValue as string;
                 string query = "SELECT HoVaTen FROM DOCGIA WHERE MaDocGia = @MaDocGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDocGia", maDocGia);

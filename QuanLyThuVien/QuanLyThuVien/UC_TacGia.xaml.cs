@@ -92,13 +92,22 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                object tonTaiMaTacGia = sqlCommand.ExecuteScalar();
+
+                query = "SELECT * FROM TACGIA WHERE TenTacGia = @TenTacGia";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
+                object tonTaiTenTacGia = sqlCommand.ExecuteScalar();
+
 
                 if (tblMaTacGia.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (txbTenTacGia.Text == "")
                     MessageBox.Show("Tên tác giả không được bỏ trống");
-                else if (sqlCommand.ExecuteScalar() != null)
-                    MessageBox.Show("Đã tồn tại tác giả");
+                else if (tonTaiMaTacGia != null)
+                    MessageBox.Show("Đã tồn tại mã tác giả");
+                else if (tonTaiTenTacGia != null)
+                    MessageBox.Show("Đã tồn tại tên tác giả");
                 else
                 {
                     query = "INSERT INTO TACGIA (MaTacGia, TenTacGia) VALUES (@MaTacGia, @TenTacGia)";
@@ -129,9 +138,17 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                object tonTaiMaTacGia = sqlCommand.ExecuteScalar();
 
-                if (sqlCommand.ExecuteScalar() == null)
+                query = "SELECT * FROM TACGIA WHERE TenTacGia = @TenTacGia";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
+                object tonTaiTenTacGia = sqlCommand.ExecuteScalar();
+
+                if (tonTaiMaTacGia == null)
                     MessageBox.Show("Không tồn tại tác giả");
+                else if (tonTaiTenTacGia != null)
+                    MessageBox.Show("Đã tồn tại tên tác giả");
                 else if (txbTenTacGia.Text == "")
                     MessageBox.Show("Tên tác giả không được bỏ trống");
                 else
@@ -180,7 +197,8 @@ namespace QuanLyThuVien
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Tác giả đang được sử dụng");
             }
             finally
             {

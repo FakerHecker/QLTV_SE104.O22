@@ -67,60 +67,68 @@ namespace QuanLyThuVien
 
         private void btnThayDoi_Click(object sender, RoutedEventArgs e)
         {
-            sqlConnection.Open();
             
-            if (cbDieuKien.SelectedIndex == 0)
+            if (Int32.TryParse(txbGiaTri.Text, out int giaTri))
             {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'ThoiHanThe'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
+                sqlConnection.Open();
+                if (cbDieuKien.SelectedIndex == 0)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'ThoiHanThe'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
 
-            }   
-            else if (cbDieuKien.SelectedIndex == 1)
+                }
+                else if (cbDieuKien.SelectedIndex == 1)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'TuoiToiThieu'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                else if (cbDieuKien.SelectedIndex == 2)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'TuoiToiDa'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                else if (cbDieuKien.SelectedIndex == 3)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'KhoangCachNamXuatBan'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                else if (cbDieuKien.SelectedIndex == 4)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoNgayMuonToiDa'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                else if (cbDieuKien.SelectedIndex == 5)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoSachMuonToiDa'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                else if (cbDieuKien.SelectedIndex == 6)
+                {
+                    string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoTienPhatMoiNgay'";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                sqlConnection.Close();
+                HienThiQuyDinh();
+            }    
+           else
             {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'TuoiToiThieu'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            else if (cbDieuKien.SelectedIndex == 2)
-            {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'TuoiToiDa'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            else if (cbDieuKien.SelectedIndex == 3)
-            {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'KhoangCachNamXuatBan'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            else if (cbDieuKien.SelectedIndex == 4)
-            {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoNgayMuonToiDa'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            else if (cbDieuKien.SelectedIndex == 5)
-            {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoSachMuonToiDa'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            else if (cbDieuKien.SelectedIndex == 6)
-            {
-                string query = "UPDATE THAMSO SET GiaTri = @GiaTri WHERE TenThamSo = 'SoTienPhatMoiNgay'";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@GiaTri", txbGiaTri.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            sqlConnection.Close();
-            HienThiQuyDinh();
+                MessageBox.Show("Giá trị nhập phải là số");
+                txbGiaTri.Text = "";
+            }    
 
         }
     }

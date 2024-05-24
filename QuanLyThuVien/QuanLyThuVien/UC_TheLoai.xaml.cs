@@ -89,13 +89,21 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
+                object tonTai = sqlCommand.ExecuteScalar();
+
+                query = "SELECT * FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
+                object trungTen = sqlCommand.ExecuteScalar();
 
                 if (tblMaTheLoai.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (txbTenTheLoai.Text == "")
                     MessageBox.Show("Tên thể loại không được bỏ trống");
-                else if (sqlCommand.ExecuteScalar() != null)
-                    MessageBox.Show("Đã tồn tại thể loại");
+                else if (tonTai != null )
+                    MessageBox.Show("Trùng mã thể loại");
+                else if (trungTen != null)
+                    MessageBox.Show("Đã tồn tại tên thể loại");
                 else
                 {
                     query = "INSERT INTO THELOAI (MaTheLoai, TenTheLoai) VALUES (@MaTheLoai, @TenTheLoai)";                   
@@ -126,9 +134,17 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-               
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tồn tại thể loại");
+                object khongTonTai = sqlCommand.ExecuteScalar();
+
+                query = "SELECT * FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbTenTheLoai.Text);
+                object trungTen = sqlCommand.ExecuteScalar();
+
+                if (khongTonTai == null)
+                    MessageBox.Show("Không tồn tại mã thể loại");
+                else if (trungTen != null)
+                    MessageBox.Show("Đã tồn tại tên thể loại");
                 else if (txbTenTheLoai.Text == "")
                     MessageBox.Show("Tên thể loại không được bỏ trống");
                 else
@@ -178,7 +194,8 @@ namespace QuanLyThuVien
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Thể loại đang được sử dụng");
             }
             finally
             {

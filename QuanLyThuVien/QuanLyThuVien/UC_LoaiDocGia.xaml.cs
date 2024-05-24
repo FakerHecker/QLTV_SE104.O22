@@ -94,10 +94,17 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
+                object tonTaiLDG = sqlCommand.ExecuteScalar();
+
+                query = "SELECT TenLoaiDocGia FROM LOAIDOCGIA WHERE TenLoaiDocGia = @TenLoaiDocGia";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
+                object trungTen = sqlCommand.ExecuteScalar();
+
                 if (tblMaLoaiDocGia.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
-                else if (sqlCommand.ExecuteScalar() != null)
-                    MessageBox.Show("Đã tồn tại loại độc giả");
+                else if (tonTaiLDG != null || trungTen != null)
+                    MessageBox.Show("Đã tồn tại tên loại độc giả");
                 else if (txbTenLoaiDocGia.Text == "")
                     MessageBox.Show("Tên loại độc giả không được để trống");
                 else
@@ -131,8 +138,17 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                if (sqlCommand.ExecuteScalar() == null)
+                object khongTonTai = sqlCommand.ExecuteScalar();
+
+                query = "SELECT TenLoaiDocGia FROM LOAIDOCGIA WHERE TenLoaiDocGia = @TenLoaiDocGia";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenLoaiDocGia", txbTenLoaiDocGia.Text);
+                object trungTen = sqlCommand.ExecuteScalar();
+
+                if (khongTonTai == null)
                     MessageBox.Show("Không tồn tại loại độc giả");
+                else if (trungTen != null)
+                    MessageBox.Show("Đã tồn tại tên loại độc giả");
                 else if (txbTenLoaiDocGia.Text == "")
                     MessageBox.Show("Tên loại độc giả không được để trống");
                 else

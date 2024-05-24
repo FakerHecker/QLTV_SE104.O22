@@ -45,19 +45,19 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Mã báo cáo" Grid.Column="0" Height="30" Grid.Row="0" FontSize="15" HorizontalAlignment="Center"/>
-                <Label Content="Ngày lập" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15" HorizontalAlignment="Center"/>
-                <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15" HorizontalAlignment="Center"/>
-                <Label Content="Tháng" Grid.Row="3" Height="30"  FontSize="15" HorizontalAlignment="Center"/>
-                <Label Content="Năm" Grid.Row="4" Height="30"  FontSize="15" HorizontalAlignment="Center"/>
+                <Label x:Name="lbNgayLap"  Content="Ngày lập" Grid.Column="0" Height="30" Grid.Row="2" FontSize="15" HorizontalAlignment="Center" Visibility="Hidden"/>
+                <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="1" FontSize="15" HorizontalAlignment="Center"/>
+                <Label x:Name="lbThang"  Content="Tháng" Grid.Row="2" Height="30"  FontSize="15" HorizontalAlignment="Center" Visibility="Hidden"/>
+                <Label x:Name="lbNam"  Content="Năm" Grid.Row="3" Height="30"  FontSize="15" HorizontalAlignment="Center" Visibility="Hidden"/>
 
                 <TextBlock x:Name="tblMaBaoCao"  Grid.Row="0" Grid.Column="1" FontSize="15" Margin="0,15,0,0"/>
-                <DatePicker x:Name="dpNgayLap"  Grid.Row="1" Grid.Column="1" />
-                <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="2" Grid.Column="1" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged" Margin="0,0,0,0">
+                <DatePicker x:Name="dpNgayLap"  Grid.Row="2" Grid.Column="1" Visibility="Hidden"/>
+                <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="1" Grid.Column="1" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged" Margin="0,0,0,0">
                     <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
                     <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
                 </ComboBox>
-                <ComboBox x:Name="cbThang" Grid.Row="3" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbThang_SelectionChanged"/>
-                <ComboBox x:Name="cbNam" Grid.Row="4" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbNam_SelectionChanged"/>
+                <ComboBox x:Name="cbThang" Grid.Row="2" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbThang_SelectionChanged" Visibility="Hidden"/>
+                <ComboBox x:Name="cbNam" Grid.Row="3" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbNam_SelectionChanged" Visibility="Hidden"/>
             </Grid>
         </GroupBox>
 

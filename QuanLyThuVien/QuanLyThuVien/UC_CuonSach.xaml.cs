@@ -223,7 +223,7 @@ namespace QuanLyThuVien
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Cuốn sách đang được mượn");
+                MessageBox.Show("Cuốn sách đang được sử dụng");
             }
             finally
             {

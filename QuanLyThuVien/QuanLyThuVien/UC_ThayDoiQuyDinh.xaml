@@ -58,13 +58,13 @@
                 <Label Content="6. Số sách mượn tối đa" FontSize="15" Grid.Row="5" Grid.ColumnSpan="2"/>
                 <Label Content="7. Số tiền phạt trên một ngày trả trễ" FontSize="15" Grid.Row="6" Grid.ColumnSpan="2"/>
 
-                <TextBlock x:Name="tblThoiHanThe"  FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblTuoiToiThieu"  FontSize="15" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblTuoiToiDa"  FontSize="15" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblKhoangCachNamXuatBan"  FontSize="15" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblSoNgayMuonToiDa"  FontSize="15" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblSoSachMuonToiDa"  FontSize="15" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <TextBlock x:Name="tblSoTienPhat"  FontSize="15" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2"/>
+                <TextBlock x:Name="tblThoiHanThe"  FontSize="15" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblTuoiToiThieu"  FontSize="15" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblTuoiToiDa"  FontSize="15" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblKhoangCachNamXuatBan"  FontSize="15" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblSoNgayMuonToiDa"  FontSize="15" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblSoSachMuonToiDa"  FontSize="15" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
+                <TextBlock x:Name="tblSoTienPhat"  FontSize="15" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="2" Margin="0,7,0,0"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" FontSize="15"  Header="Thay đổi quy định" Grid.RowSpan="11" Margin="5,0,0,0">

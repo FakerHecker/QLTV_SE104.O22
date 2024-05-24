@@ -149,7 +149,8 @@ namespace QuanLyThuVien
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Không thể xóa, độc giả đang được sử dụng");
             }
             finally
             {
@@ -184,12 +185,25 @@ namespace QuanLyThuVien
 
                 sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+                object tonTaiDocGia = sqlCommand.ExecuteScalar();
+
+                //kiểm tra trùng
+                sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE HoVaTen = @TenDocGia AND NgaySinh = @NgaySinh AND DiaChi = @DiaChi AND Email = @Email", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenDocGia", txtHoTen.Text);
+                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
+                object trungDocGia = sqlCommand.ExecuteScalar();
 
                 if (tblMaDocGia.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (txtHoTen.Text == "")
                     MessageBox.Show("Tên độc giả không được để trống");
-                else if (sqlCommand.ExecuteScalar() != null)
+                else if (txtDiaChi.Text == "")
+                    MessageBox.Show("Địa chỉ không được bỏ trống");
+                else if (txtEmail.Text == "")
+                    MessageBox.Show("Email không được bỏ trống");
+                else if (tonTaiDocGia != null || trungDocGia != null)
                     MessageBox.Show("Đã tồn tại độc giả");
                 else if (age > minAge && age < maxAge)
                 {
@@ -268,12 +282,26 @@ namespace QuanLyThuVien
 
                 sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+                object khongThayDocGIa = sqlCommand.ExecuteScalar(); ;
+
+                sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE HoVaTen = @TenDocGia AND NgaySinh = @NgaySinh AND DiaChi = @DiaChi AND Email = @Email", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenDocGia", txtHoTen.Text);
+                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
+                object trungDocGia = sqlCommand.ExecuteScalar();
 
 
                 if (txtHoTen.Text == "")
                     MessageBox.Show("Tên độc giả không được để trống");
-                else if (sqlCommand.ExecuteScalar() == null)
+                else if (txtDiaChi.Text == "")
+                    MessageBox.Show("Địa chỉ không được bỏ trống");
+                else if (txtEmail.Text == "")
+                    MessageBox.Show("Email không được bỏ trống");
+                else if (khongThayDocGIa == null)
                     MessageBox.Show("Không tìm thấy độc giả");
+                else if (trungDocGia != null)
+                    MessageBox.Show("Trùng thông tin độc giả");
                 else if (age > minAge && age < maxAge)
                 {
 

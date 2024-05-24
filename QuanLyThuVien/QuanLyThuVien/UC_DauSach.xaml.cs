@@ -173,9 +173,17 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM DAUSACH WHERE MaDauSach = @MaDauSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
+                object tonTaiMaDauSach = sqlCommand.ExecuteScalar();
 
-                if (sqlCommand.ExecuteScalar() != null)
-                    MessageBox.Show("Đã tồn tại đầu sách");
+                query = "SELECT * FROM DAUSACH WHERE TenDauSach = @TenDauSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenDauSach", txbTenDauSach.Text);
+                object tonTaiTenDauSach = sqlCommand.ExecuteScalar();
+
+                if (tonTaiMaDauSach != null)
+                    MessageBox.Show("Đã tồn tại mã đầu sách");
+                else if (tonTaiTenDauSach != null)
+                    MessageBox.Show("Đã tồn tại tên đầu sách");
                 else if (tblMaDauSach.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (txbTenDauSach.Text == "")
@@ -183,7 +191,7 @@ namespace QuanLyThuVien
                 else if (cbTenTheLoai.Text == "")
                     MessageBox.Show("Tên thể loại không được để trống");
                 else if (lbTacGia.Items.Count == 0)
-                    MessageBox.Show("Tác giả của sách không được để trống");                
+                    MessageBox.Show("Tác giả của sách không được để trống");
                 else
                 {
                     query = "SELECT MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
@@ -238,9 +246,19 @@ namespace QuanLyThuVien
                 string query = "SELECT * FROM DAUSACH WHERE MaDauSach = @MaDauSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
+                object tonTaiMaDauSach = sqlCommand.ExecuteScalar();
 
-                if (sqlCommand.ExecuteScalar() == null)
+                query = "SELECT COUNT(*) FROM DAUSACH WHERE TenDauSach = @TenDauSach AND MaDauSach <> @MaDauSach";
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenDauSach", txbTenDauSach.Text);
+                sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
+                int tonTaiTenDauSach = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+
+
+                if (tonTaiMaDauSach == null)
                     MessageBox.Show("Không tồn tại đầu sách");
+                else if (tonTaiTenDauSach == 1)
+                    MessageBox.Show("Đã tồn tại tên đầu sách");
                 else if (tblMaDauSach.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (txbTenDauSach.Text == "")
@@ -310,7 +328,7 @@ namespace QuanLyThuVien
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
                 if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tìm thấy chi tiết phiếu");
+                    MessageBox.Show("Không tìm thấy mã đầu sách");
                 else
                 {
                     query = "DELETE FROM CT_TACGIA WHERE MaDauSach = @MaDauSach";
@@ -334,7 +352,8 @@ namespace QuanLyThuVien
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                MessageBox.Show("Đầu sách đang được sử dụng");
             }
             finally
             {

@@ -84,6 +84,14 @@ namespace QuanLyThuVien
 
             lbTongSoLuotMuon.Visibility = Visibility.Visible;
             tblTongSoLuotMuon.Visibility = Visibility.Visible;
+
+            dpNgayLap.Visibility = Visibility.Hidden;
+            cbThang.Visibility = Visibility.Visible;
+            cbNam.Visibility = Visibility.Visible;
+
+            lbNgayLap.Visibility = Visibility.Hidden;
+            lbThang.Visibility = Visibility.Visible;
+            lbNam.Visibility = Visibility.Visible;
         }
 
         private void HienThiBaoCaoSachTraTre()
@@ -94,25 +102,31 @@ namespace QuanLyThuVien
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             int soNgayMuonToiDa = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
             
-            query = "SELECT TenSach AS 'Tên sách', NgayMuon AS 'Ngày mượn', DATEDIFF(day, NgayTra, NgayMuon) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
+            query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên cuốn sách', NgayMuon AS 'Ngày mượn', DATEDIFF(day, NgayMuon, @NgayThangNam) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
                 "FROM PHIEUMUONTRASACH JOIN CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach JOIN SACH ON CUONSACH.MaSach = Sach.MaSach " +
-                "WHERE MONTH(NgayMuon) = @month AND YEAR(NgayMuon) = @year AND DATEDIFF(day, NgayTra, NgayMuon) > @SoNgayMuonToiDa";
+                "WHERE DATEDIFF(day, NgayMuon, @NgayThangNam) > @SoNgayMuonToiDa AND NgayTra IS NULL";
             sqlCommand = new SqlCommand(query, sqlConnection);
-           
-            sqlCommand.Parameters.AddWithValue("@month", cbThang.SelectedValue as string);
-            sqlCommand.Parameters.AddWithValue("@year", cbNam.SelectedValue as string);
+            sqlCommand.Parameters.AddWithValue("@NgayThangNam", dpNgayLap.Text);
             sqlCommand.Parameters.AddWithValue("@SoNgayMuonToiDa", soNgayMuonToiDa);
+
+           
 
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView.ItemsSource = dt.DefaultView;
-            
             sqlConnection.Close();
 
             lbTongSoLuotMuon.Visibility = Visibility.Hidden;
             tblTongSoLuotMuon.Visibility = Visibility.Hidden;
 
+            dpNgayLap.Visibility = Visibility.Visible;
+            cbThang.Visibility = Visibility.Hidden;
+            cbNam.Visibility = Visibility.Hidden;
+
+            lbNgayLap.Visibility = Visibility.Visible;
+            lbThang.Visibility = Visibility.Hidden;
+            lbNam.Visibility = Visibility.Hidden;
         }
 
         private void cbLoaiBaoCao_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -121,11 +135,13 @@ namespace QuanLyThuVien
             {
                 HienThiBaoCaoTheoTheLoai();
                 InitMaBaoCaoMuonSach();
+                
             }
             else if (cbLoaiBaoCao.SelectedIndex == 1)
             {
                 HienThiBaoCaoSachTraTre();
                 InitMaBaoCaoTraTre();
+               
             }  
             
         }
@@ -272,17 +288,13 @@ namespace QuanLyThuVien
                         sqlConnection.Open();
                         foreach (var item in dataGridView.Items)
                         {
-                            string maBaoCao = InitMaBaoCaoTraTre();
-
-                            string query = "SELECT TOP 1 MaCuonSach FROM CUONSACH WHERE TenCuonSach = @TenCuonSach";
-                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                            sqlCommand.Parameters.AddWithValue("@TenCuonSach", ((DataRowView)item).Row["Tên cuốn sách"].ToString());
-                            string maCuonSach = sqlCommand.ExecuteScalar().ToString();
+                            string maBaoCao = tblMaBaoCao.Text;
+                            string maCuonSach = ((DataRowView)item).Row["Mã cuốn sách"].ToString();
 
 
-                            query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao, Thang, Nam) " +
+                            string query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao, Thang, Nam) " +
                                        " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao, @Thang, @Nam)";
-                            sqlCommand = new SqlCommand(query, sqlConnection);
+                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
 
                             sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", maBaoCao);
@@ -293,6 +305,8 @@ namespace QuanLyThuVien
                             sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
                             sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"].ToString());
                             sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"].ToString());
+
+                            sqlCommand.ExecuteScalar();
                         }
                         MessageBox.Show("Lưu thành công");
                         sqlConnection.Close();
