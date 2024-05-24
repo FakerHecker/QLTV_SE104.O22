@@ -123,7 +123,7 @@
             </StackPanel>
             <StackPanel x:Name="SP2" Visibility="Hidden"  Orientation="Horizontal" Margin="240,79,178,30" Grid.Column="1">
                 <Button x:Name="btnCuonSach" Content="Cuốn sách" Click="Button_Click" Margin="0,0,0,380" Grid.RowSpan="2"  Background="#441A90" Grid.ColumnSpan="2"/>
-                <Button x:Name="btnSach" Content="Sách" Click="Button_Click" Margin="0,0,0,380" Grid.RowSpan="2"  Background="#441A90" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnSach" Content="Sách" Click="Button_Click" Margin="0,0,0,380" Grid.RowSpan="2"  Background="MediumPurple" Grid.ColumnSpan="2"/>
                 <Button x:Name="btnTheLoai" Content="Loại sách" Click="Button_Click" Margin="0,0,0,380"  Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                 <Button x:Name="btnDauSach" Content="Đầu sách" Grid.ColumnSpan="2" Grid.RowSpan="2"  Background="MediumPurple" Margin="0,0,0,380" Click="Button_Click" />
                 <Button x:Name="btnTacGia" Content="Tác giả" Grid.ColumnSpan="2" Click="Button_Click"  Background="MediumPurple" Margin="0,0,0,380" Grid.RowSpan="2"/>
@@ -132,6 +132,11 @@
             <StackPanel x:Name="SP3" Visibility="Hidden" Orientation="Horizontal" Margin="240,79,297,30" Grid.Column="1">
                 <Button x:Name="btnPhieuMuonSach" Content="Cho mượn sách" Click="Button_Click" Margin="0,0,0,380" Background="#441A90" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                 <Button x:Name="btnPhieuTraSach" Content="Nhận trả sách" Click="Button_Click" Margin="0,0,0,380"  Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+            </StackPanel>
+
+            <StackPanel x:Name="SP4" Visibility="Hidden" Orientation="Horizontal" Margin="240,79,297,30" Grid.Column="1">
+                <Button x:Name="btnTaoBaoCao" Content="Tạo báo cáo" Click="Button_Click" Margin="0,0,0,380" Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnXemBaoCao" Content="Xem danh sách báo cáo" Click="Button_Click" Margin="0,0,0,380"  Background="MediumPurple" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </StackPanel>
             <Border BorderThickness="1" BorderBrush="#27104E" CornerRadius="5" Margin="220,109,20,26" Grid.Column="1" Grid.RowSpan="2" >
                 <ContentControl x:Name="CC" Grid.Column="1" Grid.RowSpan="2" Margin="20,0" />

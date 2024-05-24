@@ -86,6 +86,9 @@
     <Compile Include="UC_ChoMuonSach.xaml.cs">
       <DependentUpon>UC_ChoMuonSach.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC_CuonSach.xaml.cs">
+      <DependentUpon>UC_CuonSach.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UC_DauSach.xaml.cs">
       <DependentUpon>UC_DauSach.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,9 @@
     </Compile>
     <Compile Include="UC_TraCuuSach.xaml.cs">
       <DependentUpon>UC_TraCuuSach.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC_XemBaoCao.xaml.cs">
+      <DependentUpon>UC_XemBaoCao.xaml</DependentUpon>
     </Compile>
     <Compile Include="W_ChiTietPhieuNhap.xaml.cs">
       <DependentUpon>W_ChiTietPhieuNhap.xaml</DependentUpon>
@@ -180,6 +186,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UC_CuonSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UC_DauSach.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UC_TraCuuSach.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC_XemBaoCao.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

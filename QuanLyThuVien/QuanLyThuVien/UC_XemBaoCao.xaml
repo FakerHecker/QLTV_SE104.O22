@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="QuanLyThuVien.UC_XemBaoCao"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyThuVien"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Loại báo cáo" FontSize="15" Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" Margin="0,0,5,0">
+            <Grid x:Name="gr">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+
+                </Grid.RowDefinitions>
+
+                <Label Content="Loại báo cáo" Grid.Column="0" Height="30" Grid.Row="0" FontSize="15" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="cbLoaiBaoCao" FontSize="15" Grid.Row="0" Grid.Column="1" SelectedIndex="-1" SelectionChanged="cbLoaiBaoCao_SelectionChanged" Margin="0,0,0,0">
+                    <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
+                    <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
+                </ComboBox>
+                
+            </Grid>
+        </GroupBox>
+
+
+        <Label Content="Xem báo cáo thống kê" Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <GroupBox Header="Danh sách báo cáo" Grid.Row="1" Grid.RowSpan="9" Grid.Column="3" Grid.ColumnSpan="6" FontSize="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.11*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbTongSoLuotMuon"  Content="Tổng số lượt mượn:" Grid.Row="1" Grid.Column="0" FontSize="15" Margin="0,10,0,0" Visibility="Hidden"/>
+                <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="0,15,0,0" Visibility="Hidden"/>
+            </Grid>
+        </GroupBox>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnInBaoCao" Content="In danh sách báo cáo" Grid.Row="7" Grid.Column="1" Width="150" Margin="5,0,5,0" Click="btnInBaoCao_Click"/>
+            <Button x:Name="btnXoa" Content="Xóa" Grid.Row="7" Grid.Column="1" Margin="5,0,5,0" Width="150" Click="btnXoa_Click"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

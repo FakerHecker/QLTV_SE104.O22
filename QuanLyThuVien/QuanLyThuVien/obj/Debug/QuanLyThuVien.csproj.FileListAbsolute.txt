@@ -452,3 +452,7 @@ D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyTh.B5137
 D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.exe
 D:\Update215\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.pdb
 D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_LoaiDocGia.baml
+D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_CuonSach.g.cs
+D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_CuonSach.baml
+D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_XemBaoCao.g.cs
+D:\NMCNPM\Project\QLTV_SE104.O22\QuanLyThuVien\QuanLyThuVien\obj\Debug\UC_XemBaoCao.baml

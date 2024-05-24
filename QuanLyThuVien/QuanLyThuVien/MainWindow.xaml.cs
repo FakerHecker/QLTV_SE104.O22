@@ -108,6 +108,7 @@ namespace QuanLyThuVien
 
                     SP2.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
+                    SP4.Visibility = Visibility.Hidden;
                     CC.Content = new DocGia();
                     break;
                 case "ItemBook":
@@ -115,13 +116,15 @@ namespace QuanLyThuVien
                     SP2.Visibility = Visibility.Visible;
                     SP1.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
-                    CC.Content = new UC_Sach();
+                    SP4.Visibility = Visibility.Hidden;
+                    CC.Content = new UC_CuonSach();
                     break;
                 case "ItemBorrow":
 
                     SP3.Visibility = Visibility.Visible;
                     SP2.Visibility = Visibility.Hidden;
                     SP1.Visibility = Visibility.Hidden;
+                    SP4.Visibility = Visibility.Hidden;
                     CC.Content = new UC_ChoMuonSach();
                     break;
                 case "ItemSearch":
@@ -129,18 +132,22 @@ namespace QuanLyThuVien
                     SP1.Visibility = Visibility.Hidden;
                     SP2.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
+                    SP4.Visibility = Visibility.Hidden;
                     break;
                 case "ItemFix":
                     CC.Content = new UC_ThayDoiQuyDinh();
                     SP1.Visibility = Visibility.Hidden;
                     SP2.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
+                    SP4.Visibility = Visibility.Hidden;
                     break;
                 case "ItemReport":
+                    CC.Content = new UC_BaoCaoThongKe();
                     CC.Content = new UC_BaoCaoThongKe();
                     SP1.Visibility = Visibility.Hidden;
                     SP2.Visibility = Visibility.Hidden;
                     SP3.Visibility = Visibility.Hidden;
+                    SP4.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -217,7 +224,7 @@ namespace QuanLyThuVien
                 }
                 else if (clickedButton == btnCuonSach)
                 {
-                    CC.Content = new UC_Sach();
+                    CC.Content = new UC_CuonSach();
                 }
                 else if (clickedButton == btnSach)
                 {
@@ -246,6 +253,14 @@ namespace QuanLyThuVien
                 else if (clickedButton == btnPhieuTraSach)
                 {
                     CC.Content = new UC_NhanTraSach();
+                }
+                else if (clickedButton == btnTaoBaoCao)
+                {
+                    CC.Content = new UC_BaoCaoThongKe();
+                }
+                else if (clickedButton == btnXemBaoCao)
+                {
+                    CC.Content = new UC_XemBaoCao();
                 }
             }
         }
