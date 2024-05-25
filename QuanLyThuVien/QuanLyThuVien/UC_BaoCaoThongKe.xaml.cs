@@ -273,7 +273,7 @@ namespace QuanLyThuVien
                                     sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
                                     sqlCommand.Parameters.AddWithValue("@MaTheLoai", maTheLoai);
                                     sqlCommand.Parameters.AddWithValue("@SoLuotMuon", ((DataRowView)item).Row["Số lượt mượn"].ToString());
-                                    sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"].ToString());
+                                    sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"]);
                                     sqlCommand.ExecuteScalar();
                                 }
                                 else
@@ -313,10 +313,10 @@ namespace QuanLyThuVien
                                        " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao)";
                             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                             sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", maBaoCao);
-                            sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
+                            sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", DateTime.Parse(dpNgayLap.Text));
                             sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
-                            sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"].ToString());
-                            sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"].ToString());
+                            sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"]);
+                            sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"]);
                             sqlCommand.ExecuteScalar();
                             sqlConnection.Close();
                             

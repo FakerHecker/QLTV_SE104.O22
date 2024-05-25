@@ -388,5 +388,14 @@ namespace QuanLyThuVien
                 }
             }
         }
+
+        private void btnIn_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDlg = new PrintDialog();
+            if (printDlg.ShowDialog() == true)
+            {
+                printDlg.PrintVisual(gr, "My Control Print");
+            }
+        }
     }
 }

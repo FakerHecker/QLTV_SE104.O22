@@ -28,9 +28,6 @@ namespace QuanLyThuVien
             InitializeComponent();
             string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True"; sqlConnection = new SqlConnection(connectionString);
             sqlConnection = new SqlConnection(connectionString);
-
-           
-
         }
 
         private void HienThiBaoCaoTheoTheLoai()
@@ -70,11 +67,14 @@ namespace QuanLyThuVien
             {
                 HienThiBaoCaoTheoTheLoai();
                 InitMaBaoCaoMuonSach();
+                gbChiTietBaoCao.Visibility = Visibility.Visible;
+
             }
             else if (cbLoaiBaoCao.SelectedIndex == 1)
             {
                 HienThiBaoCaoSachTraTre();
                 InitMaBaoCaoTraTre();
+                gbChiTietBaoCao.Visibility = Visibility.Hidden;
             }
 
         }
@@ -211,5 +211,33 @@ namespace QuanLyThuVien
                 }
             }
         }
+
+        private void dataGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid gd = (DataGrid)sender;
+            DataRowView row_selected = gd.SelectedItem as DataRowView;
+            if (row_selected != null)
+            {
+                string maBaoCaoMuonSach = row_selected.Row["Mã báo cáo mượn sách"].ToString();    
+                try
+                {
+                    sqlConnection.Open();
+                    string query = "SELECT MaBaoCaoMuonSach AS 'Mã báo cáo mượn sách', TenTheLoai AS 'Thể loại', SoLuotMuon AS 'Số lượt mượn', TiLe AS 'Tỉ lệ' FROM CT_BCMUONSACH JOIN THELOAI ON CT_BCMUONSACH.MaTheLoai = THELOAI.MaTheLoai WHERE MaBaoCaoMuonSach = @MaBaoCaoMuonSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", maBaoCaoMuonSach);
+                    SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView_chitiet.ItemsSource = dt.DefaultView;
+
+                    sqlConnection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+        // 
     }
 }

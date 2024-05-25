@@ -47,7 +47,7 @@
                     <ComboBoxItem>Tình hình mượn sách theo thể loại</ComboBoxItem>
                     <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
                 </ComboBox>
-                
+
             </Grid>
         </GroupBox>
 
@@ -64,15 +64,28 @@
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2" AutoGeneratingColumn="dataGridView_AutoGeneratingColumn"/>
+                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2" AutoGeneratingColumn="dataGridView_AutoGeneratingColumn" SelectionChanged="dataGridView_SelectionChanged"/>
                 <Label x:Name="lbTongSoLuotMuon"  Content="Tổng số lượt mượn:" Grid.Row="1" Grid.Column="0" FontSize="15" Margin="0,10,0,0" Visibility="Hidden"/>
                 <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="0,15,0,0" Visibility="Hidden"/>
             </Grid>
         </GroupBox>
         <StackPanel Grid.Row="4" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="btnInBaoCao" Content="In danh sách báo cáo" Grid.Row="7" Grid.Column="1" Width="150" Margin="5,0,5,0" Click="btnInBaoCao_Click"/>
+            <Button x:Name="btnInBaoCao" Content="In danh sách báo cáo" Grid.Row="7" Grid.Column="1" Width="200" Margin="5,0,5,0" Click="btnInBaoCao_Click"/>
             <Button x:Name="btnXoa" Content="Xóa" Grid.Row="7" Grid.Column="1" Margin="5,0,5,0" Width="150" Click="btnXoa_Click"/>
         </StackPanel>
+        <GroupBox x:Name="gbChiTietBaoCao" Header="Chi tiết báo cáo" Grid.Row="5" Grid.RowSpan="6" Grid.ColumnSpan="3" FontSize="15" Margin="0,10,5,0" Visibility="Hidden">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.11*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid x:Name="dataGridView_chitiet" IsReadOnly="True" Grid.ColumnSpan="2" AutoGeneratingColumn="dataGridView_AutoGeneratingColumn"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </UserControl>

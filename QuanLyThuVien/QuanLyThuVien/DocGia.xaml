@@ -38,14 +38,15 @@
         <Label Content="Thông tin độc giả" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
 
-        <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="1" Click="btnThem_Click" Margin="5,0,5,0" />
-        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="2" Click="btnLuu_Click" Margin="5,0,5,0"/>
-        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="3" Click="btnCapNhat_Click"  Margin="5,0,5,0"/>
-        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="4" Click="btnXoa_Click" Margin="5,0,5,0"/>
+        <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="0" Click="btnThem_Click" Margin="30,0,120,0" Grid.ColumnSpan="2" Width="120"/>
+        <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="1" Click="btnLuu_Click" Margin="50,0,100,0" Grid.ColumnSpan="2" Width="120"/>
+        <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="2" Click="btnCapNhat_Click"  Margin="70,0,80,2" Grid.ColumnSpan="2" Width="120"/>
+        <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="3" Click="btnXoa_Click" Margin="90,0,60,0" Grid.ColumnSpan="2" Width="120"/>
+        <Button x:Name="btnIn" Content="In"  Grid.Row="5" Grid.Column="4" Click="btnIn_Click" Margin="110,0,40,0" Grid.ColumnSpan="2" Width="120"/>
 
 
         <GroupBox x:Name="gb" Header="Thông tin chi tiết độc giả" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" FontSize="15">
-            <Grid>
+            <Grid x:Name="gr">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -59,27 +60,27 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Mã độc giả" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Họ tên" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Loại độc giả" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Label Content="Ngày sinh" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Địa chỉ" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Email" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
-                <Label Content="Ngày lập thẻ" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center"/>
-                <Label Content="Ngày hết hạn" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
-                <Label Content="Tổng nợ" Height="30" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"/>
+                <Label Content="Mã độc giả" Height="30" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,5,0" />
+                <Label Content="Họ tên" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,5,0"/>
+                <Label Content="Loại độc giả" Height="30" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Margin="5,0,5,0"/>
+                <Label Content="Ngày sinh" Height="30" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0"/>
+                <Label Content="Địa chỉ" Height="30" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0"/>
+                <Label Content="Email" Height="30" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Margin="5,0,5,0"/>
+                <Label Content="Ngày lập thẻ" Height="30" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,5,0" />
+                <Label Content="Ngày hết hạn" Height="30" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,5,0" />
+                <Label Content="Tổng nợ" Height="30" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" Margin="5,0,5,0"/>
 
-                <TextBlock x:Name="tblMaDocGia" Height="30" Grid.Row="0" Grid.Column="1"/>
-                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock x:Name="tblMaDocGia" Height="30" Grid.Row="0" Grid.Column="1" Margin="5,0,5,0"/>
+                <TextBox x:Name="txtHoTen" Height="30" Grid.Row="1" Grid.Column="1" Margin="5,0,5,0"/>
                 <ComboBox x:Name="cbLoaiDG"  Grid.Row="2" Grid.Column="1"/>
 
-                <DatePicker x:Name="dtNgaySinh" Grid.Row="0" Grid.Column="3"/>
-                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3"/>
-                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3"/>
+                <DatePicker x:Name="dtNgaySinh" Grid.Column="3"/>
+                <TextBox x:Name="txtDiaChi" Height="30" Grid.Row="1" Grid.Column="3" Margin="5,0,5,0"/>
+                <TextBox x:Name="txtEmail" Height="30" Grid.Row="2" Grid.Column="3" Margin="5,0,5,0"/>
 
-                <DatePicker x:Name="dtNgayLapThe" Grid.Row="0" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
-                <TextBlock x:Name="tblNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5" Margin="0,7,0,0"/>
-                <TextBlock x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5" Margin="0,7,0,0"/>
+                <DatePicker x:Name="dtNgayLapThe" Grid.Column="5" SelectedDateChanged="dtNgayLapThe_SelectedDateChanged" />
+                <TextBlock x:Name="tblNgayHetHan" Height="30" Grid.Row="1" Grid.Column="5" Margin="5,0,5,0"/>
+                <TextBlock x:Name="txtTongNo" Height="30" Grid.Row="2" Grid.Column="5" Margin="5,0,5,0"/>
             </Grid>
         </GroupBox>
         <GroupBox Header="Danh sách độc giả" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">

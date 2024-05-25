@@ -36,7 +36,7 @@ namespace QuanLyThuVien
 
         private void InitTieuChuanTraCuu()
         {
-            cbKey.Items.Add("Mã sách");
+            cbKey.Items.Add("Mã cuốn sách");
             cbKey.Items.Add("Tên sách");
             cbKey.Items.Add("Thể loại");
             cbKey.Items.Add("Tác giả");
@@ -134,6 +134,14 @@ namespace QuanLyThuVien
             sqlConnection.Close();
             tblSoSachTimThay.Text = (dgvCuonSach.Items.Count).ToString();
 
+        }
+
+        private void btnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            txbValue.Text = "";
+            tblSoSachTimThay.Text = "";
+            tblTongSoSach.Text = "";
+            HienThiDanhSachSach();
         }
     }
 }

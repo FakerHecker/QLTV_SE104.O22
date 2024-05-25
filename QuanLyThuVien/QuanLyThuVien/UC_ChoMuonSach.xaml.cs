@@ -31,10 +31,18 @@ namespace QuanLyThuVien
             InitializeComponent();
             string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
+            InitTieuChuanTraCuu();
             InitMaPhieuMuon();
             InitMaDocGia();
             InitPhieuMuon();
             HienThiDanhSachSach();
+        }
+
+        private void InitTieuChuanTraCuu()
+        {
+            cbKey.Items.Add("Mã cuốn sách");
+            cbKey.Items.Add("Tên sách");
+            cbKey.SelectedIndex = 0;
         }
 
         private void HienThiDanhSachSach()
@@ -198,23 +206,42 @@ namespace QuanLyThuVien
 
         private void btnTimSach_Click(object sender, RoutedEventArgs e)
         {
-            string query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM  SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
             sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
-            SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dgvSach.ItemsSource = dt.DefaultView;
-            sqlConnection.Close();
-
-            query = "SELECT COUNT(*) FROM  SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
-            sqlConnection.Open();
-            sqlCommand = new SqlCommand(query, sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
-            tblSoSachTimThay.Text = sqlCommand.ExecuteScalar().ToString();
-            sqlConnection.Close();
-
+            string query;
+            if(cbKey.SelectedIndex == 1)
+            {
+                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvSach.ItemsSource = dt.DefaultView;
+                sqlConnection.Close();
+                query = "SELECT COUNT(*) FROM  SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
+                sqlConnection.Open();
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                tblSoSachTimThay.Text = sqlCommand.ExecuteScalar().ToString();
+                sqlConnection.Close();
+            } 
+            else if(cbKey.SelectedIndex == 0)
+            {
+                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE MaCuonSach = @MaCuonSach";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaCuonSach", txbTenSach.Text);
+                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvSach.ItemsSource = dt.DefaultView;
+                sqlConnection.Close();
+                query = "SELECT COUNT(*) FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE MaCuonSach = @MaCuonSach";
+                sqlConnection.Open();
+                sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@MaCuonSach", txbTenSach.Text);
+                tblSoSachTimThay.Text = sqlCommand.ExecuteScalar().ToString();
+                sqlConnection.Close();
+            }    
         }
 
         private void cbMaDocGia_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -259,6 +286,12 @@ namespace QuanLyThuVien
         private void btnThemMoi_Click(object sender, RoutedEventArgs e)
         {
             InitPhieuMuon();
+        }
+
+        private void btnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            tblSoSachTimThay.Text = "";
+            HienThiDanhSachSach();
         }
     }
 }

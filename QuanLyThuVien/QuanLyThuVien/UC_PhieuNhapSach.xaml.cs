@@ -150,14 +150,20 @@ namespace QuanLyThuVien
             sqlConnection.Close();
 
             if (phieuNhap == null)
+            {
                 MessageBox.Show("Không tồn tại phiếu nhập");
+            }
             else
             {
                 W_ChiTietPhieuNhap ChiTietPhieu = new W_ChiTietPhieuNhap(tblMaPhieuNhap.Text);
-                ChiTietPhieu.Show();
-            }                  
-            
-                    
+
+                ChiTietPhieu.Owner = Window.GetWindow(this); // Đặt chủ sở hữu cho dialog
+
+                ChiTietPhieu.Width = 1300;
+                ChiTietPhieu.Height = 600;
+                ChiTietPhieu.WindowStartupLocation = WindowStartupLocation.CenterOwner; // Hiển thị ở trung tâm màn hình
+                ChiTietPhieu.ShowDialog(); // Sử dụng ShowDialog() để hiển thị dưới dạng dialog
+            }
         }
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
