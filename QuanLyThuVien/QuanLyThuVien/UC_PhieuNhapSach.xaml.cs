@@ -162,45 +162,50 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
-                object tonTaiPhieuNhap = sqlCommand.ExecuteScalar();
-
-                query = "SELECT COUNT(*) FROM CT_PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
-                sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
-                int tonTaiCTPhieuNhap = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
-
-                if (tonTaiPhieuNhap == null)
-                    MessageBox.Show("Không tồn tại phiếu nhập");
-                else if (tonTaiCTPhieuNhap > 0)
-                    MessageBox.Show("Tồn tại CT Phiếu nhập, không thể xóa");
-                else
+                try
                 {
-                    query = "DELETE FROM PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
+                    object tonTaiPhieuNhap = sqlCommand.ExecuteScalar();
+
+                    query = "SELECT COUNT(*) FROM CT_PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
-                    sqlCommand.ExecuteScalar();
+                    int tonTaiCTPhieuNhap = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
+
+                    if (tonTaiPhieuNhap == null)
+                        MessageBox.Show("Không tồn tại phiếu nhập");
+                    else if (tonTaiCTPhieuNhap > 0)
+                        MessageBox.Show("Tồn tại CT Phiếu nhập, không thể xóa");
+                    else
+                    {
+                        query = "DELETE FROM PHIEUNHAPSACH WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
+                        sqlCommand.ExecuteScalar();
+                        tblMaPhieuNhap.Text = "";
+                        dpNgayNhap.Text = "";
+                        tblTongTien.Text = "";
+                    }
+
+
                 }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Dữ liệu phiếu nhập sách đang được sử dụng, không thế xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiPhieuNhap();
 
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiPhieuNhap();
-                tblMaPhieuNhap.Text = "";
-                dpNgayNhap.Text = "";
-                tblTongTien.Text = "";
-            }
+                }
+            }            
         }
 
         private void btnLamMoi_Click(object sender, RoutedEventArgs e)

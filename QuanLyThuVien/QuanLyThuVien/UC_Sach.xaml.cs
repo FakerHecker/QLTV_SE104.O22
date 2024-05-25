@@ -251,37 +251,44 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tồn tại sách");
-                else
+                try
                 {
-                    query = "DELETE FROM SACH WHERE MaSach = @MaSach";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM SACH WHERE MaSach = @MaSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
-                    sqlCommand.ExecuteScalar();
-                }    
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachSach();
+                    if (sqlCommand.ExecuteScalar() == null)
+                        MessageBox.Show("Không tồn tại sách");
+                    else
+                    {
+                        query = "DELETE FROM SACH WHERE MaSach = @MaSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
+                        sqlCommand.ExecuteScalar();
 
-                tblMaSach.Text = "";
-                txbTenSach.Text = "";
-                cbTenDauSach.SelectedIndex = -1;
-                txbNamXuatBan.Text = "";
-                txbNhaXuatBan.Text = "";
-            }
+                        tblMaSach.Text = "";
+                        txbTenSach.Text = "";
+                        cbTenDauSach.SelectedIndex = -1;
+                        txbNamXuatBan.Text = "";
+                        txbNhaXuatBan.Text = "";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Dữ liệu sách đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachSach();
+
+                   
+                }
+            }    
+            
         }
 
         private void cbTenDauSach_SelectionChanged(object sender, SelectionChangedEventArgs e)

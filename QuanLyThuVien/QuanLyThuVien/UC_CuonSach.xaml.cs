@@ -189,47 +189,51 @@ namespace QuanLyThuVien
         }
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                DataRowView selectedRow = dgvCuonSach.SelectedItem as DataRowView;
-                if (selectedRow != null)
+                try
                 {
-                    if (selectedRow.Row["Tình trạng"].ToString() == "True")
+                    DataRowView selectedRow = dgvCuonSach.SelectedItem as DataRowView;
+                    if (selectedRow != null)
                     {
-                        MessageBox.Show("Cuốn sách đang được mượn");
-                    }
-                    else
-                    {
-                        sqlConnection.Open();
-                        string query = "SELECT * FROM CUONSACH WHERE MaCuonSach = @MaCuonSach";
-                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                        sqlCommand.Parameters.AddWithValue("@MaCuonSach", tblMaCuonSach.Text);
-                        if (sqlCommand.ExecuteScalar() == null)
-                            MessageBox.Show("Không tồn tại loại độc giả");
+                        if (selectedRow.Row["Tình trạng"].ToString() == "True")
+                        {
+                            MessageBox.Show("Cuốn sách đang được mượn");
+                        }
                         else
                         {
-                            query = "DELETE FROM CUONSACH WHERE MaCuonSach = @MaCuonSach";
-                            sqlCommand = new SqlCommand(query, sqlConnection);
+                            sqlConnection.Open();
+                            string query = "SELECT * FROM CUONSACH WHERE MaCuonSach = @MaCuonSach";
+                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                             sqlCommand.Parameters.AddWithValue("@MaCuonSach", tblMaCuonSach.Text);
-                            sqlCommand.ExecuteScalar();
+                            if (sqlCommand.ExecuteScalar() == null)
+                                MessageBox.Show("Không tồn tại loại độc giả");
+                            else
+                            {
+                                query = "DELETE FROM CUONSACH WHERE MaCuonSach = @MaCuonSach";
+                                sqlCommand = new SqlCommand(query, sqlConnection);
+                                sqlCommand.Parameters.AddWithValue("@MaCuonSach", tblMaCuonSach.Text);
+                                sqlCommand.ExecuteScalar();
 
-                            tblMaCuonSach.Text = "";
-                            cbTenSach.Text = "";
+                                tblMaCuonSach.Text = "";
+                                cbTenSach.Text = "";
+                            }
+
                         }
-
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Cuốn sách đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachCuonSach();
-            }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Cuốn sách đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachCuonSach();
+                }
+            }    
+            
 
         }
 

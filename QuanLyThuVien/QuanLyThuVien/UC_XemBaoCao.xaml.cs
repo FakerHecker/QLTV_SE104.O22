@@ -153,39 +153,43 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            if (cbLoaiBaoCao.SelectedIndex == 0)
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                DataRowView selectedItem = dataGridView.SelectedItem as DataRowView;
-                if (selectedItem != null)
+                if (cbLoaiBaoCao.SelectedIndex == 0)
                 {
-                    sqlConnection.Open();
-                    string query = "DELETE FROM CT_BCMUONSACH WHERE MaBaoCaoMuonSach = @MaBaoCaoMuonSach";
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", selectedItem.Row["Mã báo cáo mượn sách"].ToString());
-                    sqlCommand.ExecuteScalar();
+                    DataRowView selectedItem = dataGridView.SelectedItem as DataRowView;
+                    if (selectedItem != null)
+                    {
+                        sqlConnection.Open();
+                        string query = "DELETE FROM CT_BCMUONSACH WHERE MaBaoCaoMuonSach = @MaBaoCaoMuonSach";
+                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", selectedItem.Row["Mã báo cáo mượn sách"].ToString());
+                        sqlCommand.ExecuteScalar();
 
-                    query = "DELETE FROM BAOCAOMUONSACH WHERE MaBaoCaoMuonSach = @MaBaoCaoMuonSach";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", selectedItem.Row["Mã báo cáo mượn sách"].ToString());
-                    sqlCommand.ExecuteScalar();
-                    sqlConnection.Close();
+                        query = "DELETE FROM BAOCAOMUONSACH WHERE MaBaoCaoMuonSach = @MaBaoCaoMuonSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", selectedItem.Row["Mã báo cáo mượn sách"].ToString());
+                        sqlCommand.ExecuteScalar();
+                        sqlConnection.Close();
+                    }
+                    HienThiBaoCaoTheoTheLoai();
                 }
-                HienThiBaoCaoTheoTheLoai();
-            }
-            else if (cbLoaiBaoCao.SelectedIndex == 1)
-            {
-                DataRowView selectedItem = dataGridView.SelectedItem as DataRowView;
-                if (selectedItem != null)
+                else if (cbLoaiBaoCao.SelectedIndex == 1)
                 {
-                    sqlConnection.Open();
-                    string query = "DELETE FROM BAOCAOTRATRE WHERE MaBaoCaoTraTre = @MaBaoCaoTraTre";
-                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", selectedItem.Row["Mã báo cáo trả trễ"].ToString());
-                    sqlCommand.ExecuteScalar();
-                    sqlConnection.Close();
+                    DataRowView selectedItem = dataGridView.SelectedItem as DataRowView;
+                    if (selectedItem != null)
+                    {
+                        sqlConnection.Open();
+                        string query = "DELETE FROM BAOCAOTRATRE WHERE MaBaoCaoTraTre = @MaBaoCaoTraTre";
+                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", selectedItem.Row["Mã báo cáo trả trễ"].ToString());
+                        sqlCommand.ExecuteScalar();
+                        sqlConnection.Close();
+                    }
+                    HienThiBaoCaoSachTraTre();
                 }
-                HienThiBaoCaoSachTraTre();
-            }
+            }    
+            
         }
     }
 }

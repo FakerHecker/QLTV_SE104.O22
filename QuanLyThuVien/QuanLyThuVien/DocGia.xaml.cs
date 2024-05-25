@@ -120,45 +120,48 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tìm thấy độc giả");
-                else
+                try
                 {
-                    query = "DELETE FROM DOCGIA WHERE MaDocGia = @MaDocGia";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
-                    sqlCommand.ExecuteScalar();
+                    if (sqlCommand.ExecuteScalar() == null)
+                        MessageBox.Show("Không tìm thấy độc giả");
+                    else
+                    {
+                        query = "DELETE FROM DOCGIA WHERE MaDocGia = @MaDocGia";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
+                        sqlCommand.ExecuteScalar();
 
-                    tblMaDocGia.Text = "";
-                    txtHoTen.Text = "";
-                    cbLoaiDG.SelectedIndex = -1;
-                    dtNgaySinh.Text = "";
-                    txtDiaChi.Text = "";
-                    txtEmail.Text = "";
-                    dtNgayLapThe.Text = "";
-                    tblNgayHetHan.Text = "";
-                    txtTongNo.Text = "";
-                } 
-                    
-                
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Không thể xóa, độc giả đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachDocGia();
-            }
+                        tblMaDocGia.Text = "";
+                        txtHoTen.Text = "";
+                        cbLoaiDG.SelectedIndex = -1;
+                        dtNgaySinh.Text = "";
+                        txtDiaChi.Text = "";
+                        txtEmail.Text = "";
+                        dtNgayLapThe.Text = "";
+                        tblNgayHetHan.Text = "";
+                        txtTongNo.Text = "";
+                    }
 
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Không thể xóa, độc giả đang được sử dụng");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachDocGia();
+                }
+            }    
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)

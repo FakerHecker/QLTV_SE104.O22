@@ -43,8 +43,8 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click" Visibility="Hidden"/>
                     <Button x:Name="btnXoa" Content="Xóa" Margin="10,0,5,10" Click="btnXoa_Click"/>
+                    <Button x:Name="btnLuu" Content="Lưu" Margin="10,0,5,10" Click="btnLuu_Click" Visibility="Hidden"/>
                 </StackPanel>
 
             </Grid>

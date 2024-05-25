@@ -322,45 +322,49 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM DAUSACH WHERE MaDauSach = @MaDauSach";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tìm thấy mã đầu sách");
-                else
+                try
                 {
-                    query = "DELETE FROM CT_TACGIA WHERE MaDauSach = @MaDauSach";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM DAUSACH WHERE MaDauSach = @MaDauSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
-                    sqlCommand.ExecuteScalar();
+                    if (sqlCommand.ExecuteScalar() == null)
+                        MessageBox.Show("Không tìm thấy mã đầu sách");
+                    else
+                    {
+                        query = "DELETE FROM CT_TACGIA WHERE MaDauSach = @MaDauSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
+                        sqlCommand.ExecuteScalar();
 
-                    query = "DELETE FROM DAUSACH WHERE MaDauSach = @MaDauSach";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
-                    sqlCommand.ExecuteScalar();
+                        query = "DELETE FROM DAUSACH WHERE MaDauSach = @MaDauSach";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
+                        sqlCommand.ExecuteScalar();
+                    }
+
+                    tblMaDauSach.Text = "";
+                    txbTenDauSach.Text = "";
+                    cbTenTheLoai.SelectedIndex = -1;
+                    cbTacGia.SelectedIndex = -1;
+                    lbTacGia.Items.Clear();
+
+
                 }
-
-                tblMaDauSach.Text = "";
-                txbTenDauSach.Text = "";
-                cbTenTheLoai.SelectedIndex = -1;
-                cbTacGia.SelectedIndex = -1;
-                lbTacGia.Items.Clear();
-                                   
-                
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Đầu sách đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachDauSach();
-            }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Dữ liệu đầu sách đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachDauSach();
+                }
+            }    
+            
         }
     }
 }

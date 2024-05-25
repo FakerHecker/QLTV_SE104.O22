@@ -173,38 +173,42 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tồn tại thể loại");
-                else
+                try
                 {
-                    query = "DELETE FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
-                    sqlCommand.ExecuteScalar();
 
-                }    
-                
+                    if (sqlCommand.ExecuteScalar() == null)
+                        MessageBox.Show("Không tồn tại thể loại");
+                    else
+                    {
+                        query = "DELETE FROM THELOAI WHERE MaTheLoai = @MaTheLoai";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaTheLoai", tblMaTheLoai.Text);
+                        sqlCommand.ExecuteScalar();
+                        tblMaTheLoai.Text = "";
+                        txbTenTheLoai.Text = "";
+                    }
 
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Thể loại đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachTheLoaiSach();
-                tblMaTheLoai.Text = "";
-                txbTenTheLoai.Text = "";
-            }
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Dữ liệu thể loại đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachTheLoaiSach();
+                    
+                }
+            }    
+           
         }
     }
 }

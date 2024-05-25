@@ -176,36 +176,42 @@ namespace QuanLyThuVien
         }
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tồn tại tác giả");
-                else
+                try
                 {
-                    query = "DELETE FROM TACGIA WHERE MaTacGia = @MaTacGia";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-                    sqlCommand.ExecuteScalar();
-                }    
-               
+                    object tonTaiTacGia = sqlCommand.ExecuteScalar();
 
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Tác giả đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachTacGia();
-                tblMaTacGia.Text = "";
-                txbTenTacGia.Text = "";
+                    if (tonTaiTacGia == null)
+                        MessageBox.Show("Không tồn tại tác giả");
+                    else
+                    {
+                        query = "DELETE FROM TACGIA WHERE MaTacGia = @MaTacGia";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
+                        sqlCommand.ExecuteScalar();
+                        tblMaTacGia.Text = "";
+                        txbTenTacGia.Text = "";
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Dữ liệu tác giả đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachTacGia();
+                   
+                }
+
             }
 
         }

@@ -176,37 +176,39 @@ namespace QuanLyThuVien
         }
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                if (sqlCommand.ExecuteScalar() == null)
-                    MessageBox.Show("Không tồn tại loại độc giả");
-                else
+                try
                 {
-                    query = "DELETE FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
-                    sqlCommand.ExecuteScalar();
+                    if (sqlCommand.ExecuteScalar() == null)
+                        MessageBox.Show("Không tồn tại loại độc giả");
+                    else
+                    {
+                        query = "DELETE FROM LOAIDOCGIA WHERE MaLoaiDocGia = @MaLoaiDocGia";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", tblMaLoaiDocGia.Text);
+                        sqlCommand.ExecuteScalar();
 
-                    tblMaLoaiDocGia.Text = "";
-                    txbTenLoaiDocGia.Text = "";
+                        tblMaLoaiDocGia.Text = "";
+                        txbTenLoaiDocGia.Text = "";
+                    }
+
                 }
-
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.ToString());
-                MessageBox.Show("Loại độc giả đang được sử dụng");
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachLoaiDocGia();
-            }
-
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Loại độc giả đang được sử dụng, không thể xóa");
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachLoaiDocGia();
+                }
+            }             
         }
     }
 }

@@ -84,7 +84,8 @@ namespace QuanLyThuVien
                 tblMaPhieuThu.Text = row_selected.Row["Mã phiếu thu tiền"].ToString();
                 cbMaDocGia.Text = row_selected.Row["Mã độc giả"].ToString();
                 txbSoTienThu.Text = row_selected.Row["Số tiền thu"].ToString();
-                tblTongNo.Text = "";
+                if (float.TryParse(row_selected.Row["Số tiền thu"].ToString(), out float soTienThu) && float.TryParse(row_selected.Row["Còn lại"].ToString(), out float conLai))
+                    tblTongNo.Text = (soTienThu + conLai).ToString();
                 tblConLai.Text = row_selected.Row["Còn lại"].ToString();
                 dpNgayThu.Text = row_selected.Row["Ngày thu"].ToString();
             }
@@ -195,40 +196,43 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlConnection.Open();
-                string query = "SELECT * FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
-                if (sqlCommand.ExecuteScalar() == null)
+                try
                 {
-                    MessageBox.Show("Không tồn tại phiếu thu tiền phạt");
-                }
-                {
-                    query = "DELETE FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
-                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    string query = "SELECT * FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
-                    sqlCommand.ExecuteScalar();
+                    if (sqlCommand.ExecuteScalar() == null)
+                    {
+                        MessageBox.Show("Không tồn tại phiếu thu tiền phạt");
+                    }
+                    {
+                        query = "DELETE FROM PHIEUTHUTIENPHAT WHERE MaPhieuThuTien = @MaPhieuThuTien";
+                        sqlCommand = new SqlCommand(query, sqlConnection);
+                        sqlCommand.Parameters.AddWithValue("@MaPhieuThuTien", tblMaPhieuThu.Text);
+                        sqlCommand.ExecuteScalar();
+                    }
+
                 }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiDanhSachPhieuThuTienPhat();
-                tblMaPhieuThu.Text = "";
-                cbMaDocGia.SelectedIndex = -1;
-                tblHoTen.Text = "";
-                tblTongNo.Text = "";
-                txbSoTienThu.Text = "";
-                tblConLai.Text = "";
-                dpNgayThu.Text = "";
-            }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiDanhSachPhieuThuTienPhat();
+                    tblMaPhieuThu.Text = "";
+                    cbMaDocGia.SelectedIndex = -1;
+                    tblHoTen.Text = "";
+                    tblTongNo.Text = "";
+                    txbSoTienThu.Text = "";
+                    tblConLai.Text = "";
+                    dpNgayThu.Text = "";
+                }
+            }              
         }
 
         private void txbSoTienThu_TextChanged(object sender, TextChangedEventArgs e)

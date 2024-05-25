@@ -226,50 +226,68 @@ namespace QuanLyThuVien
             DataRowView row_selected = gd.SelectedItem as DataRowView;
             if (row_selected != null)
             {
-                txbMaPhieuMuon.Text = row_selected.Row["Mã phiếu mượn trả"].ToString();
-                tblHoVaTen.Text = row_selected.Row["Mã độc giả"].ToString();
-                tblMaSach.Text = row_selected.Row["Mã cuốn sách"].ToString();
-                dpNgayMuon.Text = row_selected.Row["Ngày mượn"].ToString();
-                dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("MM/dd/yyyy");
-                dpNgayTra.Text = DateTime.Now.ToString();
+                if (row_selected.Row["Ngày trả"].ToString() == "")
+                {
+                    txbMaPhieuMuon.Text = row_selected.Row["Mã phiếu mượn trả"].ToString();
+                    tblHoVaTen.Text = row_selected.Row["Mã độc giả"].ToString();
+                    tblMaSach.Text = row_selected.Row["Mã cuốn sách"].ToString();
+                    dpNgayMuon.Text = row_selected.Row["Ngày mượn"].ToString();
+                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("MM/dd/yyyy");
+                    dpNgayTra.Text = DateTime.Now.ToString();
+                    txbSoTienTra.Text = "";
+                    tblConlai.Text = "";
+                }    
+               else
+                {
+                    txbMaPhieuMuon.Text = row_selected.Row["Mã phiếu mượn trả"].ToString();
+                    tblHoVaTen.Text = row_selected.Row["Mã độc giả"].ToString();
+                    tblMaSach.Text = row_selected.Row["Mã cuốn sách"].ToString();
+                    dpNgayMuon.Text = row_selected.Row["Ngày mượn"].ToString();
+                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("MM/dd/yyyy");
+                    dpNgayTra.Text = row_selected.Row["Ngày trả"].ToString();
+                    txbSoTienTra.Text = row_selected.Row["Số tiền trả"].ToString();
+                    tblConlai.Text = row_selected.Row["Còn lại"].ToString();
+                }    
             }
         }
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView selectedItem = dgvPhieuMuon.SelectedItem as DataRowView;
-            if (selectedItem != null)
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                string maPhieu = selectedItem.Row["Mã phiếu mượn trả"].ToString();
-                //MessageBox.Show(maPhieu);
-
-                string ngayTra = selectedItem.Row["Ngày trả"].ToString();
-                if (ngayTra == "")
+                DataRowView selectedItem = dgvPhieuMuon.SelectedItem as DataRowView;
+                if (selectedItem != null)
                 {
-                    MessageBox.Show("Không thể xóa vì chưa trả sách");
-                }    
-                else
-                {
-                    try
-                    {
-                        sqlConnection.Open();
-                        string query = "DELETE FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
-                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                        sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", maPhieu);
-                        sqlCommand.ExecuteScalar();
-                        sqlConnection.Close();
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-                    }
-                    finally
-                    {
-                        HienThiDanhSachPhieuMuon();
-                    }
+                    string maPhieu = selectedItem.Row["Mã phiếu mượn trả"].ToString();
+                    //MessageBox.Show(maPhieu);
 
-                }    
-            }
+                    string ngayTra = selectedItem.Row["Ngày trả"].ToString();
+                    if (ngayTra == "")
+                    {
+                        MessageBox.Show("Không thể xóa vì chưa trả sách");
+                    }
+                    else
+                    {
+                        try
+                        {
+                            sqlConnection.Open();
+                            string query = "DELETE FROM PHIEUMUONTRASACH WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
+                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                            sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", maPhieu);
+                            sqlCommand.ExecuteScalar();
+                            sqlConnection.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                        finally
+                        {
+                            HienThiDanhSachPhieuMuon();
+                        }
+                    }
+                }
+            }            
         }
 
         private void btnIn_Click(object sender, RoutedEventArgs e)
