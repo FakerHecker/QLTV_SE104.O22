@@ -84,9 +84,7 @@
         </GroupBox>
         <GroupBox Header="Danh sách độc giả" Grid.Row="6" Grid.RowSpan="6" Grid.ColumnSpan="6" FontSize="15">
             <Grid>
-                <DataGrid x:Name="dataGridView" SelectionChanged="dataGridView_SelectionChanged" IsReadOnly="True">
-                    
-                </DataGrid>
+                <DataGrid x:Name="dataGridView" SelectionChanged="dataGridView_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="dataGridView_AutoGeneratingColumn"/>
             </Grid>
         </GroupBox>
     </Grid>

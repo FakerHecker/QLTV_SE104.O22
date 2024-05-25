@@ -30,7 +30,7 @@ namespace QuanLyThuVien
         {
             InitializeComponent();
 
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaPhieuThu();
             InitMaDocGia();
@@ -167,7 +167,7 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", cbMaDocGia.Text);
                     sqlCommand.Parameters.AddWithValue("@SoTienThu", txbSoTienThu.Text);
                     sqlCommand.Parameters.AddWithValue("@ConLai", tblConLai.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayThu", dpNgayThu.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayThu", DateTime.Parse(dpNgayThu.Text));
                     sqlCommand.ExecuteScalar();
                     MessageBox.Show("Thêm thành công");
 
@@ -268,6 +268,18 @@ namespace QuanLyThuVien
             {
                 printDlg.PrintVisual(a, "My Control Print");
             }  
+        }
+
+        private void dgvPhieuThuTienPhat_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Ngày thu")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace QuanLyThuVien
         public UC_NhanTraSach()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             HienThiDanhSachPhieuMuon();
         }
@@ -140,7 +140,7 @@ namespace QuanLyThuVien
                         query = "UPDATE PHIEUMUONTRASACH SET NgayTra = @NgayTra, TienPhatKyNay = @TienPhatKyNay, SoTienTra = @SoTienTra, ConLai = @ConLai WHERE MaPhieuMuonTraSach = @MaPhieuMuonTraSach";
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", txbMaPhieuMuon.Text);
-                        sqlCommand.Parameters.AddWithValue("@NgayTra", dpNgayTra.Text);
+                        sqlCommand.Parameters.AddWithValue("@NgayTra", DateTime.Parse(dpNgayTra.Text));
                         sqlCommand.Parameters.AddWithValue("@TienPhatKyNay", tblTienPhatKyNay.Text);
                         sqlCommand.Parameters.AddWithValue("@SoTienTra", txbSoTienTra.Text);
                         sqlCommand.Parameters.AddWithValue("@ConLai", tblConlai.Text);
@@ -232,7 +232,7 @@ namespace QuanLyThuVien
                     tblHoVaTen.Text = row_selected.Row["Mã độc giả"].ToString();
                     tblMaSach.Text = row_selected.Row["Mã cuốn sách"].ToString();
                     dpNgayMuon.Text = row_selected.Row["Ngày mượn"].ToString();
-                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("MM/dd/yyyy");
+                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("dd/MM/yyyy");
                     dpNgayTra.Text = DateTime.Now.ToString();
                     txbSoTienTra.Text = "";
                     tblConlai.Text = "";
@@ -243,7 +243,7 @@ namespace QuanLyThuVien
                     tblHoVaTen.Text = row_selected.Row["Mã độc giả"].ToString();
                     tblMaSach.Text = row_selected.Row["Mã cuốn sách"].ToString();
                     dpNgayMuon.Text = row_selected.Row["Ngày mượn"].ToString();
-                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("MM/dd/yyyy");
+                    dpNgayPhaiTra.Text = ((DateTime)row_selected.Row["Ngày phải trả"]).ToString("dd/MM/yyyy");
                     dpNgayTra.Text = row_selected.Row["Ngày trả"].ToString();
                     txbSoTienTra.Text = row_selected.Row["Số tiền trả"].ToString();
                     tblConlai.Text = row_selected.Row["Còn lại"].ToString();
@@ -296,6 +296,34 @@ namespace QuanLyThuVien
             if (printDlg.ShowDialog() == true)
             {
                 printDlg.PrintVisual(gr, "My Control Print");
+            }
+        }
+
+        private void dgvPhieuMuon_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Ngày mượn")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
+            if (e.PropertyName == "Ngày trả")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
+            if (e.PropertyName == "Ngày phải trả")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
             }
         }
     }

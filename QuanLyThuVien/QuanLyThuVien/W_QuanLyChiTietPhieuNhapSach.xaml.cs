@@ -120,23 +120,28 @@ namespace QuanLyThuVien
 
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            try
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa",
+            MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
-                string query = "DELETE FROM CT_PHIEUNHAPSACH WHERE MaCTPhieuNhapSach = @MaCTPhieuNhapSach";
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlConnection.Open();
-                sqlCommand.Parameters.AddWithValue("@MaCTPhieuNhapSach", txbMaCTPhieuNhap.Text);
-                sqlCommand.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                sqlConnection.Close();
-                HienThiChiTietPhieuNhapSach();
-            }
+                try
+                {
+                    string query = "DELETE FROM CT_PHIEUNHAPSACH WHERE MaCTPhieuNhapSach = @MaCTPhieuNhapSach";
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlConnection.Open();
+                    sqlCommand.Parameters.AddWithValue("@MaCTPhieuNhapSach", txbMaCTPhieuNhap.Text);
+                    sqlCommand.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                    HienThiChiTietPhieuNhapSach();
+                }
+            }                    
         }
     }
 }

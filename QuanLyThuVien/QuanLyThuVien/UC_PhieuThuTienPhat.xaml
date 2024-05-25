@@ -93,7 +93,7 @@
         
         <GroupBox Header="Danh sách phiếu thu" Grid.Row="1" Grid.Column="3" Grid.RowSpan="11" Grid.ColumnSpan="3" FontSize="15" Margin="5,0,0,0">
             <Grid>
-                <DataGrid x:Name="dgvPhieuThuTienPhat" SelectionChanged="dgvPhieuThuTienPhat_SelectionChanged" IsReadOnly="True"/>
+                <DataGrid x:Name="dgvPhieuThuTienPhat" SelectionChanged="dgvPhieuThuTienPhat_SelectionChanged" IsReadOnly="True" AutoGeneratingColumn="dgvPhieuThuTienPhat_AutoGeneratingColumn"/>
             </Grid>
         </GroupBox>
     </Grid>

@@ -33,7 +33,7 @@ namespace QuanLyThuVien
             
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; sqlConnection = new SqlConnection(connectionString);
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True"; sqlConnection = new SqlConnection(connectionString);
             sqlConnection = new SqlConnection(connectionString);
 
             InitComboBoxThangItems();
@@ -102,11 +102,11 @@ namespace QuanLyThuVien
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             int soNgayMuonToiDa = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
             
-            query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên cuốn sách', NgayMuon AS 'Ngày mượn', DATEDIFF(day, NgayMuon, @NgayThangNam) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
+            query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên cuốn sách', NgayMuon AS 'Ngày mượn', DATEDIFF(day, NgayMuon, @NgayPhaiTra) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
                 "FROM PHIEUMUONTRASACH JOIN CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach JOIN SACH ON CUONSACH.MaSach = Sach.MaSach " +
-                "WHERE DATEDIFF(day, NgayMuon, @NgayThangNam) > @SoNgayMuonToiDa AND NgayTra IS NULL";
+                "WHERE DATEDIFF(day, NgayMuon, @NgayPhaiTra) > @SoNgayMuonToiDa AND NgayTra IS NULL";
             sqlCommand = new SqlCommand(query, sqlConnection);
-            sqlCommand.Parameters.AddWithValue("@NgayThangNam", dpNgayLap.Text);
+            sqlCommand.Parameters.AddWithValue("@NgayPhaiTra", DateTime.Parse(dpNgayLap.Text));
             sqlCommand.Parameters.AddWithValue("@SoNgayMuonToiDa", soNgayMuonToiDa);
 
            
@@ -349,6 +349,18 @@ namespace QuanLyThuVien
             else if (cbLoaiBaoCao.SelectedIndex == 1)
             {
                 HienThiBaoCaoSachTraTre();
+            }
+        }
+
+        private void dataGridView_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Ngày mượn")
+            {
+                var column = e.Column as System.Windows.Controls.DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
             }
         }
     }

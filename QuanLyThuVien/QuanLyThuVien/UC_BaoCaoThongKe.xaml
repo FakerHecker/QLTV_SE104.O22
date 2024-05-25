@@ -74,7 +74,7 @@
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                <DataGrid x:Name="dataGridView" IsReadOnly="True" Grid.ColumnSpan="2" AutoGeneratingColumn="dataGridView_AutoGeneratingColumn"/>
                 <Label x:Name="lbTongSoLuotMuon"  Content="Tổng số lượt mượn:" Grid.Row="1" Grid.Column="0" FontSize="15" Margin="0,10,0,0" Visibility="Hidden"/>
                 <TextBlock x:Name="tblTongSoLuotMuon" Grid.Row="1" Grid.Column="1" FontSize="15" Margin="0,15,0,0" Visibility="Hidden"/>
             </Grid>

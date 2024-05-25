@@ -33,7 +33,7 @@ namespace QuanLyThuVien
         public W_ChiTietPhieuNhap(string ma)
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             tblMaPhieuNhap.Text = ma;
             maPNS = ma;
@@ -399,8 +399,6 @@ namespace QuanLyThuVien
                         tblThanhTien.Text = "";
 
                     }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -412,7 +410,6 @@ namespace QuanLyThuVien
                     HienThiDanhSachChiTietPhieuNhap();
                 }
             }    
-           
         }
     }
 }

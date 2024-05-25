@@ -30,13 +30,13 @@ namespace QuanLyThuVien
         public DocGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; 
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True"; 
             sqlConnection = new SqlConnection(connectionString);
             InitMaDocGia();
             InitLoaiDocGia();
             HienThiDanhSachDocGia();
-
         }
+
 
         private void InitMaDocGia()
         {
@@ -75,6 +75,7 @@ namespace QuanLyThuVien
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView.ItemsSource = dt.DefaultView;
+            
             sqlConnection.Close();
             
            
@@ -112,18 +113,21 @@ namespace QuanLyThuVien
             sqlConnection.Close();
             DateTime selectedDate = dtNgayLapThe.SelectedDate.Value;
             DateTime newDate = selectedDate.AddMonths(thoiHanThe);
-            tblNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
+            tblNgayHetHan.Text = newDate.ToString("dd/MM/yyyy");
 
             txtTongNo.Text = "0";
 
         }
 
+
+
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
+
                 {
                     sqlConnection.Open();
                     string query = "SELECT * FROM DOCGIA WHERE MaDocGia = @MaDocGia";
@@ -148,8 +152,6 @@ namespace QuanLyThuVien
                         tblNgayHetHan.Text = "";
                         txtTongNo.Text = "";
                     }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -161,7 +163,7 @@ namespace QuanLyThuVien
                     sqlConnection.Close();
                     HienThiDanhSachDocGia();
                 }
-            }    
+            }
         }
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
@@ -194,7 +196,7 @@ namespace QuanLyThuVien
                 //kiểm tra trùng
                 sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE HoVaTen = @TenDocGia AND NgaySinh = @NgaySinh AND DiaChi = @DiaChi AND Email = @Email", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@TenDocGia", txtHoTen.Text);
-                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.SelectedDate.Value);
                 sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                 sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
                 object trungDocGia = sqlCommand.ExecuteScalar();
@@ -222,11 +224,11 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
                     sqlCommand.Parameters.AddWithValue("@HoVaTen", txtHoTen.Text);
                     sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", maLoaiDG);
-                    sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.SelectedDate.Value);
                     sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                     sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", tblNgayHetHan.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.SelectedDate.Value);
+                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", DateTime.Parse(tblNgayHetHan.Text));
                     sqlCommand.Parameters.AddWithValue("@TongNo", 0);
                     sqlCommand.ExecuteScalar();
                 }
@@ -257,7 +259,7 @@ namespace QuanLyThuVien
                 sqlConnection.Close();
                 DateTime selectedDate = dtNgayLapThe.SelectedDate.Value;
                 DateTime newDate = selectedDate.AddMonths(thoiHanThe);
-                tblNgayHetHan.Text = newDate.ToString("MM/dd/yyyy");
+                tblNgayHetHan.Text = newDate.ToString("dd/MM/yyyy");
             }
 
         }
@@ -290,7 +292,7 @@ namespace QuanLyThuVien
 
                 sqlCommand = new SqlCommand("SELECT * FROM DOCGIA WHERE HoVaTen = @TenDocGia AND NgaySinh = @NgaySinh AND DiaChi = @DiaChi AND Email = @Email", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@TenDocGia", txtHoTen.Text);
-                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.SelectedDate.Value);
                 sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                 sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
                 object trungDocGia = sqlCommand.ExecuteScalar();
@@ -319,11 +321,11 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", tblMaDocGia.Text);
                     sqlCommand.Parameters.AddWithValue("@HoVaTen", txtHoTen.Text);
                     sqlCommand.Parameters.AddWithValue("@MaLoaiDocGia", maLoaiDG);
-                    sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgaySinh", dtNgaySinh.SelectedDate.Value);
                     sqlCommand.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
                     sqlCommand.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", tblNgayHetHan.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayLapThe", dtNgayLapThe.SelectedDate.Value);
+                    sqlCommand.Parameters.AddWithValue("@NgayHetHan", DateTime.Parse(tblNgayHetHan.Text));
                     sqlCommand.Parameters.AddWithValue("@TongNo", txtTongNo.Text);
                     sqlCommand.ExecuteScalar();
                 }
@@ -354,8 +356,36 @@ namespace QuanLyThuVien
                 txtDiaChi.Text = row_selected.Row["Địa chỉ"].ToString();
                 txtEmail.Text = row_selected.Row["Email"].ToString();
                 dtNgayLapThe.SelectedDate = Convert.ToDateTime(row_selected.Row["Ngày lập thẻ"].ToString());
-                tblNgayHetHan.Text = ((DateTime)(row_selected.Row["Ngày hết hạn"])).ToString("MM/dd/yyyy");
+                tblNgayHetHan.Text = ((DateTime)(row_selected.Row["Ngày hết hạn"])).ToString("dd/MM/yyyy");
                 txtTongNo.Text = row_selected.Row["Tổng nợ"].ToString();
+            }
+        }
+
+        private void dataGridView_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Ngày sinh")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
+            if (e.PropertyName == "Ngày lập thẻ")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
+            if (e.PropertyName == "Ngày hết hạn")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
             }
         }
     }

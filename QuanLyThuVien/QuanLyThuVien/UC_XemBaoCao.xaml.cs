@@ -26,7 +26,7 @@ namespace QuanLyThuVien
         public UC_XemBaoCao()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True"; sqlConnection = new SqlConnection(connectionString);
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True"; sqlConnection = new SqlConnection(connectionString);
             sqlConnection = new SqlConnection(connectionString);
 
            
@@ -188,8 +188,28 @@ namespace QuanLyThuVien
                     }
                     HienThiBaoCaoSachTraTre();
                 }
-            }    
+            }
+        }
             
+
+        private void dataGridView_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Ngày mượn")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
+            if (e.PropertyName == "Ngày lập báo cáo")
+            {
+                var column = e.Column as DataGridTextColumn;
+                if (column != null)
+                {
+                    column.Binding.StringFormat = "dd/MM/yyyy";
+                }
+            }
         }
     }
 }

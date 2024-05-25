@@ -72,7 +72,7 @@
                 <TextBlock x:Name="tblTenDocGia" Height="30" Grid.Row="1" Grid.Column="3" Margin="0,10,0,0"/>
                 
 
-                <DatePicker x:Name="dpNgayMuon" Height="30" Grid.Row="2" Grid.Column="1" SelectedDateChanged="dpNgayMuon_SelectedDateChanged"/>
+                <DatePicker x:Name="dpNgayMuon" Height="30" Grid.Row="2" Grid.Column="1" SelectedDateChanged="dpNgayMuon_SelectedDateChanged" IsEnabled="False"/>
                 <TextBlock x:Name="tblNgayPhaiTra" Height="30" Grid.Row="2" Grid.Column="3" Margin="0,10,0,0"/>
 
                 <TextBlock x:Name="tblMaCuonSach" Height="30" Grid.Row="3" Grid.Column="1" Margin="0,10,0,0"/>

@@ -28,7 +28,7 @@ namespace QuanLyThuVien
         public UC_TacGia()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaTacGia();
             HienThiDanhSachTacGia();
@@ -116,7 +116,7 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
                     sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
                     sqlCommand.ExecuteScalar();
-                }                  
+                }
             }
             catch (Exception ex)
             {
@@ -160,8 +160,8 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@TenTacGia", txbTenTacGia.Text);
                     sqlCommand.ExecuteScalar();
 
-                }    
-               
+                }
+
 
             }
             catch (Exception ex)
@@ -176,7 +176,9 @@ namespace QuanLyThuVien
         }
         private void btnXoa_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa?", "Xác nhận xóa",
+            MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -184,9 +186,8 @@ namespace QuanLyThuVien
                     string query = "SELECT * FROM TACGIA WHERE MaTacGia = @MaTacGia";
                     SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
-                    object tonTaiTacGia = sqlCommand.ExecuteScalar();
 
-                    if (tonTaiTacGia == null)
+                    if (sqlCommand.ExecuteScalar() == null)
                         MessageBox.Show("Không tồn tại tác giả");
                     else
                     {
@@ -194,8 +195,6 @@ namespace QuanLyThuVien
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaTacGia", tblMaTacGia.Text);
                         sqlCommand.ExecuteScalar();
-                        tblMaTacGia.Text = "";
-                        txbTenTacGia.Text = "";
                     }
 
 
@@ -203,18 +202,17 @@ namespace QuanLyThuVien
                 catch (Exception ex)
                 {
                     //MessageBox.Show(ex.ToString());
-                    MessageBox.Show("Dữ liệu tác giả đang được sử dụng, không thể xóa");
+                    MessageBox.Show("Tác giả đang được sử dụng");
                 }
                 finally
                 {
                     sqlConnection.Close();
                     HienThiDanhSachTacGia();
-                   
+                    tblMaTacGia.Text = "";
+                    txbTenTacGia.Text = "";
                 }
 
             }
-
         }
-
     }
 }

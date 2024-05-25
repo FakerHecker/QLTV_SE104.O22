@@ -29,7 +29,7 @@ namespace QuanLyThuVien
         public UC_ChoMuonSach()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaPhieuMuon();
             InitMaDocGia();
@@ -124,7 +124,7 @@ namespace QuanLyThuVien
                     string maDocGia = cbMaDocGia.SelectedValue as string;
 
                     //Tính thẻ còn hạn hay không
-                    query = "SELECT NgayHetHan FROM DOCGIA WHERE MaDocGia = @MaDocGia AND NgayHetHan < GETDATE()";
+                    query = "SELECT NgayHetHan FROM DOCGIA WHERE DOCGIA.MaDocGia = @MaDocGia AND NgayHetHan < GETDATE()";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaDocGia", maDocGia);
                     object hanThe = sqlCommand.ExecuteScalar();
@@ -170,8 +170,8 @@ namespace QuanLyThuVien
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaPhieuMuonTraSach", tblMaPhieuMuonTra.Text);
                         sqlCommand.Parameters.AddWithValue("@MaDocGia", cbMaDocGia.Text);
-                        sqlCommand.Parameters.AddWithValue("@NgayMuon", dpNgayMuon.Text);
-                        sqlCommand.Parameters.AddWithValue("@NgayPhaiTra", (dpNgayMuon.SelectedDate ?? DateTime.Now).AddDays(Int32.Parse(soNgayMuonToiDa)).ToString());
+                        sqlCommand.Parameters.AddWithValue("@NgayMuon", DateTime.Parse(dpNgayMuon.Text));
+                        sqlCommand.Parameters.AddWithValue("@NgayPhaiTra", (dpNgayMuon.SelectedDate ?? DateTime.Now).AddDays(Int32.Parse(soNgayMuonToiDa)));
                         sqlCommand.Parameters.AddWithValue("@MaCuonSach", tblMaCuonSach.Text);
                         sqlCommand.ExecuteScalar();
 
@@ -252,7 +252,7 @@ namespace QuanLyThuVien
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
                 string soNgayMuonToiDa = sqlCommand.ExecuteScalar().ToString();
                 sqlConnection.Close();
-                tblNgayPhaiTra.Text = (dpNgayMuon.SelectedDate ?? DateTime.Now).AddDays(Int32.Parse(soNgayMuonToiDa)).ToString("MM/dd/yyyy");
+                tblNgayPhaiTra.Text = (dpNgayMuon.SelectedDate ?? DateTime.Now).AddDays(Int32.Parse(soNgayMuonToiDa)).ToString("dd/MM/yyyy");
             }
         }
 

@@ -28,7 +28,7 @@ namespace QuanLyThuVien
         public UC_TheLoai()
         {
             InitializeComponent();
-            string connectionString = @"Data Source=DESKTOP-AV6EQV4\SQLEXPRESS;Initial Catalog=QLTV_DB;User ID=sa;Password=123456;Pooling=False;Encrypt=True;TrustServerCertificate=True";
+            string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True";
             sqlConnection = new SqlConnection(connectionString);
             InitMaTheLoai();
             HienThiDanhSachTheLoaiSach();
@@ -193,8 +193,6 @@ namespace QuanLyThuVien
                         tblMaTheLoai.Text = "";
                         txbTenTheLoai.Text = "";
                     }
-
-
                 }
                 catch (Exception ex)
                 {
@@ -205,10 +203,8 @@ namespace QuanLyThuVien
                 {
                     sqlConnection.Close();
                     HienThiDanhSachTheLoaiSach();
-                    
                 }
             }    
-           
         }
     }
 }
