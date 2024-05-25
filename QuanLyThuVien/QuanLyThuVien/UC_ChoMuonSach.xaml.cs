@@ -155,9 +155,6 @@ namespace QuanLyThuVien
                     sqlCommand.Parameters.AddWithValue("@MaCuonSach", tblMaCuonSach.Text);
                     string isBorrowed = sqlCommand.ExecuteScalar().ToString();
 
-
-
-
                     if (hanThe != null)
                         MessageBox.Show("Thẻ hết hạn");
                     else if (sachHetHan != null)

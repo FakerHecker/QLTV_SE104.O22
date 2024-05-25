@@ -192,7 +192,7 @@ namespace QuanLyThuVien
             string maBC = "BCMS001";
             if (maBaoCao != null)
             {
-                int currentNumber = int.Parse(maBC.Substring(4));
+                int currentNumber = int.Parse(maBaoCao.ToString().Substring(4));
                 currentNumber++;
                 maBC = $"BCMS{currentNumber:D3}";
             }
@@ -209,7 +209,7 @@ namespace QuanLyThuVien
             string maBC = "BCTT001";
             if (maBaoCao != null)
             {
-                int currentNumber = int.Parse(maBC.Substring(4));
+                int currentNumber = int.Parse(maBaoCao.ToString().Substring(4));
                 currentNumber++;
                 maBC = $"BCTT{currentNumber:D3}";
             }
@@ -227,47 +227,64 @@ namespace QuanLyThuVien
                 {
                     if (dataGridView.Items.Count > 0)
                     {
-                        // lưu vào bảng BAOCAOMUONSACH
+
                         sqlConnection.Open();
-                        string query = "INSERT INTO BAOCAOMUONSACH (MaBaoCaoMuonSach, Thang, Nam, TongSoLuotMuon, NgayLapBaoCao) VALUES (@MaBaoCaoMuonSach, @Thang, @Nam, @TongSoLuotMuon, @NgayLapBaoCao)";
+                        string query = "SELECT * FROM BAOCAOMUONSACH WHERE Thang = @Thang AND Nam = @Nam";
                         SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                        sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
                         sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
                         sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
-                        sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
-                        sqlCommand.Parameters.AddWithValue("@TongSoLuotMuon", tblTongSoLuotMuon.Text);
-                        sqlCommand.ExecuteScalar();
-                        MessageBox.Show("Lưu thành công");
-
-                        // lưu vào bảng chi tiết BCMS
-                        foreach (var item in dataGridView.Items)
-                        {
-                            // Xử lý từng dòng dữ liệu tại đây
-                            // Ví dụ: truy cập các giá trị của từng cột bằng cách sử dụng các thuộc tính hoặc phương thức của đối tượng item
-                            string tenTheLoai = ((DataRowView)item).Row["Tên thể loại"].ToString();
-                            query = "SELECT MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
-                            sqlCommand = new SqlCommand(query, sqlConnection);
-                            sqlCommand.Parameters.AddWithValue("@TenTheLoai", tenTheLoai);
-                            object maTL = sqlCommand.ExecuteScalar();
-                            string maTheLoai = "";
-                            if (maTL != null)
-                            {
-                                maTheLoai = maTL.ToString();
-                                query = "INSERT INTO CT_BCMUONSACH (MaBaoCaoMuonSach, MaTheLoai, SoLuotMuon, TiLe) VALUES (@MaBaoCaoMuonSach, @MaTheLoai, @SoLuotMuon, @TiLe)";
-                                sqlCommand = new SqlCommand(query, sqlConnection);
-                                sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
-                                sqlCommand.Parameters.AddWithValue("@MaTheLoai", maTheLoai);
-                                sqlCommand.Parameters.AddWithValue("@SoLuotMuon", ((DataRowView)item).Row["Số lượt mượn"].ToString());
-                                sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"].ToString());
-                                sqlCommand.ExecuteScalar();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Không tồn tại thể loại");
-                            }
-                        }
-
+                        object trungPhieu = sqlCommand.ExecuteScalar();
                         sqlConnection.Close();
+                        
+                        if (trungPhieu != null)
+                        {
+                            MessageBox.Show("Đã tồn tại báo báo mượn sách tháng " + cbThang.Text + " năm " + cbNam.Text);
+                        }    
+                        else
+                        {
+                            // lưu vào bảng BAOCAOMUONSACH
+                            sqlConnection.Open();
+                            query = "INSERT INTO BAOCAOMUONSACH (MaBaoCaoMuonSach, Thang, Nam, TongSoLuotMuon) VALUES (@MaBaoCaoMuonSach, @Thang, @Nam, @TongSoLuotMuon)";
+                            sqlCommand = new SqlCommand(query, sqlConnection);
+                            sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
+                            sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
+                            sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
+                            sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
+                            sqlCommand.Parameters.AddWithValue("@TongSoLuotMuon", tblTongSoLuotMuon.Text);
+                            sqlCommand.ExecuteScalar();
+                            MessageBox.Show("Lưu thành công");
+
+                            // lưu vào bảng chi tiết BCMS
+                            foreach (var item in dataGridView.Items)
+                            {
+                                // Xử lý từng dòng dữ liệu tại đây
+                                // Ví dụ: truy cập các giá trị của từng cột bằng cách sử dụng các thuộc tính hoặc phương thức của đối tượng item
+                                string tenTheLoai = ((DataRowView)item).Row["Tên thể loại"].ToString();
+                                query = "SELECT MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                                sqlCommand = new SqlCommand(query, sqlConnection);
+                                sqlCommand.Parameters.AddWithValue("@TenTheLoai", tenTheLoai);
+                                object maTL = sqlCommand.ExecuteScalar();
+                                string maTheLoai = "";
+                                if (maTL != null)
+                                {
+                                    maTheLoai = maTL.ToString();
+                                    query = "INSERT INTO CT_BCMUONSACH (MaBaoCaoMuonSach, MaTheLoai, SoLuotMuon, TiLe) VALUES (@MaBaoCaoMuonSach, @MaTheLoai, @SoLuotMuon, @TiLe)";
+                                    sqlCommand = new SqlCommand(query, sqlConnection);
+                                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
+                                    sqlCommand.Parameters.AddWithValue("@MaTheLoai", maTheLoai);
+                                    sqlCommand.Parameters.AddWithValue("@SoLuotMuon", ((DataRowView)item).Row["Số lượt mượn"].ToString());
+                                    sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"].ToString());
+                                    sqlCommand.ExecuteScalar();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Không tồn tại thể loại");
+                                }
+                            }
+
+                            sqlConnection.Close();
+                        }    
+                      
                     }
                     else
                         MessageBox.Show("Không có dữ liệu");
@@ -285,31 +302,27 @@ namespace QuanLyThuVien
                     
                     if (dataGridView.Items.Count > 0)
                     {
-                        sqlConnection.Open();
+                       
                         foreach (var item in dataGridView.Items)
                         {
-                            string maBaoCao = tblMaBaoCao.Text;
+
+                            string maBaoCao = InitMaBaoCaoTraTre();
+                            sqlConnection.Open();                           
                             string maCuonSach = ((DataRowView)item).Row["Mã cuốn sách"].ToString();
-
-
-                            string query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao, Thang, Nam) " +
-                                       " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao, @Thang, @Nam)";
+                            string query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao) " +
+                                       " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao)";
                             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-
                             sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", maBaoCao);
                             sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
-                            sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
-                            sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
-
                             sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
                             sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"].ToString());
                             sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"].ToString());
-
                             sqlCommand.ExecuteScalar();
+                            sqlConnection.Close();
+                            
                         }
                         MessageBox.Show("Lưu thành công");
-                        sqlConnection.Close();
+                        
                     }
                     else
                     {

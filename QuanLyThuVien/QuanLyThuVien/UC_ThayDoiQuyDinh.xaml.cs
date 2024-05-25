@@ -68,7 +68,7 @@ namespace QuanLyThuVien
         private void btnThayDoi_Click(object sender, RoutedEventArgs e)
         {
             
-            if (Int32.TryParse(txbGiaTri.Text, out int giaTri))
+            if (Int32.TryParse(txbGiaTri.Text, out int giaTri) && giaTri > 0)
             {
                 sqlConnection.Open();
                 if (cbDieuKien.SelectedIndex == 0)
@@ -123,10 +123,11 @@ namespace QuanLyThuVien
                 }
                 sqlConnection.Close();
                 HienThiQuyDinh();
+                MessageBox.Show("Thay đổi quy định thành công");
             }    
            else
             {
-                MessageBox.Show("Giá trị nhập phải là số");
+                MessageBox.Show("Giá trị nhập không hợp lệ");
                 txbGiaTri.Text = "";
             }    
 

@@ -36,7 +36,7 @@ namespace QuanLyThuVien
         private void HienThiBaoCaoTheoTheLoai()
         {
             sqlConnection.Open();
-            string query = "SELECT MaBaoCaoMuonSach AS 'Mã báo cáo mượn sách', Thang AS 'Tháng', Nam AS 'Năm', TongSoLuotMuon AS 'Tổng số lượt mượn', NgayLapBaoCao AS 'Ngày lập báo cáo' FROM BAOCAOMUONSACH";
+            string query = "SELECT MaBaoCaoMuonSach AS 'Mã báo cáo mượn sách', Thang AS 'Tháng', Nam AS 'Năm', TongSoLuotMuon AS 'Tổng số lượt mượn' FROM BAOCAOMUONSACH";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
             DataTable dt = new DataTable();
@@ -49,7 +49,7 @@ namespace QuanLyThuVien
         {
             sqlConnection.Open();
 
-            string query = "SELECT MaBaoCaoTraTre AS 'Mã báo cáo trả trễ', NgayMuon AS 'Ngày mượn', MaCuonSach AS 'Mã cuốn sách', SoNgayTraTre AS 'Số ngày trả trễ', Thang AS 'Tháng', Nam AS 'Năm', NgayLapBaoCao AS 'Ngày lập báo cáo' FROM BAOCAOTRATRE";
+            string query = "SELECT MaBaoCaoTraTre AS 'Mã báo cáo trả trễ', NgayMuon AS 'Ngày mượn', MaCuonSach AS 'Mã cuốn sách', SoNgayTraTre AS 'Số ngày trả trễ', NgayLapBaoCao AS 'Ngày lập báo cáo' FROM BAOCAOTRATRE";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand);

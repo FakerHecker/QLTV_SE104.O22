@@ -65,7 +65,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT MaSach AS 'Mã sách', TenSach AS 'Tên sách', TenDauSach AS 'Tên đầu sách', NamXuatBan AS 'Năm xuất bản', NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach";
+            string query = "SELECT MaSach AS 'Mã sách', TenSach AS 'Tên sách', TenDauSach AS 'Tên đầu sách', TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -282,6 +282,30 @@ namespace QuanLyThuVien
                 txbNamXuatBan.Text = "";
                 txbNhaXuatBan.Text = "";
             }
+        }
+
+        private void cbTenDauSach_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbTenDauSach.SelectedIndex != -1)
+            {
+                sqlConnection.Open();
+                string query = "SELECT MaDauSach FROM DAUSACH WHERE TenDauSach = @TenDauSach";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@TenDauSach", cbTenDauSach.SelectedValue as string);
+                object maDauSach = sqlCommand.ExecuteScalar();
+                
+                if (maDauSach != null)
+                {
+
+                    query = "SELECT TenTheLoai FROM DAUSACH JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE MaDauSach = @maDauSach";
+                    sqlCommand = new SqlCommand(query, sqlConnection);
+                    sqlCommand.Parameters.AddWithValue("@maDauSach", maDauSach.ToString());
+                    object tenTheLoai = sqlCommand.ExecuteScalar();
+                    if (tenTheLoai != null)
+                        tblTheLoai.Text = tenTheLoai.ToString();
+                }
+                sqlConnection.Close();
+            }    
         }
     }
 }
