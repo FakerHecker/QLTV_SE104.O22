@@ -65,7 +65,10 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT MaSach AS 'Mã sách', TenSach AS 'Tên sách', TenDauSach AS 'Tên đầu sách', TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
+            string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên sách', " +
+                "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
+                "NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
+                "JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -190,7 +193,7 @@ namespace QuanLyThuVien
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
                 object tonTaiMaSach = sqlCommand.ExecuteScalar();
 
-                query = "SELECT * FROM SACH WHERE TenSach = @TenSach AND MaSach <> @MaSach";
+                query = "SELECT * FROM SACH WHERE TenSach = @TenSach";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);

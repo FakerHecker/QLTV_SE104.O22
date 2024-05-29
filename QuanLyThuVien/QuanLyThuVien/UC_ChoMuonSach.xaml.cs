@@ -48,7 +48,9 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM  SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach";
+            string query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenDauSach AS 'Tên sách' FROM SACH " +
+                "JOIN CUONSACH ON CUONSACH.MaSach = SACH.MaSach " +
+                "JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach WHERE TinhTrang = 0";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);

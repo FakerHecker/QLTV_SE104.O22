@@ -36,16 +36,34 @@ namespace QuanLyThuVien
             string connectionString = @"Data Source=.\;Initial Catalog=QLTV;Integrated Security = True"; sqlConnection = new SqlConnection(connectionString);
             sqlConnection = new SqlConnection(connectionString);
 
-            InitComboBoxThangItems();
             InitComboBoxNamItems();
+            InitComboBoxThangItems();
+            SetBlackoutDates();
             dpNgayLap.SelectedDate = DateTime.Now;
-            
+        }
+        private void SetBlackoutDates()
+        {
+            // Define the range of dates to be blacked out
+            DateTime today = DateTime.Now.AddDays(1);
+            DateTime endDate = DateTime.MaxValue;
+
+            // Add the date range to the BlackoutDates collection
+            dpNgayLap.BlackoutDates.Add(new CalendarDateRange(today, endDate));
         }
         private void InitComboBoxThangItems()
         {
-            for (int i = 1; i <= 12; i++)
-                cbThang.Items.Add(i.ToString());
-            cbThang.SelectedIndex = DateTime.Now.Month - 1;
+            string year = cbNam.SelectedValue as string;
+            if (year == DateTime.Now.Year.ToString())
+            {
+                for (int i = 1; i <= DateTime.Now.Month; i++)
+                    cbThang.Items.Add(i.ToString());
+            }
+            else
+            {
+                for (int i = 1; i <= 12; i++)
+                    cbThang.Items.Add(i.ToString());
+            }
+            cbThang.SelectedIndex = DateTime.Now.Month - 2;
         }
         private void InitComboBoxNamItems()
         {
@@ -53,7 +71,6 @@ namespace QuanLyThuVien
             for (int i = nam - 4; i <= nam; i++)
                 cbNam.Items.Add(i.ToString());
             cbNam.SelectedIndex = 4;
-            
         }
 
         
@@ -102,9 +119,11 @@ namespace QuanLyThuVien
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             int soNgayMuonToiDa = Int32.Parse(sqlCommand.ExecuteScalar().ToString());
             
-            query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên cuốn sách', NgayMuon AS 'Ngày mượn', DATEDIFF(day, NgayMuon, @NgayPhaiTra) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
-                "FROM PHIEUMUONTRASACH JOIN CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach JOIN SACH ON CUONSACH.MaSach = Sach.MaSach " +
-                "WHERE DATEDIFF(day, NgayMuon, @NgayPhaiTra) > @SoNgayMuonToiDa AND NgayTra IS NULL";
+            query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên cuốn sách', NgayMuon AS 'Ngày mượn', " +
+                "DATEDIFF(day, NgayMuon, @NgayPhaiTra) - @SoNgayMuonToiDa AS 'Số ngày trả trễ' " +
+                "FROM PHIEUMUONTRASACH JOIN CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach " +
+                "JOIN SACH ON CUONSACH.MaSach = Sach.MaSach JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach" +
+                " WHERE DATEDIFF(day, NgayMuon, @NgayPhaiTra) > @SoNgayMuonToiDa AND NgayTra IS NULL";
             sqlCommand = new SqlCommand(query, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@NgayPhaiTra", DateTime.Parse(dpNgayLap.Text));
             sqlCommand.Parameters.AddWithValue("@SoNgayMuonToiDa", soNgayMuonToiDa);

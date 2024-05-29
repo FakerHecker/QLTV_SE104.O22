@@ -122,7 +122,7 @@ namespace QuanLyThuVien
                     query = "INSERT INTO PHIEUNHAPSACH (MaPhieuNhapSach, NgayNhap, TongTien) VALUES (@MaPhieuNhapSach, @NgayNhap, @TongTien)";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", tblMaPhieuNhap.Text);
-                    sqlCommand.Parameters.AddWithValue("@NgayNhap", dpNgayNhap.Text);
+                    sqlCommand.Parameters.AddWithValue("@NgayNhap", DateTime.Parse(dpNgayNhap.Text));
                     sqlCommand.Parameters.AddWithValue("@TongTien", tblTongTien.Text);
                     sqlCommand.ExecuteScalar();
                 }    
