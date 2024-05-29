@@ -35,14 +35,14 @@
 
 
 
-        <Label Content="Thông tin độc giả" Grid.Row="0" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Content="Thông tin độc giả" Grid.Row="0" FontWeight="Bold" Grid.Column="0" FontSize="30" Grid.ColumnSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
 
         <Button x:Name="btnThem" Content="Thêm mới" Grid.Row="5" Grid.Column="0" Click="btnThem_Click" Margin="30,0,120,0" Grid.ColumnSpan="2" Width="120"/>
         <Button x:Name="btnLuu" Content="Lưu"  Grid.Row="5" Grid.Column="1" Click="btnLuu_Click" Margin="50,0,100,0" Grid.ColumnSpan="2" Width="120"/>
         <Button x:Name="btnCapNhat" Content="Cập nhật"  Grid.Row="5" Grid.Column="2" Click="btnCapNhat_Click"  Margin="70,0,80,2" Grid.ColumnSpan="2" Width="120"/>
         <Button x:Name="btnXoa" Content="Xóa"  Grid.Row="5" Grid.Column="3" Click="btnXoa_Click" Margin="90,0,60,0" Grid.ColumnSpan="2" Width="120"/>
-        <Button x:Name="btnIn" Content="In"  Grid.Row="5" Grid.Column="4" Click="btnIn_Click" Margin="110,0,40,0" Grid.ColumnSpan="2" Width="120"/>
+        <Button x:Name="btnIn" Content="In Phiếu"  Grid.Row="5" Grid.Column="4" Click="btnIn_Click" Margin="110,0,40,0" Grid.ColumnSpan="2" Width="120"/>
 
 
         <GroupBox x:Name="gb" Header="Thông tin chi tiết độc giả" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="4" FontSize="15">

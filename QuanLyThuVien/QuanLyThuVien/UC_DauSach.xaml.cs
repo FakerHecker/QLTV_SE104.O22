@@ -249,7 +249,7 @@ namespace QuanLyThuVien
                 sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);
                 object tonTaiMaDauSach = sqlCommand.ExecuteScalar();
 
-                query = "SELECT COUNT(*) FROM DAUSACH WHERE TenDauSach = @TenDauSach AND MaDauSach <> @MaDauSach";
+                query = "SELECT COUNT(*) FROM DAUSACH WHERE TenDauSach = @TenDauSach";
                 sqlCommand = new SqlCommand(query, sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@TenDauSach", txbTenDauSach.Text);
                 sqlCommand.Parameters.AddWithValue("@MaDauSach", tblMaDauSach.Text);

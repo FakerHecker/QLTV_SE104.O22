@@ -37,7 +37,7 @@ namespace QuanLyThuVien
         private void InitTenSach()
         {
             cbTenSach.Items.Clear();
-            string query = "SELECT TenSach FROM SACH"; // Thay thế YourTableName bằng tên bảng của bạn
+            string query = "SELECT TenDauSach FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
 
             sqlConnection.Open();
             SqlCommand command = new SqlCommand(query, sqlConnection);
@@ -45,7 +45,7 @@ namespace QuanLyThuVien
 
             while (reader.Read())
             {
-                string companyName = reader["TenSach"].ToString();
+                string companyName = reader["TenDauSach"].ToString();
                 cbTenSach.Items.Add(companyName);
             }
             sqlConnection.Close();
@@ -65,7 +65,9 @@ namespace QuanLyThuVien
         private void HienThiDanhSachCuonSach()
         {
             sqlConnection.Open();
-            string query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM CUONSACH JOIN SACH ON CUONSACH.MaSach = SACH.MaSach";
+            string query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenDauSach AS 'Tên sách', " +
+                "TinhTrang AS 'Tình trạng' FROM SACH JOIN CUONSACH ON CUONSACH.MaSach = SACH.MaSach " +
+                "JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);

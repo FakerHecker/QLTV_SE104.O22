@@ -38,10 +38,10 @@ CREATE TABLE CT_PHIEUNHAPSACH(
 
 CREATE TABLE SACH(
 	MaSach varchar(50) not null primary key,
-	TenSach nvarchar(50) not null,
 	MaDauSach varchar(50),
 	NamXuatBan int ,
-	NhaXuatBan nvarchar(50)
+	NhaXuatBan nvarchar(50),
+	SoLuongTon int
 );
 
 CREATE TABLE DAUSACH(
@@ -384,5 +384,22 @@ INSERT INTO CT_BCMUONSACH (MaBaoCaoMuonSach, MaTheLoai, SoLuotMuon, TiLe) VALUES
 ('BCMS003', 'TL006', 15, 0.25),
 ('BCMS004', 'TL007', 80, 1)
 
-UPDATE PHIEUNHAPSACH
-SET TongTien = 0
+Select MaCuonSach, TenDauSach, TinhTrang from SACH 
+JOIN CUONSACH ON CUONSACH.MaSach = SACH.MaSach 
+JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach
+WHERE TinhTrang = 0
+
+SELECT 
+    CUONSACH.MaCuonSach, 
+    TenDauSach, 
+    NgayMuon, 
+    DATEDIFF(day, NgayMuon, 29/05/2025) - 4 
+FROM 
+    PHIEUMUONTRASACH 
+JOIN 
+    CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach 
+JOIN 
+    SACH ON CUONSACH.MaSach = Sach.MaSach
+JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach 
+WHERE 
+    DATEDIFF(day, NgayMuon, 29/05/2024) > 4 AND NgayTra IS NULL

@@ -78,7 +78,7 @@
                     <ListViewItem x:Name="ItemSearch" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Search" Height="30" Width="30" Margin="10"/>
-                            <TextBlock Text ="Tìm kiếm" VerticalAlignment="Center" FontSize="16" Margin="5 10"/>
+                            <TextBlock Text ="Tra cứu sách" VerticalAlignment="Center" FontSize="16" Margin="5 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemReport" Height="100" MouseEnter="Item_MouseEnter" MouseLeave="Item_MouseLeave">

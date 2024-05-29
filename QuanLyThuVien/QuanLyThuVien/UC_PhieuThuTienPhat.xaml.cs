@@ -39,7 +39,7 @@ namespace QuanLyThuVien
 
         private void InitMaDocGia()
         {
-            string query = "SELECT * FROM DOCGIA"; // Thay thế YourTableName bằng tên bảng của bạn
+            string query = "SELECT * FROM DOCGIA WHERE TongNo > 0"; // Thay thế YourTableName bằng tên bảng của bạn
 
             sqlConnection.Open();
             SqlCommand command = new SqlCommand(query, sqlConnection);
