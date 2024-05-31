@@ -389,17 +389,4 @@ JOIN CUONSACH ON CUONSACH.MaSach = SACH.MaSach
 JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach
 WHERE TinhTrang = 0
 
-SELECT 
-    CUONSACH.MaCuonSach, 
-    TenDauSach, 
-    NgayMuon, 
-    DATEDIFF(day, NgayMuon, 29/05/2025) - 4 
-FROM 
-    PHIEUMUONTRASACH 
-JOIN 
-    CUONSACH ON PHIEUMUONTRASACH.MaCuonSach = CUONSACH.MaCuonSach 
-JOIN 
-    SACH ON CUONSACH.MaSach = Sach.MaSach
-JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach 
-WHERE 
-    DATEDIFF(day, NgayMuon, 29/05/2024) > 4 AND NgayTra IS NULL
+

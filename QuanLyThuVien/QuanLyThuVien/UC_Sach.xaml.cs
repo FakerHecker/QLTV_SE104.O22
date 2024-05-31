@@ -65,9 +65,10 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên sách', " +
+            string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên đầu sách', " +
                 "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
-                "NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
+                "NhaXuatBan AS 'Nhà xuất bản', SoLuongTon AS 'Số lượng tồn' " +
+                "FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
                 "JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
@@ -83,7 +84,7 @@ namespace QuanLyThuVien
             if (row_selected != null)
             {
                 tblMaSach.Text = row_selected.Row["Mã sách"].ToString();
-                txbTenSach.Text = row_selected.Row["Tên sách"].ToString();
+                // txbTenSach.Text = row_selected.Row["Tên sách"].ToString();
                 cbTenDauSach.Text = row_selected.Row["Tên đầu sách"].ToString();
                 txbNamXuatBan.Text = row_selected.Row["Năm xuất bản"].ToString();
                 txbNhaXuatBan.Text = row_selected.Row["Nhà xuất bản"].ToString();

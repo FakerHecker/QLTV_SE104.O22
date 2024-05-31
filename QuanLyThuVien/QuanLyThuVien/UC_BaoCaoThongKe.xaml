@@ -60,7 +60,7 @@
                     <ComboBoxItem>Số sách mượn quá hạn</ComboBoxItem>
                 </ComboBox>
                 <ComboBox x:Name="cbThang" Grid.Row="2" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbThang_SelectionChanged" Visibility="Hidden"/>
-                <ComboBox x:Name="cbNam" Grid.Row="3" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbNam_SelectionChanged" Visibility="Hidden"/>
+                <ComboBox x:Name="cbNam" Grid.Row="3" Grid.Column="1"  Height="30"  FontSize="15"  Margin="0,0,100,0" SelectionChanged="cbNam_SelectionChanged" />
             </Grid>
         </GroupBox>
 

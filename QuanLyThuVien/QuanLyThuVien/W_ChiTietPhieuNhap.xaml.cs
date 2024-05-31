@@ -49,7 +49,8 @@ namespace QuanLyThuVien
         private void HienThiDanhSachChiTietPhieuNhap()
         {
             sqlConnection.Open();
-            string query = "SELECT MaCTPhieuNhapSach AS 'Mã chi tiết phiếu nhập sách', MaPhieuNhapSach AS 'Mã phiếu nhập sách', TenSach AS 'Tên sách', SoLuong AS 'Số lượng', DonGia AS 'Đơn giá' FROM CT_PHIEUNHAPSACH JOIN SACH ON CT_PHIEUNHAPSACH.MaSach = SACH.MaSach WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
+            string query = "SELECT MaCTPhieuNhapSach AS 'Mã chi tiết phiếu nhập sách', MaPhieuNhapSach AS 'Mã phiếu nhập sách', TenDauSach AS 'Tên đầu sách', SoLuong AS 'Số lượng', DonGia AS 'Đơn giá' " +
+                "FROM CT_PHIEUNHAPSACH JOIN SACH ON CT_PHIEUNHAPSACH.MaSach = SACH.MaSach JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", maPNS);
             SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
@@ -128,7 +129,7 @@ namespace QuanLyThuVien
                     MessageBox.Show("Đã tồn tại chi tiết phiếu nhập sách");
                 else if (float.TryParse(txbSoLuong.Text, out float soLuong) && float.TryParse(txbDonGia.Text, out float donGia) && soLuong > 0 && donGia > 0)
                 {
-
+                    // lấy mã sách
                     query = "SELECT MaSach FROM SACH WHERE TenSach = @TenSach";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
@@ -277,13 +278,13 @@ namespace QuanLyThuVien
         {
             
             sqlConnection.Open();
-            string query = "SELECT * FROM SACH"; // Thay thế YourTableName bằng tên bảng của bạn
+            string query = "SELECT * FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
             SqlCommand command = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                string companyName = reader["TenSach"].ToString();
+                string companyName = reader["TenDauSach"].ToString();
                 cbTenSach.Items.Add(companyName);
             }
             sqlConnection.Close();

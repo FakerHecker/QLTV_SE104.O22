@@ -52,22 +52,17 @@ namespace QuanLyThuVien
         }
         private void InitComboBoxThangItems()
         {
-            string year = cbNam.SelectedValue as string;
-            if (year == DateTime.Now.Year.ToString())
-            {
-                for (int i = 1; i <= DateTime.Now.Month; i++)
-                    cbThang.Items.Add(i.ToString());
-            }
-            else
-            {
-                for (int i = 1; i <= 12; i++)
-                    cbThang.Items.Add(i.ToString());
-            }
+            for (int i = 1; i <= 12; i++)
+                cbThang.Items.Add(i.ToString());
             cbThang.SelectedIndex = DateTime.Now.Month - 2;
         }
         private void InitComboBoxNamItems()
         {
             int nam = DateTime.Now.Year;
+            if(DateTime.Now.Month == 1)
+            {
+                nam--;
+            }
             for (int i = nam - 4; i <= nam; i++)
                 cbNam.Items.Add(i.ToString());
             cbNam.SelectedIndex = 4;
@@ -167,28 +162,53 @@ namespace QuanLyThuVien
 
         private void cbThang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbLoaiBaoCao.SelectedIndex == 0)
+            if(cbThang.SelectedIndex != -1)
             {
-                HienThiBaoCaoTheoTheLoai();
-            }
-            else if (cbLoaiBaoCao.SelectedIndex == 1)
-            {
-                HienThiBaoCaoSachTraTre();
-            }
-            
+                if (cbLoaiBaoCao.SelectedIndex == 0)
+                {
+                    HienThiBaoCaoTheoTheLoai();
+                }
+                else if (cbLoaiBaoCao.SelectedIndex == 1)
+                {
+                    HienThiBaoCaoSachTraTre();
+                }
+            }    
         }
 
         private void cbNam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbLoaiBaoCao.SelectedIndex == 0)
+            if(cbNam.SelectedIndex != -1)
             {
-                HienThiBaoCaoTheoTheLoai();
-            }
-            else if (cbLoaiBaoCao.SelectedIndex == 1)
-            {
-                HienThiBaoCaoSachTraTre();
-            }
-            
+                if (cbLoaiBaoCao.SelectedIndex == 0)
+                {
+                    if (int.Parse(cbNam.SelectedValue as string) == DateTime.Now.Year)
+                    {
+                        cbThang.Items.Clear();
+                        
+                        for (int i = 1; i < DateTime.Now.Month; i++)
+                        {
+                            cbThang.Items.Add((i).ToString());
+                        }
+                        cbThang.SelectedIndex = DateTime.Now.Month - 2;
+                    }
+                    else
+                    {
+                        int index = cbThang.SelectedIndex;
+                        cbThang.Items.Clear();
+                        for (int i = 1; i <= 12; i++)
+                        {
+                            cbThang.Items.Add(i.ToString());
+                        }
+                        cbThang.SelectedIndex = index;
+                    }
+                    HienThiBaoCaoTheoTheLoai();
+                }
+                else if (cbLoaiBaoCao.SelectedIndex == 1)
+                {
+                    HienThiBaoCaoSachTraTre();
+                }
+            }    
+
         }
 
         private void btnInBaoCao_Click(object sender, RoutedEventArgs e)
@@ -239,124 +259,130 @@ namespace QuanLyThuVien
 
         private void btnLuu_Click(object sender, RoutedEventArgs e)
         {
-            if (cbLoaiBaoCao.SelectedIndex == 0)
+            if(false)
             {
-                 
-                try
-                {
-                    if (dataGridView.Items.Count > 0)
-                    {
-
-                        sqlConnection.Open();
-                        string query = "SELECT * FROM BAOCAOMUONSACH WHERE Thang = @Thang AND Nam = @Nam";
-                        SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                        sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
-                        sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
-                        object trungPhieu = sqlCommand.ExecuteScalar();
-                        sqlConnection.Close();
-                        
-                        if (trungPhieu != null)
-                        {
-                            MessageBox.Show("Đã tồn tại báo báo mượn sách tháng " + cbThang.Text + " năm " + cbNam.Text);
-                        }    
-                        else
-                        {
-                            // lưu vào bảng BAOCAOMUONSACH
-                            sqlConnection.Open();
-                            query = "INSERT INTO BAOCAOMUONSACH (MaBaoCaoMuonSach, Thang, Nam, TongSoLuotMuon) VALUES (@MaBaoCaoMuonSach, @Thang, @Nam, @TongSoLuotMuon)";
-                            sqlCommand = new SqlCommand(query, sqlConnection);
-                            sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
-                            sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
-                            sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
-                            sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
-                            sqlCommand.Parameters.AddWithValue("@TongSoLuotMuon", tblTongSoLuotMuon.Text);
-                            sqlCommand.ExecuteScalar();
-                            MessageBox.Show("Lưu thành công");
-
-                            // lưu vào bảng chi tiết BCMS
-                            foreach (var item in dataGridView.Items)
-                            {
-                                // Xử lý từng dòng dữ liệu tại đây
-                                // Ví dụ: truy cập các giá trị của từng cột bằng cách sử dụng các thuộc tính hoặc phương thức của đối tượng item
-                                string tenTheLoai = ((DataRowView)item).Row["Tên thể loại"].ToString();
-                                query = "SELECT MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
-                                sqlCommand = new SqlCommand(query, sqlConnection);
-                                sqlCommand.Parameters.AddWithValue("@TenTheLoai", tenTheLoai);
-                                object maTL = sqlCommand.ExecuteScalar();
-                                string maTheLoai = "";
-                                if (maTL != null)
-                                {
-                                    maTheLoai = maTL.ToString();
-                                    query = "INSERT INTO CT_BCMUONSACH (MaBaoCaoMuonSach, MaTheLoai, SoLuotMuon, TiLe) VALUES (@MaBaoCaoMuonSach, @MaTheLoai, @SoLuotMuon, @TiLe)";
-                                    sqlCommand = new SqlCommand(query, sqlConnection);
-                                    sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
-                                    sqlCommand.Parameters.AddWithValue("@MaTheLoai", maTheLoai);
-                                    sqlCommand.Parameters.AddWithValue("@SoLuotMuon", ((DataRowView)item).Row["Số lượt mượn"].ToString());
-                                    sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"]);
-                                    sqlCommand.ExecuteScalar();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Không tồn tại thể loại");
-                                }
-                            }
-
-                            sqlConnection.Close();
-                        }    
-                      
-                    }
-                    else
-                        MessageBox.Show("Không có dữ liệu");
-                    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }   
-            else if (cbLoaiBaoCao.SelectedIndex == 1)
-            {
-                try
-                {
-                    
-                    if (dataGridView.Items.Count > 0)
-                    {
-                       
-                        foreach (var item in dataGridView.Items)
-                        {
-
-                            string maBaoCao = InitMaBaoCaoTraTre();
-                            sqlConnection.Open();                           
-                            string maCuonSach = ((DataRowView)item).Row["Mã cuốn sách"].ToString();
-                            string query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao) " +
-                                       " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao)";
-                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                            sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", maBaoCao);
-                            sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", DateTime.Parse(dpNgayLap.Text));
-                            sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
-                            sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"]);
-                            sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"]);
-                            sqlCommand.ExecuteScalar();
-                            sqlConnection.Close();
-                            
-                        }
-                        MessageBox.Show("Lưu thành công");
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không có dữ liệu");
-                    }    
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }    
+                MessageBox.Show("Không thể tạo báo cáo trong tháng này");
+            }
             else
             {
-                MessageBox.Show("Vui lòng chọn loại báo cáo");
-            }    
+                if (cbLoaiBaoCao.SelectedIndex == 0)
+                {
+                    try
+                    {
+                        if (dataGridView.Items.Count > 0)
+                        {
+
+                            sqlConnection.Open();
+                            string query = "SELECT * FROM BAOCAOMUONSACH WHERE Thang = @Thang AND Nam = @Nam";
+                            SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                            sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
+                            sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
+                            object trungPhieu = sqlCommand.ExecuteScalar();
+                            sqlConnection.Close();
+
+                            if (trungPhieu != null)
+                            {
+                                MessageBox.Show("Đã tồn tại báo báo mượn sách tháng " + cbThang.Text + " năm " + cbNam.Text);
+                            }
+                            else
+                            {
+                                // lưu vào bảng BAOCAOMUONSACH
+                                sqlConnection.Open();
+                                query = "INSERT INTO BAOCAOMUONSACH (MaBaoCaoMuonSach, Thang, Nam, TongSoLuotMuon) VALUES (@MaBaoCaoMuonSach, @Thang, @Nam, @TongSoLuotMuon)";
+                                sqlCommand = new SqlCommand(query, sqlConnection);
+                                sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
+                                sqlCommand.Parameters.AddWithValue("@Thang", cbThang.Text);
+                                sqlCommand.Parameters.AddWithValue("@Nam", cbNam.Text);
+                                sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", dpNgayLap.Text);
+                                sqlCommand.Parameters.AddWithValue("@TongSoLuotMuon", tblTongSoLuotMuon.Text);
+                                sqlCommand.ExecuteScalar();
+                                MessageBox.Show("Lưu thành công");
+
+                                // lưu vào bảng chi tiết BCMS
+                                foreach (var item in dataGridView.Items)
+                                {
+                                    // Xử lý từng dòng dữ liệu tại đây
+                                    // Ví dụ: truy cập các giá trị của từng cột bằng cách sử dụng các thuộc tính hoặc phương thức của đối tượng item
+                                    string tenTheLoai = ((DataRowView)item).Row["Tên thể loại"].ToString();
+                                    query = "SELECT MaTheLoai FROM THELOAI WHERE TenTheLoai = @TenTheLoai";
+                                    sqlCommand = new SqlCommand(query, sqlConnection);
+                                    sqlCommand.Parameters.AddWithValue("@TenTheLoai", tenTheLoai);
+                                    object maTL = sqlCommand.ExecuteScalar();
+                                    string maTheLoai = "";
+                                    if (maTL != null)
+                                    {
+                                        maTheLoai = maTL.ToString();
+                                        query = "INSERT INTO CT_BCMUONSACH (MaBaoCaoMuonSach, MaTheLoai, SoLuotMuon, TiLe) VALUES (@MaBaoCaoMuonSach, @MaTheLoai, @SoLuotMuon, @TiLe)";
+                                        sqlCommand = new SqlCommand(query, sqlConnection);
+                                        sqlCommand.Parameters.AddWithValue("@MaBaoCaoMuonSach", tblMaBaoCao.Text);
+                                        sqlCommand.Parameters.AddWithValue("@MaTheLoai", maTheLoai);
+                                        sqlCommand.Parameters.AddWithValue("@SoLuotMuon", ((DataRowView)item).Row["Số lượt mượn"].ToString());
+                                        sqlCommand.Parameters.AddWithValue("@TiLe", ((DataRowView)item).Row["Tỉ lệ (%)"]);
+                                        sqlCommand.ExecuteScalar();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Không tồn tại thể loại");
+                                    }
+                                }
+
+                                sqlConnection.Close();
+                            }
+
+                        }
+                        else
+                            MessageBox.Show("Không có dữ liệu");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+                else if (cbLoaiBaoCao.SelectedIndex == 1)
+                {
+                    try
+                    {
+
+                        if (dataGridView.Items.Count > 0)
+                        {
+
+                            foreach (var item in dataGridView.Items)
+                            {
+
+                                string maBaoCao = InitMaBaoCaoTraTre();
+                                sqlConnection.Open();
+                                string maCuonSach = ((DataRowView)item).Row["Mã cuốn sách"].ToString();
+                                string query = "INSERT INTO BAOCAOTRATRE (MaBaoCaoTraTre, MaCuonSach, NgayMuon, SoNgayTraTre, NgayLapBaoCao) " +
+                                           " VALUES (@MaBaoCaoTraTre, @MaCuonSach, @NgayMuon, @SoNgayTraTre, @NgayLapBaoCao)";
+                                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                                sqlCommand.Parameters.AddWithValue("@MaBaoCaoTraTre", maBaoCao);
+                                sqlCommand.Parameters.AddWithValue("@NgayLapBaoCao", DateTime.Parse(dpNgayLap.Text));
+                                sqlCommand.Parameters.AddWithValue("@MaCuonSach", maCuonSach);
+                                sqlCommand.Parameters.AddWithValue("@NgayMuon", ((DataRowView)item).Row["Ngày mượn"]);
+                                sqlCommand.Parameters.AddWithValue("@SoNgayTraTre", ((DataRowView)item).Row["Số ngày trả trễ"]);
+                                sqlCommand.ExecuteScalar();
+                                sqlConnection.Close();
+
+                            }
+                            MessageBox.Show("Lưu thành công");
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không có dữ liệu");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn loại báo cáo");
+                }
+            }  
         }
 
         private void dpNgayLap_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
