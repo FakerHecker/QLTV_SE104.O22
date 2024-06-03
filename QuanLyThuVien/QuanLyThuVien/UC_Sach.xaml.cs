@@ -65,10 +65,16 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
+<<<<<<< HEAD
             string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên đầu sách', " +
                 "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
                 "NhaXuatBan AS 'Nhà xuất bản', SoLuongTon AS 'Số lượng tồn' " +
                 "FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
+=======
+            string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên sách', " +
+                "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
+                "NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
+>>>>>>> 065edd43d8180560ab5303dec5b479a5bbf8f552
                 "JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
