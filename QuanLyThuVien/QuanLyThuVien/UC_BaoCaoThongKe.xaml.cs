@@ -52,8 +52,22 @@ namespace QuanLyThuVien
         }
         private void InitComboBoxThangItems()
         {
+<<<<<<< HEAD
             for (int i = 1; i <= 12; i++)
                 cbThang.Items.Add(i.ToString());
+=======
+            string year = cbNam.SelectedValue as string;
+            if (year == DateTime.Now.Year.ToString())
+            {
+                for (int i = 1; i <= DateTime.Now.Month; i++)
+                    cbThang.Items.Add(i.ToString());
+            }
+            else
+            {
+                for (int i = 1; i <= 12; i++)
+                    cbThang.Items.Add(i.ToString());
+            }
+>>>>>>> 065edd43d8180560ab5303dec5b479a5bbf8f552
             cbThang.SelectedIndex = DateTime.Now.Month - 2;
         }
         private void InitComboBoxNamItems()
