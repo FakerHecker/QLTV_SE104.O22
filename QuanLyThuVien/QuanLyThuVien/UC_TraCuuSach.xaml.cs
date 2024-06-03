@@ -40,13 +40,14 @@ namespace QuanLyThuVien
             cbKey.Items.Add("Tên sách");
             cbKey.Items.Add("Thể loại");
             cbKey.Items.Add("Tác giả");
+            cbKey.Items.Add("Tình Trạng");
             cbKey.SelectedIndex = 0;
         }
 
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-            string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', SACH.TenSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai";
+            string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -61,14 +62,14 @@ namespace QuanLyThuVien
             if (cbKey.SelectedIndex == 0)
             {
                 
-                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', SACH.TenSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
+                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
                                 "FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach " +
                                 "JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach " +
                                 "JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach " +
                                 "JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia " +
                                 "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE MaCuonSach = @MaCuonSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaCuonSach", txbValue.Text);
+                sqlCommand.Parameters.AddWithValue("@MaCuonSach", cbValue.Text);
                 
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
@@ -79,14 +80,14 @@ namespace QuanLyThuVien
             }
             else if (cbKey.SelectedIndex == 1) 
             {
-                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', SACH.TenSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
+                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
                                 "FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach " +
                                 "JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach " +
                                 "JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach " +
                                 "JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia " +
-                                "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE TenSach = @TenSach";
+                                "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE TenDauSach = @TenSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenSach", txbValue.Text);
+                sqlCommand.Parameters.AddWithValue("@TenSach", cbValue.Text);
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
@@ -95,14 +96,14 @@ namespace QuanLyThuVien
             }
             else if (cbKey.SelectedIndex == 2)
             {
-                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', SACH.TenSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
+                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
                                 "FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach " +
                                 "JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach " +
                                 "JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach " +
                                 "JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia " +
                                 "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE TenTheLoai = @TenTheLoai";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenTheLoai", txbValue.Text);
+                sqlCommand.Parameters.AddWithValue("@TenTheLoai", cbValue.Text);
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
@@ -111,15 +112,37 @@ namespace QuanLyThuVien
             }
             else if (cbKey.SelectedIndex == 3)
             {
-                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', SACH.TenSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
+                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
                                 "FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach " +
                                 "JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach " +
                                 "JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach " +
                                 "JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia " +
                                 "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE TenTacGia = @TenTacGia";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenTacGia", txbValue.Text);
+                sqlCommand.Parameters.AddWithValue("@TenTacGia", cbValue.Text);
 
+                SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvCuonSach.ItemsSource = dt.DefaultView;
+            }
+            else if (cbKey.SelectedIndex == 4)
+            {
+                string query = "SELECT CUONSACH.MaCuonSach AS 'Mã cuốn sách', DAUSACH.TenDauSach AS 'Tên sách', THELOAI.TenTheLoai AS 'Thể loại', TACGIA.TenTacGia AS 'Tác giả', TinhTrang AS 'Tình trạng' " +
+                                "FROM  SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach " +
+                                "JOIN DAUSACH ON Sach.MaDauSach = DauSach.MaDauSach " +
+                                "JOIN CT_TACGIA ON DAUSACH.MaDauSach = CT_TACGIA.MaDauSach " +
+                                "JOIN TACGIA ON CT_TACGIA.MaTacGia = TACGIA.MaTacGia " +
+                                "JOIN THELOAI ON DAUSACH.MaTheLoai = THELOAI.MaTheLoai WHERE TinhTrang = @TinhTrang";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                if(cbValue.Text == "Đã mượn")
+                {
+                    sqlCommand.Parameters.AddWithValue("@TinhTrang", true);
+                }    
+                else if(cbValue.Text == "Chưa mượn")
+                {
+                    sqlCommand.Parameters.AddWithValue("@TinhTrang", false);
+                }    
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -138,10 +161,84 @@ namespace QuanLyThuVien
 
         private void btnHuy_Click(object sender, RoutedEventArgs e)
         {
-            txbValue.Text = "";
+            cbValue.Text = "";
             tblSoSachTimThay.Text = "";
             tblTongSoSach.Text = "";
             HienThiDanhSachSach();
+        }
+
+        private void cbKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbKey.SelectedIndex == 0)
+            {
+                cbValue.Items.Clear();
+                string query = "SELECT MaCuonSach FROM CUONSACH"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["MaCuonSach"].ToString();
+                    cbValue.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
+            else if (cbKey.SelectedIndex == 1)
+            {
+                cbValue.Items.Clear();
+                string query = "SELECT TenDauSach FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["TenDauSach"].ToString();
+                    cbValue.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
+            else if (cbKey.SelectedIndex == 2)
+            {
+                cbValue.Items.Clear();
+                string query = "SELECT * FROM THELOAI"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["TenTheLoai"].ToString();
+                    cbValue.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
+            else if (cbKey.SelectedIndex == 3)
+            {
+                cbValue.Items.Clear();
+                string query = "SELECT * FROM TACGIA"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["TenTacGia"].ToString();
+                    cbValue.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
+            else if(cbKey.SelectedIndex == 4)
+            {
+                cbValue.Items.Clear();
+                cbValue.Items.Add("Đã mượn");
+                cbValue.Items.Add("Chưa mượn");
+            }
         }
     }
 }

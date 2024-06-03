@@ -212,26 +212,26 @@ namespace QuanLyThuVien
             string query;
             if(cbKey.SelectedIndex == 1)
             {
-                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
+                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenDauSach AS 'Tên sách' FROM SACH JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach JOIN DAUSACH ON Sach.MaDauSach = DAUSACH.MaDauSach WHERE TenDauSach = @TenSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 dgvSach.ItemsSource = dt.DefaultView;
                 sqlConnection.Close();
-                query = "SELECT COUNT(*) FROM  SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE TenSach = @TenSach";
+                query = "SELECT COUNT(*) FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach JOIN DAUSACH ON Sach.MaDauSach = DAUSACH.MaDauSach WHERE TenDauSach = @TenSach";
                 sqlConnection.Open();
                 sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
+                sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
                 tblSoSachTimThay.Text = sqlCommand.ExecuteScalar().ToString();
                 sqlConnection.Close();
             } 
             else if(cbKey.SelectedIndex == 0)
             {
-                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenSach AS 'Tên sách', TinhTrang AS 'Tình trạng' FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE MaCuonSach = @MaCuonSach";
+                query = "SELECT MaCuonSach AS 'Mã cuốn sách', TenDauSach AS 'Tên sách' FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach JOIN DAUSACH ON Sach.MaDauSach = DAUSACH.MaDauSach WHERE MaCuonSach = @MaCuonSach";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaCuonSach", txbTenSach.Text);
+                sqlCommand.Parameters.AddWithValue("@MaCuonSach", cbTenSach.Text);
                 SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -240,7 +240,7 @@ namespace QuanLyThuVien
                 query = "SELECT COUNT(*) FROM SACH INNER JOIN CUONSACH ON SACH.MaSach = CUONSACH.MaSach WHERE MaCuonSach = @MaCuonSach";
                 sqlConnection.Open();
                 sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@MaCuonSach", txbTenSach.Text);
+                sqlCommand.Parameters.AddWithValue("@MaCuonSach", cbTenSach.Text);
                 tblSoSachTimThay.Text = sqlCommand.ExecuteScalar().ToString();
                 sqlConnection.Close();
             }    
@@ -294,6 +294,42 @@ namespace QuanLyThuVien
         {
             tblSoSachTimThay.Text = "";
             HienThiDanhSachSach();
+        }
+
+        private void cbKey_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbKey.SelectedIndex == 0)
+            {
+                cbTenSach.Items.Clear();
+                string query = "SELECT MaCuonSach FROM CUONSACH"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["MaCuonSach"].ToString();
+                    cbTenSach.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
+            else if (cbKey.SelectedIndex == 1)
+            {
+                cbTenSach.Items.Clear();
+                string query = "SELECT TenDauSach FROM DAUSACH"; // Thay thế YourTableName bằng tên bảng của bạn
+
+                sqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, sqlConnection);
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string maDS = reader["TenDauSach"].ToString();
+                    cbTenSach.Items.Add(maDS);
+                }
+                sqlConnection.Close();
+            }
         }
     }
 }

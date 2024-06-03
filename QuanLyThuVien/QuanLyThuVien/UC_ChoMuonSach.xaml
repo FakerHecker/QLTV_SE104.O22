@@ -101,10 +101,10 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox x:Name="cbKey" Height="30" FontSize="15"  HorizontalAlignment="Center"/>
+                <ComboBox x:Name="cbKey" Height="30" FontSize="15"  HorizontalAlignment="Center" SelectionChanged="cbKey_SelectionChanged"/>
                 <Label Content="Số sách tìm thấy" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
 
-                <TextBox x:Name="txbTenSach" Height="30" Grid.Row="0" Grid.Column="1" />
+                <ComboBox x:Name="cbTenSach" Height="30" Grid.Row="0" Grid.Column="1" />
                 <TextBlock x:Name="tblSoSachTimThay"  Height="30" Grid.Row="1" Grid.Column="1" Margin="0,10,0,0"/>
             </Grid>
         </GroupBox>

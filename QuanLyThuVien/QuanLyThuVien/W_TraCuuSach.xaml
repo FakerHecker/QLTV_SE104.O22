@@ -32,7 +32,7 @@
                     <RowDefinition  Height="1*"/>
                 </Grid.RowDefinitions>
                 <ComboBox Grid.Row="0" Grid.Column="0"/>
-                <TextBox x:Name="txbThongTinTim" Grid.Row="0" Grid.Column="2"/>
+                <ComboBox x:Name="txbThongTinTim" Grid.Row="0" Grid.Column="2"/>
                 <Button Content="Tìm kiếm" Grid.Row="2" Grid.Column="0"/>
                 <Button Content="Hủy" Grid.Row="2" Grid.Column="2"/>
             </Grid>

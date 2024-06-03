@@ -39,9 +39,7 @@ namespace QuanLyThuVien
             maPNS = ma;
             InitMaPhieuNhap();
             InitTenSach();
-            HienThiDanhSachChiTietPhieuNhap();
-
-            
+            HienThiDanhSachChiTietPhieuNhap(); 
         }
 
         
@@ -49,7 +47,7 @@ namespace QuanLyThuVien
         private void HienThiDanhSachChiTietPhieuNhap()
         {
             sqlConnection.Open();
-            string query = "SELECT MaCTPhieuNhapSach AS 'Mã chi tiết phiếu nhập sách', MaPhieuNhapSach AS 'Mã phiếu nhập sách', TenDauSach AS 'Tên đầu sách', SoLuong AS 'Số lượng', DonGia AS 'Đơn giá' " +
+            string query = "SELECT MaCTPhieuNhapSach AS 'Mã chi tiết phiếu nhập sách', MaPhieuNhapSach AS 'Mã phiếu nhập sách', TenDauSach AS 'Tên sách', SoLuong AS 'Số lượng', DonGia AS 'Đơn giá' " +
                 "FROM CT_PHIEUNHAPSACH JOIN SACH ON CT_PHIEUNHAPSACH.MaSach = SACH.MaSach JOIN DAUSACH ON DAUSACH.MaDauSach = SACH.MaDauSach WHERE MaPhieuNhapSach = @MaPhieuNhapSach";
             SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
             sqlCommand.Parameters.AddWithValue("@MaPhieuNhapSach", maPNS);
@@ -130,7 +128,7 @@ namespace QuanLyThuVien
                 else if (float.TryParse(txbSoLuong.Text, out float soLuong) && float.TryParse(txbDonGia.Text, out float donGia) && soLuong > 0 && donGia > 0)
                 {
                     // lấy mã sách
-                    query = "SELECT MaSach FROM SACH WHERE TenSach = @TenSach";
+                    query = "SELECT MaSach FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach WHERE TenDauSach = @TenSach";
                     sqlCommand = new SqlCommand(query, sqlConnection);
                     sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
                     string maSach = sqlCommand.ExecuteScalar().ToString();
@@ -323,7 +321,7 @@ namespace QuanLyThuVien
                     {
 
                         //xóa sách
-                        query = "SELECT MaSach FROM SACH WHERE TenSach = @TenSach";
+                        query = "SELECT MaSach FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach WHERE TenDauSach = @TenSach";
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@TenSach", cbTenSach.Text);
                         string maSach = sqlCommand.ExecuteScalar().ToString();
