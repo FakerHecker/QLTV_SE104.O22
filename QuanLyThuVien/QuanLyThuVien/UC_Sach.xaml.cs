@@ -65,16 +65,10 @@ namespace QuanLyThuVien
         private void HienThiDanhSachSach()
         {
             sqlConnection.Open();
-<<<<<<< HEAD
             string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên đầu sách', " +
                 "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
                 "NhaXuatBan AS 'Nhà xuất bản', SoLuongTon AS 'Số lượng tồn' " +
                 "FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
-=======
-            string query = "SELECT MaSach AS 'Mã sách', TenDauSach AS 'Tên sách', " +
-                "TenTheLoai AS 'Thể loại', NamXuatBan AS 'Năm xuất bản', " +
-                "NhaXuatBan AS 'Nhà xuất bản' FROM SACH JOIN DAUSACH ON SACH.MaDauSach = DAUSACH.MaDauSach " +
->>>>>>> 065edd43d8180560ab5303dec5b479a5bbf8f552
                 "JOIN THELOAI ON THELOAI.MaTheLoai = DAUSACH.MaTheLoai";
             SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection);
             DataTable dt = new DataTable();
@@ -106,7 +100,6 @@ namespace QuanLyThuVien
         private void btnThemMoi_Click(object sender, RoutedEventArgs e)
         {
             tblMaSach.Text = IncreasePrimaryKey();
-            txbTenSach.Text = "";
             cbTenDauSach.SelectedIndex = -1;
             txbNamXuatBan.Text = "";
             txbNhaXuatBan.Text = "";
@@ -126,19 +119,11 @@ namespace QuanLyThuVien
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
                 object tonTaiMaSach = sqlCommand.ExecuteScalar();
 
-                query = "SELECT * FROM SACH WHERE TenSach = @TenSach";
-                sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
-                object tonTaiTenSach = sqlCommand.ExecuteScalar();
 
                 if (tblMaSach.Text == "")
                     MessageBox.Show("Vui lòng chọn 'Thêm mới' để nhập thông tin");
                 else if (tonTaiMaSach != null)
                     MessageBox.Show("Đã tồn tại sách");
-                else if (txbTenSach.Text == "")
-                    MessageBox.Show("Tên sách không được để trống");
-                else if (tonTaiTenSach != null)
-                    MessageBox.Show("Tên sách không được trùng");
                 else if (cbTenDauSach.SelectedIndex == -1)
                     MessageBox.Show("Tên đầu sách không được để trống");
                 else if (txbNhaXuatBan.Text == "")
@@ -153,10 +138,9 @@ namespace QuanLyThuVien
                         sqlCommand.Parameters.AddWithValue("@TenDauSach", cbTenDauSach.Text);
                         string maDauSach = sqlCommand.ExecuteScalar().ToString();
 
-                        query = "INSERT INTO SACH (MaSach, TenSach, MaDauSach, NamXuatBan, NhaXuatBan) VALUES (@MaSach, @TenSach, @MaDauSach, @NamXuatBan, @NhaXuatBan)";
+                        query = "INSERT INTO SACH (MaSach, MaDauSach, NamXuatBan, NhaXuatBan) VALUES (@MaSach, @TenSach, @MaDauSach, @NamXuatBan, @NhaXuatBan)";
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
-                        sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
                         sqlCommand.Parameters.AddWithValue("@MaDauSach", maDauSach);
                         sqlCommand.Parameters.AddWithValue("@NamXuatBan", txbNamXuatBan.Text);
                         sqlCommand.Parameters.AddWithValue("@NhaXuatBan", txbNhaXuatBan.Text);
@@ -200,20 +184,11 @@ namespace QuanLyThuVien
                 sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
                 object tonTaiMaSach = sqlCommand.ExecuteScalar();
 
-                query = "SELECT * FROM SACH WHERE TenSach = @TenSach";
-                sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
-                sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
-                object tonTaiTenSach = sqlCommand.ExecuteScalar();
 
                 if (tblMaSach.Text == "")
                     MessageBox.Show("Vui lòng chọn sách để cập nhật thông tin");
                 else if (tonTaiMaSach == null)
                     MessageBox.Show("Không tồn tại sách");
-                else if (tonTaiTenSach != null)
-                    MessageBox.Show("Không được trùng tên sách");
-                else if (txbTenSach.Text == "")
-                    MessageBox.Show("Tên sách không được để trống");
                 else if (txbNhaXuatBan.Text == "")
                     MessageBox.Show("Nhà xuất bản không được để trống");
                 else if (Int32.TryParse(txbNamXuatBan.Text, out int namXuatBan))
@@ -226,10 +201,9 @@ namespace QuanLyThuVien
                         sqlCommand.Parameters.AddWithValue("@TenDauSach", cbTenDauSach.Text);
                         string maDauSach = sqlCommand.ExecuteScalar().ToString();
 
-                        query = "UPDATE SACH  SET TenSach = @TenSach, MaDauSach = @MaDauSach, NamXuatBan = @NamXuatBan, NhaXuatBan = @NhaXuatBan WHERE MaSach = @MaSach";
+                        query = "UPDATE SACH SET MaDauSach = @MaDauSach, NamXuatBan = @NamXuatBan, NhaXuatBan = @NhaXuatBan WHERE MaSach = @MaSach";
                         sqlCommand = new SqlCommand(query, sqlConnection);
                         sqlCommand.Parameters.AddWithValue("@MaSach", tblMaSach.Text);
-                        sqlCommand.Parameters.AddWithValue("@TenSach", txbTenSach.Text);
                         sqlCommand.Parameters.AddWithValue("@MaDauSach", maDauSach);
                         sqlCommand.Parameters.AddWithValue("@NamXuatBan", txbNamXuatBan.Text);
                         sqlCommand.Parameters.AddWithValue("@NhaXuatBan", txbNhaXuatBan.Text);
@@ -279,7 +253,6 @@ namespace QuanLyThuVien
                         sqlCommand.ExecuteScalar();
 
                         tblMaSach.Text = "";
-                        txbTenSach.Text = "";
                         cbTenDauSach.SelectedIndex = -1;
                         txbNamXuatBan.Text = "";
                         txbNhaXuatBan.Text = "";
